@@ -20,7 +20,7 @@
 
 title:  "Krijn Doekemeijer"
 description: >-
-  CS MSc graduate, fascinated by Storage Systems and Big Data.
+  CS MSc graduate, intrigued by Storage Systems and Big Data.
 baseurl: ""
 url: ""
 
@@ -71,3 +71,5 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+exclude:
+  - cv/

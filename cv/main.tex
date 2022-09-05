@@ -1,0 +1,277 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge \scshape Krijn Doekemeijer} \\ \vspace{1pt}
+    \small +31 0617841858 $|$ \href{mailto:krijn.doekemeijer@gmail.com}{\underline{krijn.doekemeijer@gmail.com}} $|$
+    \href{https://krien.github.io/}{\underline{krien.github.io}} $|$
+    \href{https://linkedin.com/in/krijn-doekemeijer-9692801aa}{\underline{linkedin.com/in/krijn-doekemeijer}} $|$
+    \href{https://github.com/Krien}{\underline{github.com/Krien}}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+     \resumeSubheading
+      {Vrije Universiteit Amsterdam and Universiteit van Amsterdam}{Amsterdam, The Netherlands}
+      {Joint Masters degree in Computer Science, Big Data Engineering track. GA 8.9}{Aug. 2020 -- August 2022}
+    \resumeSubheading
+      {Utrecht University}{Utrecht, The Netherlands}
+      {Bachelors degree in Computer Science and Game Technology. GA 8.6 }{Aug. 2017 -- May 2020}
+  \resumeSubHeadingListEnd
+
+
+\section{Research and publications}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+          {\textbf{TropoDB: Design, Implementation and Evaluation of} $|$ \emph{Master thesis}} {February 2022 --}\\[1ex]
+          \textbf{an Optimised KV-Store for NVMe Zoned Namespace Devices}
+          \resumeItemListStart
+            \resumeItem{TropoDB is the design, implementation and evaluation of an LSM-tree-based key-value store for NVMe Zoned Namespace Devices. See \href{https://github.com/Krien/TropoDB/blob/master/paper/out/TropoDB:_Design_and_Implementation_of_a_NVMe_Zoned_Namespace_Optimised_LSM_KV_Store_2022.pdf}{\underline{TropoDB.pdf}} and
+            \href{https://github.com/Krien/TropoDB}{\underline{github.com/Krien/TropoDB}} for more information. It received a 9.5 as grade.}
+          \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{Key-Value Stores on Flash Storage Devices: A Survey} $|$ \emph{Literature study}} {January 2022 --}
+          \resumeItemListStart
+            \resumeItem{A survey on how key-value stores are at the moment designed for flash storage devices, how they can optimised for flash storage devices and what role flash will play for key-value stores in the future. See \href{https://arxiv.org/abs/2205.07975}{\underline{arxiv.org/abs/2205.07975}} for more information.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Developer for the Customer Experience (CX) team}{Oktober 2020 -- November 2021}
+      {Kaartje2Go, Working Talent}{Zwolle, The Netherlands}
+      \resumeItemListStart
+        \resumeItem{Analytics pipeline, Telemetry tooling, A/B test tooling}
+        \resumeItem{DevOps tasks like AWS and CI/CD tasks}
+        \resumeItem{Machine learning (genetic algorithms)}
+        \resumeItem{Backend and Frontend (web development)}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Derailed}{September 2019 -- January 2020}
+      {NS, ProRail, Utrecht University (bachelor thesis)}{Utrecht, The Netherlands}
+      \resumeItemListStart
+            \resumeItem{Developing a serious game in C\# and \textit{MonoGame} (game library) in a well-rounded team of 10 students}
+            \resumeItem{Helped designing a graphical/logical simulation of the Dutch train network}
+            \resumeItem{Created the UI framework for Derailed from the ground up using only Monogame}
+            \resumeItem{Responsible for the software architecture and its design (also involves skills such as UML)}
+      \resumeItemListEnd
+
+    %   \resumeSubheading
+    %   {Warehouse employee}{July 2020 -- August 2020}
+    %   {Iddink}{Ede, The Netherlands}
+    %   \resumeItemListStart
+    %     \resumeItem{Worked in a warehouse, sorting and packaging}
+    %   \resumeItemListEnd
+
+
+    %   \resumeSubheading
+    %   {Holiday Job}{August 2019 -- September 2020}
+    %   {DA}{The Netherlands}
+    %   \resumeItemListStart
+    %     \resumeItem{Holiday job, travelling across the country with a team and \\ inspecting various stores from the DA for incorrect QR codes}
+    %   \resumeItemListEnd
+
+    %   \resumeSubheading
+    %   {Postman}{July 2016 -- August 2017, January 2018 -- July 2018}
+    %   {Sandd, PostNL}{Amersfoort, The Netherlands}
+    %   \resumeItemListStart
+    %     \resumeItem{Sorting mail}
+    %     \resumeItem{Delivering mail on bike}
+    %   \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+          {\textbf{TropoDB} $|$ \emph{C, C++, CMake, ZNS SSDs, Key-value store}} {February 2022 --}
+          \resumeItemListStart
+            \resumeItem{  For my master thesis I implemented a key-value store directly on top of ZNS SSDs, known as \textit{TropoDB}. This implementation is a modification of the state-of-the-art key-value store RocksDB. It does not use a file system and uses the \textit{SZD} API to interface with the storage instead. SZD I made myself as well. See \href{https://github.com/Krien/TropoDB}{\underline{github.com/Krien/TropoDB}}. }
+          \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{Simple ZNS Device (SZD)} $|$ \emph{C, C++, CMake, ZNS SSDs, SPDK}} {February 2022 -- }
+          \resumeItemListStart
+            \resumeItem{ \textit{SZD} is an API built around the \href{https://spdk.io/}{\underline{SPDK}} storage engine for ZNS SSDs. It uses an opinionated subset of SPDK, adds C++ support and comes with various default data structures (batteries included). SZD should simplify ZNS development. See \href{https://github.com/Krien/SimpleZNSDevice}{\underline{github.com/Krien/SimpleZNSDevice}}.  }
+          \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{File system for ZNS SSDs} $|$ \emph{C, C++, CMake, ZNS SSDs}} {November 2021 -- December 2021}
+          \resumeItemListStart
+            \resumeItem{For the university course ``Storage Systems", I worked on building a file system on top of a \textit{Flash Translation Layer} (FTL) made for ZNS devices. This file system was then tested and benchmarked with the key-value store RocksDB.}
+          \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{Flash Translation Layer (FTL) for ZNS SSDs} $|$ \emph{C, C++, CMake, ZNS SSDs}} {November 2021 -- November 2021}
+          \resumeItemListStart
+            \resumeItem{For the university course ``Storage Systems", I worked on building a \textit{Flash Translation Layer} (FTL) directly on top of a ZNS device with the help of libnvme. Most of the project was written in C, with a bit of C++.}
+          \resumeItemListEnd
+        % \resumeProjectHeading
+        %   {\textbf{Exidy Sorcerer literature study} $|$ \emph{Literature study, History, Emulators}} {January 2021 -- February 2021}
+        %   \resumeItemListStart
+        %     \resumeItem{For the university course ``History of Digital Cultures", I worked with a team on documenting the history of how an old Home Computer, known as the Exidy Sorcerer, was used in the Netherlands. I mainly worked on getting old Dutch software running in Microsoft BASIC to work in a Sorcerer emulator and documenting this software. }
+        %   \resumeItemListEnd
+        % \resumeProjectHeading
+        %   {\textbf{Reddit visualisation} $|$ \emph{Python, JavaScript, Frontend, Machine Learning}} {February 2021 -- March 2021}
+        %   \resumeItemListStart
+        %     \resumeItem{For the university course ``Information Visualisation", I worked with a team on creating a tool to do sentiment analysis of Reddit. My tasks mainly working on various data processing and visualisation tasks; tools such as Bokeh, Pandas and jQuery were used to achieve this.}
+        %   \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{COVID-19 Twitter visualisation} $|$ \emph{Python, Machine learning, NLP}} {November 2020 -- December 2020}
+          \resumeItemListStart
+            \resumeItem{For the university course ``Web Data Processing", I worked with an enthusiastic team on a visualisation of the most important topics on Twitter during the COVID-19 pandemic for each country. For me, this mainly involved the topic modelling aspects (NLP, ML, Python).}
+          \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{COVID-19 Pollution map} $|$ \emph{Spark, Python, Big Data}} {September 2020 -- Oktober 2020}
+          \resumeItemListStart
+            \resumeItem{For the university course ``Large Scale Data Engineering", I worked with a team on a large scale data processing pipeline and visualisation tool of air pollution during the COVID-19 Pandemic. I focused on the data processing pipeline parts with Python, Apache Spark and DataBricks.}
+          \resumeItemListEnd
+    % \resumeProjectHeading
+    %       {\textbf{Ray-tracing porting efforts} $|$ \emph{C\#, Java, C++, SDL}}{July 2020 -- July 2020}
+    %       \resumeItemListStart
+    %         \resumeItem{Porting a Raytracer I had originally written in C\# to Java and C++ to properly learn the languages.}
+    %       \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{Haskell Shoot 'em up} $|$ \emph{Haskell, game development}}{Oktober 2018 -- November 2018}
+          \resumeItemListStart
+            \resumeItem{I developed a Shoot 'em up game with Haskell and Gloss (graphics library) for the course ``Functional programming". See \href{https://github.com/Krien/Haskell.ShootEmUp}{\underline{github.com/Krien/Haskell.ShootEmUp}}.}
+          \resumeItemListEnd
+       \resumeProjectHeading
+          {\textbf{Noxium} $|$ \emph{Unity, C\#, game development}}{November 2017 -- Februari 2018}
+          \resumeItemListStart
+            \resumeItem{Developing a 3d beat 'em up game in the game engine Unity with a team of 4. For this project, I created the AI, UI and I/O logic,  menu and various multiplayer aspects of the game. }
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming languages}{: Experience in C, C++, C\#, Python, JavaScript, TypeScript, PHP, Haskell and R. Knowledgeable about various other languages such as RUST, Matlab, a few Lisp dialects and APL. Proficient in the ``DSLs" Bash, HTML, SQL and LaTeX} \\
+     \textbf{Frameworks/Libraries}{: Among others SPDK, BPF, RocksDB, LevelDB, LightGBM, TensorFlow, NLTK, MPI, Google Analytics suite, MonoGame, Gloss, SDL, OpenGL,  React, Cake, Symfony, Flask, Bokeh} \\
+     \textbf{Developer Tools}{: Git, Docker, QEMU, AWS, Kubernetes, Apache Spark, DataBricks, Linux, Windows, Unity, WSL,  BPFTrace, perf, fio} \\
+     \textbf{General skills}{: Machine learning, CI/CD, virtualisation, software testing, software architecture, game development, scrum/agile }
+     }}
+ \end{itemize}
+
+
+%-------------------------------------------
+\end{document}
