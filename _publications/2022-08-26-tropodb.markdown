@@ -1,0 +1,51 @@
+---
+layout: post
+title: "TropoDB: Design, Implementation and Evaluation of an Optimised KV-Store for NVMe Zoned Namespace Devices"
+date:  2022-08-26 14:00:00
+authors: "Krijn Doekemeijer"
+categories: flash "key-value store"
+short: "The design, implementation and evaluation of an LSM-tree-based key-value store for NVMe Zoned Namespace Devices."
+status: WIP
+---
+
+<h2>Abstract</h2>
+The amount of data that is processed each year keeps increasing, expected to
+reach approximately 180 zettabytes of data in the year 2025. Larger data vol-
+umes require applications and hardware solutions to scale along. A big part
+of the digital ecosystem makes use of key-value stores to store and load data.
+Key-value stores, therefore, become a prime target for optimisation efforts. Re-
+cently a new interface for storage devices, known as Zoned Namespaces (ZNS),
+has been proposed. This interface is able to achieve better results than the
+conventional block-based approach when used on flash-based SSDs, both in
+performance and durability. Therefore, there is an interest by both industry
+and academia to shift to the usage of ZNS SSDs. Key-value stores are also
+a target for this shift because key-value stores are I/O heavy, require high
+performance and are used extensively. Further on, key-value stores commonly
+make use of data structures known as Log-structured Merge-trees (LSM-trees),
+whose design already follows ZNS closely, making them a natural fit for ZNS
+optimisations. Especially, co-optimising the garbage collection process of both
+storage and a key-value store is promising. Therefore, we have designed and
+implemented an LSM-tree-based key-value store directly on top of ZNS, known
+as TropoDB. TropoDB directly interfaces with the storage and is designed using
+an userspace I/O stack within the RocksDB ecosystem.
+We come with a number of novel designs for LSM-tree components on top of
+ZNS. The results of the implementation are both promising and competitive.
+TropoDB is able to come close to RocksDB with state-of-the-art file systems.
+However, GC-centric optimisations show limited gains in regards to tail latency,
+write amplification and numbers of erasures. To improve the performance gains,
+we present and discuss various optimisation avenues for TropoDB. Source code
+for TropoDB is available at [https://github.com/Krien/TropoDB](
+https://github.com/Krien/TropoDB).
+
+<h2>Metadata</h2>
+- <b>Authors:</b> Krijn Doekemeijer 
+- <b>Keywords:</b> Flash storage, SSD, NVMe, ZNS, Key-value stores, LSM-tree, RocksDB, LevelDB, user-space, file systems
+- <b>Publish date:</b> Not published yet!!!
+
+<h2>Availability (for now)</h2>
+- Draft paper: [github.com/Krien/TropoDB/blob/master/paper/out/TropoDB.pdf](https://github.com/Krien/TropoDB/blob/master/paper/out/TropoDB:_Design_and_Implementation_of_a_NVMe_Zoned_Namespace_Optimised_LSM_KV_Store_2022.pdf).
+- TropoDB code: [github.com/Krien/TropoDB](https://github.com/Krien/TropoDB)
+- TropoDB code (mirror):
+[github.com/atlarge-research/TropoDB](https://github.com/atlarge-research/TropoDB)
+- SZD code (custom ZNS API): [github.com/Krien/SimpleZNSDevice](https://github.com/Krien/SimpleZNSDevice)
+- Benchmark code: [github.com/Krien/ZNS_SPDK_Benchmarks](https://github.com/Krien/ZNS_SPDK_Benchmarks)
