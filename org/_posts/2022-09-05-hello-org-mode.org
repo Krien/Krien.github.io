@@ -1,0 +1,35 @@
+#+TITLE: 2022 09 05 Hello Org Mode
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: Hello Org Mode
+excerpt: Having fun with Org Mode
+---
+#+END_EXPORT
+
+* Headings
+text
+** H2
+text
+*** H3
+text
+**** H4
+text
+*  Code
+Emacs lisp:
+#+BEGIN_SRC emacs-lisp :results value pp
+;; https://orgmode.org/manual/Working-with-Source-Code.html
+(defun org-xor (a b)
+  "Exclusive or."
+  (if a (not b) b))
+#+END_SRC
+
+#+RESULTS:
+: org-xor
+
+Raku:
+#+BEGIN_SRC raku
+my $test='hello Raku is supported';
+print $test;
+#+END_SRC
