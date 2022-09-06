@@ -4,7 +4,8 @@
 ---
 layout: post
 title: "Notes: Setting up fio for SPDK"
-excerpt: Setting up fio for SPDK
+short: "Setting up fio for SPDK"
+status: Stale
 ---
 #+END_EXPORT
 

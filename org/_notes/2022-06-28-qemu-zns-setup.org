@@ -3,8 +3,9 @@
 #+BEGIN_EXPORT html
 ---
 layout: post
-title: "Notes: Setup QEMU for ZNS experiments"
-excerpt: Notes on setting up QEMU for ZNS experiments
+title: "Setup QEMU for ZNS experiments"
+short: "Setting up QEMU for ZNS experiments"
+status: WIP
 ---
 #+END_EXPORT
 

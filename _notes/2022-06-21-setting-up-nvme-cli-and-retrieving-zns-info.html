@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Notes: Setting up NVMe-CLI and retrieving NVMe SSD info"
-excerpt: Setting up NVMe-CLi and retrieving NVMe SSD info
+title: "NVMe-CLI"
+short: "Setting up NVMe-CLi and retrieving NVMe SSD info"
+status: WIP
 ---
 
-<div id="outline-container-org7f1d9c4" class="outline-2">
-<h2 id="org7f1d9c4"><span class="section-number-2">1.</span> Setting up NVMe-CLI</h2>
+<div id="outline-container-org6f0b8dd" class="outline-2">
+<h2 id="org6f0b8dd"><span class="section-number-2">1.</span> Setting up NVMe-CLI</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A good approach to get the most modern features is to build nvme-cli yourself. For this, you can do:
@@ -26,8 +27,8 @@ Then simply check if it works by listing all NVMe capable devices and see if the
 </div>
 </div>
 
-<div id="outline-container-org2dc3831" class="outline-2">
-<h2 id="org2dc3831"><span class="section-number-2">2.</span> Using nvme-cli to get NVMe stats</h2>
+<div id="outline-container-org599d268" class="outline-2">
+<h2 id="org599d268"><span class="section-number-2">2.</span> Using nvme-cli to get NVMe stats</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The NVMe standard specifies that NVMe SSDs should support a functionality known as smart-log. This contains some basic metrics that can be used to get information from the SSD. A few of those metrics are predefined and are therefore available on most NVMe SSDs, provided they are made in a reliable in trustworthy manner. This can be beneficial for benchmarking, a few helpful ones include:

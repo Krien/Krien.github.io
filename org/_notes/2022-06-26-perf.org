@@ -3,8 +3,9 @@
 #+BEGIN_EXPORT html
 ---
 layout: post
-title: "Notes: Perf"
-excerpt: "Notes related to perf"
+title: "Perf"
+short: "Setting up Perf and using Perf"
+status: Stale
 ---
 #+END_EXPORT
 

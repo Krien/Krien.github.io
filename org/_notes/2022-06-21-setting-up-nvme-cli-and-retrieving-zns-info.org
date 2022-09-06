@@ -3,8 +3,9 @@
 #+BEGIN_EXPORT html
 ---
 layout: post
-title: "Notes: Setting up NVMe-CLI and retrieving NVMe SSD info"
-excerpt: Setting up NVMe-CLi and retrieving NVMe SSD info
+title: "NVMe-CLI"
+short: "Setting up NVMe-CLi and retrieving NVMe SSD info"
+status: WIP
 ---
 #+END_EXPORT
 

@@ -4,7 +4,8 @@
 ---
 layout: post
 title: "Notes: BCC, BPFtools, BPFTrace"
-excerpt: "Notes related to perf"
+short: "Notes related to perf"
+status: Stale
 ---
 #+END_EXPORT
 

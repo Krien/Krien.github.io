@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Notes: benchmarking RocksDB"
-excerpt: "Notes related to Benchmarking RocksDB"
+short: "Notes related to Benchmarking RocksDB"
+status: Stale
 ---
 
 <p>
@@ -9,12 +10,12 @@ This page contains various notes related to benchmarking RocksDB.
 RocksDB can be benchmarked with the help of db<sub>bench</sub>. This is a tool made originally made by Google for LevelDB, but now altered for Meta&rsquo;s workload with RocksDB. As it closely matches the needs of Meta, it is a handy tool to use when you want to test a key-value store that is not production-ready yet or will not start with a large workload out of the box. For example if you intend to use RocksDB, there are quite a few different options to pick from, to see what works best db<sub>bench</sub> can help significantly.
 </p>
 
-<div id="outline-container-orgdcfcde7" class="outline-2">
-<h2 id="orgdcfcde7"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
+<div id="outline-container-orgfb4dadb" class="outline-2">
+<h2 id="orgfb4dadb"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
 </div>
 
-<div id="outline-container-org39d9142" class="outline-2">
-<h2 id="org39d9142"><span class="section-number-2">2.</span> Setup db<sub>bench</sub></h2>
+<div id="outline-container-org3fd0ef1" class="outline-2">
+<h2 id="org3fd0ef1"><span class="section-number-2">2.</span> Setup db<sub>bench</sub></h2>
 <div class="outline-text-2" id="text-2">
 <p>
 db<sub>bench</sub> should come along with the rest of the RocksDB repository. By using CMake it should be possible to only issue one build command and all of db<sub>bench</sub> dependencies will be built as well. Do ensure that is run in release mode. An example command would be:
@@ -29,8 +30,8 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 </div>
 </div>
 
-<div id="outline-container-orge081189" class="outline-3">
-<h3 id="orge081189"><span class="section-number-3">2.1.</span> Improve histogram to show more information</h3>
+<div id="outline-container-orgbedaae1" class="outline-3">
+<h3 id="orgbedaae1"><span class="section-number-3">2.1.</span> Improve histogram to show more information</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 db<sub>bench</sub> has an option known as &#x2013;histogram. This option is great for general analysis, but misses a lot of information. For example, when creating a box plot you also want the P25, which is not available by default. It is also hard to measure tail latency, as P99.99 is not enough. This can (at the moment) be altered as follows:
@@ -48,8 +49,8 @@ vi ./monitoring/histogram.cc
 </div>
 </div>
 
-<div id="outline-container-orgf35b379" class="outline-2">
-<h2 id="orgf35b379"><span class="section-number-2">3.</span> Interesting workloads</h2>
+<div id="outline-container-orgb18a910" class="outline-2">
+<h2 id="orgb18a910"><span class="section-number-2">3.</span> Interesting workloads</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 db<sub>bench</sub> comes with a lot of different benchmarks. It is possible to do multiple, by using &ldquo;,&rdquo; in the argument. For example benchmarks=&ldquo;fillseq,fillrandom&rdquo;. Some benchmarks that I find interesting to test the underlying storage:
@@ -66,8 +67,8 @@ overwrite: keeps overwriting a set of the same keys. This is a good stress test.
 </div>
 
 
-<div id="outline-container-org8bfc3ab" class="outline-2">
-<h2 id="org8bfc3ab"><span class="section-number-2">4.</span> Interesting parameters</h2>
+<div id="outline-container-org0d475f4" class="outline-2">
+<h2 id="org0d475f4"><span class="section-number-2">4.</span> Interesting parameters</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 db<sub>bench</sub> allows testing various configurations. A few that I use:
@@ -91,15 +92,15 @@ db<sub>bench</sub> allows testing various configurations. A few that I use:
 </div>
 </div>
 
-<div id="outline-container-org627bfc1" class="outline-2">
-<h2 id="org627bfc1"><span class="section-number-2">5.</span> Benchmark RocksDB with ZenFS</h2>
+<div id="outline-container-org2d6e171" class="outline-2">
+<h2 id="org2d6e171"><span class="section-number-2">5.</span> Benchmark RocksDB with ZenFS</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 ZenFS is an alternative file system that can only be used within RocksDB. It is essentially a domain-specific filesystem. Further on, it only works with ZNS SSDs. However, as of July 2022 this is the state of the art for RocksDB on such devices. It is therefore tempting to compare against ZenFS when benchmarking on ZNS SSDs.
 </p>
 </div>
-<div id="outline-container-orgf161c77" class="outline-3">
-<h3 id="orgf161c77"><span class="section-number-3">5.1.</span> Installing ZenFS</h3>
+<div id="outline-container-org160c093" class="outline-3">
+<h3 id="org160c093"><span class="section-number-3">5.1.</span> Installing ZenFS</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Using ZenFS does require some extra installations. It must be used as a plugin for RocksDB, which also requires rebuilding RocksDB yourself. So it is not possible to use RocksDB from a package repository! At <a href="https://github.com/westerndigitalcorporation/zenfs">https://github.com/westerndigitalcorporation/zenfs</a>, it is explained how you can setup ZenFS. Nevertheless, as is always the case with rebuilding from source, things can go wrong. As far as I am aware WD (the company behind ZenFS) has no direct influence over the updates of RocksDB and the team that works on RocksDB has no direct influence over ZenFS. They are essentially separate projects. Therefore there might be versioning inconsistencies. Whenever working with ZenFS always verify that the both versions are compatible and if you benchmark, make sure that you are using a combination that is &ldquo;optimal&rdquo;. Preferably pin a commit, use this commit in your benchmarks and report the commit SHA in your experiment details.
@@ -159,8 +160,8 @@ Go to the RocksDB directory. Alter the CMakeList to support plugin headers being
 </div>
 </div>
 
-<div id="outline-container-orgb10ab50" class="outline-3">
-<h3 id="orgb10ab50"><span class="section-number-3">5.2.</span> ZenFS Benchmarking</h3>
+<div id="outline-container-org02d19a1" class="outline-3">
+<h3 id="org02d19a1"><span class="section-number-3">5.2.</span> ZenFS Benchmarking</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Then after ZenFS is up and running. We should be able to do benchmarking. First pick an appropriate ZNS SSD and use its name. Pick the name in `/dev/&lt;name&gt;` as ZenFS automatically uses `/dev/`. Then do the following to setup ZenFS:
@@ -182,8 +183,8 @@ Now benchmarks can be run on ZenFS. For some good examples go to <a href="https:
 </p>
 </div>
 </div>
-<div id="outline-container-org2b6f2ea" class="outline-3">
-<h3 id="org2b6f2ea"><span class="section-number-3">5.3.</span> Remove ZenFS filesystem from a device</h3>
+<div id="outline-container-org2d7ba0e" class="outline-3">
+<h3 id="org2d7ba0e"><span class="section-number-3">5.3.</span> Remove ZenFS filesystem from a device</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 This is very easy as the ZenFS filesystem is never mounted. It runs in user space. So you do not have to do anything. If however, you want the ZNS SSD to go to a clean state, reset all zones with:
@@ -196,24 +197,24 @@ This is very easy as the ZenFS filesystem is never mounted. It runs in user spac
 </div>
 </div>
 
-<div id="outline-container-org7d93441" class="outline-2">
-<h2 id="org7d93441"><span class="section-number-2">6.</span> Benchmarking RocksDB with F2FS and ZNS SSDs</h2>
+<div id="outline-container-org6ffdd27" class="outline-2">
+<h2 id="org6ffdd27"><span class="section-number-2">6.</span> Benchmarking RocksDB with F2FS and ZNS SSDs</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 F2FS supports ZNS SSDs out of the box, provided a recent version of F2FS is used. However, it does require some additional setup and things to keep track of.The first idiosyncracy is that F2FS supports sequential zones for most of its data, except for at least a part of the metadata used. ZNS can support a few zones that can be written to randomly, but does not require to support them. Further on, such zones may not be enough to hold all metadata. Whenever the amount of randomly writable space is not enough, F2FS should warn you by default. For example, 100GB requires at least 4GB of random space and 7TB requires at least 16GB of random space. When the amount of space is not enough, we have to use an additional device as there is no other way. This does hinder benchmarks as F2FS &ldquo;cheats&rdquo; in this regard. To keep side-effects to a minimum, try to use a NVMe device with similar performance.
 </p>
 </div>
 
-<div id="outline-container-orga32f4bd" class="outline-3">
-<h3 id="orga32f4bd"><span class="section-number-3">6.1.</span> Install F2FS</h3>
+<div id="outline-container-org006c6bc" class="outline-3">
+<h3 id="org006c6bc"><span class="section-number-3">6.1.</span> Install F2FS</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 When using F2FS with F2fS-tools in 2022 and using the default kernel, ZNS is not supported by default. In that case, F2FS needs to be built manually. In this case, we have to be careful. Do NOT use the version on github as it does not seem to be maintained, instead clone from git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git. Then it should be as simple as following the instructions from the repo. One thing to be aware of is if you have all dependencies properly installed and set. During the configuration phase (`/configure.sh``) you should see a list of capabilities with &ldquo;yes&rdquo; or &ldquo;no&rdquo; next to it. If &ldquo;blkzoned.capacity&rdquo; is no, you can create a ZNS file system (at least the command completes without errors or warnings), but you can not actually use it&#x2026; In this case, be sure you have a modern kernel, the headers are installed and the kernel is built with all of the required configs. In my case I had to also update a few libraries, such as BPF.
 </p>
 </div>
 </div>
-<div id="outline-container-org56fb583" class="outline-3">
-<h3 id="org56fb583"><span class="section-number-3">6.2.</span> Create the file system</h3>
+<div id="outline-container-org9bf2845" class="outline-3">
+<h3 id="org9bf2845"><span class="section-number-3">6.2.</span> Create the file system</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 To create the filesystem on ZNS, Nick Tehrany has an excellent paper on how to use F2FS on ZNS at <a href="https://arxiv.org/abs/2206.01547">https://arxiv.org/abs/2206.01547</a>. First ensure that the ZNS device is actually empty! As at the moment (June 2022) F2FS makes no attempt to reset the device with for example:
@@ -235,8 +236,8 @@ mount -t f2fs /dev/$<span style="color: #dcaeea;">devnvme</span> /mnt/f2fs <span
 </div>
 </div>
 </div>
-<div id="outline-container-org52ba435" class="outline-3">
-<h3 id="org52ba435"><span class="section-number-3">6.3.</span> Benchmarking wtih F2FS</h3>
+<div id="outline-container-org5e919df" class="outline-3">
+<h3 id="org5e919df"><span class="section-number-3">6.3.</span> Benchmarking wtih F2FS</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Be sure to use the pointed mounted with F2FS only, by specifying the db and wal directory with setting `&#x2013;db` and `&#x2013;wal<sub>dir</sub>` to be directories within the mounted filesystem.

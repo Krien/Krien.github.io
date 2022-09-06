@@ -4,7 +4,8 @@
 ---
 layout: post
 title: "Notes: benchmarking RocksDB"
-excerpt: "Notes related to Benchmarking RocksDB"
+short: "Notes related to Benchmarking RocksDB"
+status: Stale
 ---
 #+END_EXPORT
 

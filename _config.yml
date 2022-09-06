@@ -39,6 +39,10 @@ collections:
     excerpt: true
     authors: true
     output: true
+  notes:
+    status: true
+    authors: true
+    short: true
 
 # Build settings
 theme: minima

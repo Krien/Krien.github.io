@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "Notes: Setup QEMU for ZNS experiments"
-excerpt: Notes on setting up QEMU for ZNS experiments
+title: "Setup QEMU for ZNS experiments"
+short: "Setting up QEMU for ZNS experiments"
+status: WIP
 ---
 
 <p>
@@ -10,8 +11,8 @@ THe configuration is mainly focused on storage aspects, as that is my field of s
 </p>
 
 
-<div id="outline-container-org9b81c7e" class="outline-2">
-<h2 id="org9b81c7e"><span class="section-number-2">1.</span> Good QEMU sources</h2>
+<div id="outline-container-org5c3a505" class="outline-2">
+<h2 id="org5c3a505"><span class="section-number-2">1.</span> Good QEMU sources</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li><a href="https://www.qemu.org/docs/master/about/index.html">https://www.qemu.org/docs/master/about/index.html</a> is the best source on QEMU as far as I am aware.</li>
@@ -19,16 +20,16 @@ THe configuration is mainly focused on storage aspects, as that is my field of s
 </div>
 </div>
 
-<div id="outline-container-orgaf7f494" class="outline-2">
-<h2 id="orgaf7f494"><span class="section-number-2">2.</span> Installing QEMU</h2>
+<div id="outline-container-orgdb91677" class="outline-2">
+<h2 id="orgdb91677"><span class="section-number-2">2.</span> Installing QEMU</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 I do not recommend installing QEMU from your package manager, if you want to research new hardware/software. In that case, please built QEMU yourself. Additionally, QEMU comes with many configuration parameters, that can be enabled/disabled when you built QEMU yourself. Follow <a href="https://www.qemu.org/download/">https://www.qemu.org/download/</a> to get a valid default QEMU installation.
 </p>
 </div>
 
-<div id="outline-container-org439607a" class="outline-3">
-<h3 id="org439607a"><span class="section-number-3">2.1.</span> Using a specific version</h3>
+<div id="outline-container-org9ba1e06" class="outline-3">
+<h3 id="org9ba1e06"><span class="section-number-3">2.1.</span> Using a specific version</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 It is a good idea to pin a version in QEMU if you want your work to be reproducable. Do this by cloning the QEMU repo.
@@ -44,8 +45,8 @@ Also beware, `sudo make install` will install QEMU globally! Do not do this, if 
 </div>
 </div>
 
-<div id="outline-container-org31998c4" class="outline-3">
-<h3 id="org31998c4"><span class="section-number-3">2.2.</span> Interesting configuration parameters</h3>
+<div id="outline-container-orge9a0c02" class="outline-3">
+<h3 id="orge9a0c02"><span class="section-number-3">2.2.</span> Interesting configuration parameters</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 When you want to use a non-standard installation, you should add some parameters to the ./configure command used in the QEMU guide. Some parameters that are interesting:
@@ -63,16 +64,16 @@ When you want to use a non-standard installation, you should add some parameters
 </div>
 </div>
 
-<div id="outline-container-org624d7a3" class="outline-2">
-<h2 id="org624d7a3"><span class="section-number-2">3.</span> Setting up VMs</h2>
+<div id="outline-container-org5992220" class="outline-2">
+<h2 id="org5992220"><span class="section-number-2">3.</span> Setting up VMs</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Setting up a VM in QEMU is not hard, but there are a lot of parameters and functionalities to remember! Some guidelines are useful.
 </p>
 </div>
 
-<div id="outline-container-org80ec527" class="outline-3">
-<h3 id="org80ec527"><span class="section-number-3">3.1.</span> Creating images</h3>
+<div id="outline-container-orgf228638" class="outline-3">
+<h3 id="orgf228638"><span class="section-number-3">3.1.</span> Creating images</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Qemu makes it easy to create emulated devices, such as hard disks and SSDs. For this use the command qemu-img with the necessary arguments. A raw disk device of 32 MB can for example be created with:
@@ -86,15 +87,15 @@ Then when running the VM, the logic of the image can be defined. In this case NA
 </p>
 </div>
 </div>
-<div id="outline-container-orge088d33" class="outline-3">
-<h3 id="orge088d33"><span class="section-number-3">3.2.</span> Running the VM</h3>
+<div id="outline-container-org1cf311e" class="outline-3">
+<h3 id="org1cf311e"><span class="section-number-3">3.2.</span> Running the VM</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 When running the VM, you should run `qemu-system-&lt;arch&gt;` with `arch` corresponding with the arch of the device running below QEMU (your physical device!). Depending on the privileges and functionalities used, you might need root privileges&#x2026; For a full example, see for example my personal QEMU config that I used for testing ZNS, <a href="https://github.com/Krien/ZNS_personal_Qemu_config">https://github.com/Krien/ZNS_personal_Qemu_config</a>. The Gentoo wiki also has a nice explanation at <a href="https://wiki.gentoo.org/wiki/QEMU/Options">https://wiki.gentoo.org/wiki/QEMU/Options</a>.
 </p>
 </div>
-<div id="outline-container-orge5ba975" class="outline-4">
-<h4 id="orge5ba975"><span class="section-number-4">3.2.1.</span> Architecture options</h4>
+<div id="outline-container-orgf8419e5" class="outline-4">
+<h4 id="orgf8419e5"><span class="section-number-4">3.2.1.</span> Architecture options</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 For info on an arg and its options, set the parameter of the arg to help, such as for the arg `cpu`, `-cpu help`.
@@ -118,15 +119,15 @@ Something that is easy to overlook with QEMU, is the machine type. When using a 
 </div>
 </div>
 
-<div id="outline-container-org7430b6c" class="outline-3">
-<h3 id="org7430b6c"><span class="section-number-3">3.3.</span> Loading images and (emulated) devices</h3>
+<div id="outline-container-org7cc353f" class="outline-3">
+<h3 id="org7cc353f"><span class="section-number-3">3.3.</span> Loading images and (emulated) devices</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Typically you want to make use of images when using QEMU. QEMU can uses `qcow` files for its main disk images. Such images can be simply used with the option `-hda &lt;image&gt;.qcow`, such as an Ubuntu image. When you want to use additional devices, there exist a few different approaches.
 </p>
 </div>
-<div id="outline-container-org3d0b9df" class="outline-4">
-<h4 id="org3d0b9df"><span class="section-number-4">3.3.1.</span> Emulated devices</h4>
+<div id="outline-container-org6fb8f80" class="outline-4">
+<h4 id="org6fb8f80"><span class="section-number-4">3.3.1.</span> Emulated devices</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 To use emulated device (such as created with qemu-img), the commands differ. What the &ldquo;image&rdquo; exactly is, depends on the command used. To use the image as an NVMe device use:
@@ -173,8 +174,8 @@ Some interesting parameters to set for the namespace:
 </ul>
 </div>
 </div>
-<div id="outline-container-org3400fa8" class="outline-4">
-<h4 id="org3400fa8"><span class="section-number-4">3.3.2.</span> Paravirtualisation</h4>
+<div id="outline-container-org76979b3" class="outline-4">
+<h4 id="org76979b3"><span class="section-number-4">3.3.2.</span> Paravirtualisation</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 It is possible to use paravirtualisation. This shares the device with the host. This allows you to for example use partitions as they are made on the host (partitions are an OS concept, which would make virtualisation otherwise next to impossible). This CAN give a performance overhead and is therefore not preferred. Paravirtualisation can for example be done with:
@@ -185,8 +186,8 @@ It is possible to use paravirtualisation. This shares the device with the host. 
 </div>
 </div>
 </div>
-<div id="outline-container-org7d3162f" class="outline-4">
-<h4 id="org7d3162f"><span class="section-number-4">3.3.3.</span> Passthrough</h4>
+<div id="outline-container-orgdd00894" class="outline-4">
+<h4 id="orgdd00894"><span class="section-number-4">3.3.3.</span> Passthrough</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 It is also possible to use real devices with QEMU passthrough. This gives a real device to the VM to use and makes the device not usable on the host anymore. So be careful! To do this, do in order (on the host):
@@ -237,8 +238,8 @@ When the device needs to be used on the host again, we can do:
 </div>
 </div>
 </div>
-<div id="outline-container-org8ca9065" class="outline-2">
-<h2 id="org8ca9065"><span class="section-number-2">4.</span> Dealing with NUMA</h2>
+<div id="outline-container-org548ec0b" class="outline-2">
+<h2 id="org548ec0b"><span class="section-number-2">4.</span> Dealing with NUMA</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Some computers come with NUMA, this complicates the setup and is something you need to be aware of when using NUMA. Especially when using benchmarks. You do not want excessive communication between NUMA nodes. Therefore, it is beneficial/advisable to just run your QEMU on just one NUMA node. First check if you even have NUMA:

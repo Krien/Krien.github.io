@@ -1,19 +1,20 @@
 ---
 layout: post
-title: "Notes: Perf"
-excerpt: "Notes related to perf"
+title: "Perf"
+short: "Setting up Perf and using Perf"
+status: Stale
 ---
 
 <p>
 This page contains various notes related to perf.
 </p>
 
-<div id="outline-container-orgb3d50b2" class="outline-2">
-<h2 id="orgb3d50b2"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
+<div id="outline-container-org30cb1d5" class="outline-2">
+<h2 id="org30cb1d5"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
 </div>
 
-<div id="outline-container-org803b796" class="outline-2">
-<h2 id="org803b796"><span class="section-number-2">2.</span> Setting up Perf on Ubuntu</h2>
+<div id="outline-container-org63f37d0" class="outline-2">
+<h2 id="org63f37d0"><span class="section-number-2">2.</span> Setting up Perf on Ubuntu</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Setting up perf on a stable version of Ubuntu should be easy. Generally it is maintained in the &ldquo;./tools&rdquo; part of the Linux kernel. Therefore it is probably available in your package manager. Firs try to install with:
@@ -82,8 +83,8 @@ To ensure that it works try a simple command, say `perf stat sleep 1`. This shou
 </div>
 
 
-<div id="outline-container-orgfd87542" class="outline-2">
-<h2 id="orgfd87542"><span class="section-number-2">3.</span> Setting up Flamegraph for perf</h2>
+<div id="outline-container-orgbeb54f2" class="outline-2">
+<h2 id="orgbeb54f2"><span class="section-number-2">3.</span> Setting up Flamegraph for perf</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 FlameGraph is an ideal tool to get insight into what perf is returning. It allows you to get a quick overview of all calls made during the time &ldquo;perf&rdquo; was running. Luckily, FlameGraph is very easy to setup. It uses Perl, which should be installed by default on your Ubuntu machine. In this case do the following:
@@ -123,8 +124,8 @@ But wait, this does not work if you are in a remote, terminal-only environment r
 </div>
 </div>
 
-<div id="outline-container-orgd230ee7" class="outline-2">
-<h2 id="orgd230ee7"><span class="section-number-2">4.</span> My first use-case for perf and flamegraph: RocksDB is slowing down after writing 500GB of key-value pairs</h2>
+<div id="outline-container-orge428c1d" class="outline-2">
+<h2 id="orge428c1d"><span class="section-number-2">4.</span> My first use-case for perf and flamegraph: RocksDB is slowing down after writing 500GB of key-value pairs</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It is always good to have some anecdotal evidence to show how a tool can be used.

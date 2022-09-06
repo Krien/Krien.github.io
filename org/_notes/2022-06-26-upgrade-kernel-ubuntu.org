@@ -3,8 +3,9 @@
 #+BEGIN_EXPORT html
 ---
 layout: post
-title: "Notes: Upgrade Linux kernel Ubuntu through Ubuntu PPA"
-excerpt: Notes on upgrading Linux kernel in Ubuntu
+title: "Upgrade Linux kernel"
+short: "Notes on upgrading Linux kernel in Ubuntu"
+status: WIP
 ---
 #+END_EXPORT
 

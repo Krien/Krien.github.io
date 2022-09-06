@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Notes: Upgrade Linux kernel Ubuntu through Ubuntu PPA"
-excerpt: Notes on upgrading Linux kernel in Ubuntu
+title: "Upgrade Linux kernel"
+short: "Notes on upgrading Linux kernel in Ubuntu"
+status: WIP
 ---
 
-<div id="outline-container-org9c5c49e" class="outline-2">
-<h2 id="org9c5c49e"><span class="section-number-2">1.</span> Why update?</h2>
+<div id="outline-container-orgd343228" class="outline-2">
+<h2 id="orgd343228"><span class="section-number-2">1.</span> Why update?</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 There exist multiple ways to upgrade the kernel within Ubuntu. First, why would you want to upgrade your kernel? Say you want to have access to some new Storage API, but that Storage API is only available in a more modern kernel. Or there are no proper device drivers in the kernel version of Ubuntu LTS. That might require waiting for Canocical to update kernel to said kernel version, which can take months. In such case, it might be beneficial to upgrade your kernel. Beware! They are not supported yet on Ubuntu for a reason!
@@ -13,8 +14,8 @@ There exist multiple ways to upgrade the kernel within Ubuntu. First, why would 
 </div>
 </div>
 
-<div id="outline-container-orgdbb93f8" class="outline-2">
-<h2 id="orgdbb93f8"><span class="section-number-2">2.</span> Updating from Ubuntu kernel PPA directly</h2>
+<div id="outline-container-org361c7bc" class="outline-2">
+<h2 id="org361c7bc"><span class="section-number-2">2.</span> Updating from Ubuntu kernel PPA directly</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The method I show here is not necessarily the best, I just report so that I have a reproducible method :).
@@ -45,8 +46,8 @@ Now if everything went alright, new entries are added to your grub menu. Verify 
 </p>
 </div>
 
-<div id="outline-container-org0b326ed" class="outline-3">
-<h3 id="org0b326ed"><span class="section-number-3">2.1.</span> Upgrading from 5.12 to 5.17</h3>
+<div id="outline-container-org1c3b95d" class="outline-3">
+<h3 id="org1c3b95d"><span class="section-number-3">2.1.</span> Upgrading from 5.12 to 5.17</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 I had an issue with upgrading from 5.12 to 5.17, which involved in libc6 becoming the new libc standard and something with libss3-dev. Both packages were not available in &ldquo;Ubuntu Focal&rdquo;. Fixed by adding sources for &ldquo;Jammy&rdquo; (yes very risky&#x2026;), to my &ldquo;/etc/apt/sources.list&rdquo;, which did contain the new packages. Then calling:
