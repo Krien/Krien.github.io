@@ -1,0 +1,21 @@
+#+TITLE: 2022 06 21 Essential Storage Benchmark Tools
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: "Notes: Essential benchmarking tools for storage on GNU/Linux"
+excerpt: Essential benchmarking tools for storage on GNU/Linux
+---
+#+END_EXPORT
+
+This page contains a list of benchmarking tools on GNU/Linux that I at least know of and that are known to work pretty well. I am sure that I am missing a few, but please bear with me. I come back to this page to see what tools to use.
+
+- perf (https://perf.wiki.kernel.org/index.php/Main_Page)
+- FlameGraph (https://github.com/brendangregg/FlameGraph)
+- iostat (https://linux.die.net/man/1/iostat)
+- ftrace (https://www.kernel.org/doc/html/latest/trace/ftrace.html)
+- blktrace (https://linux.die.net/man/8/blktrace)
+- bcc (https://github.com/iovisor/bcc)
+- bpftrace (https://github.com/iovisor/bpftrace)
+- nvme-cli, smart-montools, blkzone or another tool to get raw statistics from NVMe devices
+- fio (https://github.com/axboe/fio), for testing file I/O, but also for testing IO frameworks (libaio, SPDK, iouring, etc)

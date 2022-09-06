@@ -1,0 +1,36 @@
+#+TITLE: 2022 06 21 Setting Up Nvme Cli And Retrieving Zns Info
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: "Notes: Setting up NVMe-CLI and retrieving NVMe SSD info"
+excerpt: Setting up NVMe-CLi and retrieving NVMe SSD info
+---
+#+END_EXPORT
+
+* Setting up NVMe-CLI
+A good approach to get the most modern features is to build nvme-cli yourself. For this, you can do:
+#+BEGIN_SRC bash
+git clone https://github.com/linux-nvme/nvme-cli.git
+cd nvme-cli
+# Follow instructions at https://github.com/linux-nvme/nvme-cli
+#+END_SRC
+Then simply check if it works by listing all NVMe capable devices and see if they are all there:
+#+BEGIN_SRC bash
+sudo nvme list
+#+END_SRC
+
+* Using nvme-cli to get NVMe stats
+The NVMe standard specifies that NVMe SSDs should support a functionality known as smart-log. This contains some basic metrics that can be used to get information from the SSD. A few of those metrics are predefined and are therefore available on most NVMe SSDs, provided they are made in a reliable in trustworthy manner. This can be beneficial for benchmarking, a few helpful ones include:
+- host_write_commands: the total number of write commands issued on the host side
+- host_read_commands: the total number of read commands issued on the host side
+- data_units_written: total number of "data units" written to the device with Data Units Written. When the value remains 0h, Data Units Written is not reported.
+- data_units_read: total number of "data units" read from the device with the SMART Data Units Read Command
+
+The unit "data units" is slightly confusing, as it is a non-conventional unit (outside of the NVMe spec :smile: ). Looking at the most recent NVMe specifics (as of June 2022) it is units of 1000 LBA size blocks, when the LBA size is 512 bytes, excluding metadata updates. This value is always rounded up. Meaning that even if only 512 bytes are written, the system would still indicate 1 data unit written (1000*512). In an older version of the NVMe spec, it is stated that LBa sizes different than 512 are converted for the smart-log to 512 units anyway, this is something to look out for... Preferably, this should be tested for each device used. But always, multiply with 512*1000 and assume an error of ~ 512*1000 - lbasize.
+
+An easy way to get the actions issued between an I/O heavy application is to log before the I/O heavy application starts and to measure afterwards. Do ensure that nothing else writes to the device in the meantime as smart-log does not differentiate between the applications, that is an OS thing. Information can be retrieved with for example:
+#+BEGIN_SRC bash
+sudo nvme smart-log -o json "/dev/<nvmedev>" # with <nvmedev> the device name
+#+END_SRC
+The simply process with a tool like `jq` or `awk` to get the appropriate field.

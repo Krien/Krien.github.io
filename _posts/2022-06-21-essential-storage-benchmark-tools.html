@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Notes: Essential benchmarking tools for storage on GNU/Linux"
+excerpt: Essential benchmarking tools for storage on GNU/Linux
+---
+
+<p>
+This page contains a list of benchmarking tools on GNU/Linux that I at least know of and that are known to work pretty well. I am sure that I am missing a few, but please bear with me. I come back to this page to see what tools to use.
+</p>
+
+<ul class="org-ul">
+<li>perf (<a href="https://perf.wiki.kernel.org/index.php/Main_Page">https://perf.wiki.kernel.org/index.php/Main_Page</a>)</li>
+<li>FlameGraph (<a href="https://github.com/brendangregg/FlameGraph">https://github.com/brendangregg/FlameGraph</a>)</li>
+<li>iostat (<a href="https://linux.die.net/man/1/iostat">https://linux.die.net/man/1/iostat</a>)</li>
+<li>ftrace (<a href="https://www.kernel.org/doc/html/latest/trace/ftrace.html">https://www.kernel.org/doc/html/latest/trace/ftrace.html</a>)</li>
+<li>blktrace (<a href="https://linux.die.net/man/8/blktrace">https://linux.die.net/man/8/blktrace</a>)</li>
+<li>bcc (<a href="https://github.com/iovisor/bcc">https://github.com/iovisor/bcc</a>)</li>
+<li>bpftrace (<a href="https://github.com/iovisor/bpftrace">https://github.com/iovisor/bpftrace</a>)</li>
+<li>nvme-cli, smart-montools, blkzone or another tool to get raw statistics from NVMe devices</li>
+<li>fio (<a href="https://github.com/axboe/fio">https://github.com/axboe/fio</a>), for testing file I/O, but also for testing IO frameworks (libaio, SPDK, iouring, etc)</li>
+</ul>

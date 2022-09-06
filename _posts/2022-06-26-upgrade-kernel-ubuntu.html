@@ -1,0 +1,63 @@
+---
+layout: post
+title: "Notes: Upgrade Linux kernel Ubuntu through Ubuntu PPA"
+excerpt: Notes on upgrading Linux kernel in Ubuntu
+---
+
+<div id="outline-container-org9c5c49e" class="outline-2">
+<h2 id="org9c5c49e"><span class="section-number-2">1.</span> Why update?</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+There exist multiple ways to upgrade the kernel within Ubuntu. First, why would you want to upgrade your kernel? Say you want to have access to some new Storage API, but that Storage API is only available in a more modern kernel. Or there are no proper device drivers in the kernel version of Ubuntu LTS. That might require waiting for Canocical to update kernel to said kernel version, which can take months. In such case, it might be beneficial to upgrade your kernel. Beware! They are not supported yet on Ubuntu for a reason!
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdbb93f8" class="outline-2">
+<h2 id="orgdbb93f8"><span class="section-number-2">2.</span> Updating from Ubuntu kernel PPA directly</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The method I show here is not necessarily the best, I just report so that I have a reproducible method :).
+I take no responsibility if you mess up your system. The ubuntu Kernel team supply various ready to use kernel versions at <a href="https://kernel.ubuntu.com/~kernel-ppa/mainline">https://kernel.ubuntu.com/~kernel-ppa/mainline</a>. Those versions come with a few &ldquo;.deb&rdquo; files, checksums and metadata. These &ldquo;.deb&rdquo; files contain everything you need to add a new kernel version. You can then get the &ldquo;.deb&rdquo; files either through a `browser` or `wget`. These can then be installed with dpkg (yes no apt, remember we have the files locally). Be sure to read up on the version you intend to install and what files you need. In general you need the headers, modules and image deb files. For example, I wanted to install 5.17.1 for amd64. To do this, I called:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">mkdir</span> l517 &amp;&amp; <span style="color: #ECBE7B;">cd</span> l517 <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Does not really matter what it is called, just remember WHERE you will install the deb files!</span>
+wget <span style="color: #98be65;">\ </span>https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-headers-5.17.1-051701-generic_5.17.1-051701.202203280950_amd64.deb
+wget <span style="color: #98be65;">\</span>
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-headers-5.17.1-051701_5.17.1-051701.202203280950_all.deb
+wget <span style="color: #98be65;">\</span>
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-image-unsigned-5.17.1-051701-generic_5.17.1-051701.202203280950_amd64.deb <span style="color: #98be65;">\</span>
+wget <span style="color: #98be65;">\</span>
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-modules-5.17.1-051701-generic_5.17.1-051701.202203280950_amd64.deb
+</pre>
+</div>
+<p>
+Then we need to install all of these &ldquo;.deb&rdquo; files. But beware! Sometimes there are breaking changes that can mess up halfway through.
+For example when Libc updates, but the new libs is not yet in your &ldquo;.sources&rdquo; file in Ubuntu. Keep this in mind and make sure that you do not throw all your eggs in one basket, make backups now!
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Make sure you did not throw other random files in the earlier created directory!</span>
+<span style="color: #ECBE7B;">sudo</span> dpkg -i *.deb
+</pre>
+</div>
+<p>
+Now if everything went alright, new entries are added to your grub menu. Verify if there are any errors and if not reboot.
+</p>
+</div>
+
+<div id="outline-container-org0b326ed" class="outline-3">
+<h3 id="org0b326ed"><span class="section-number-3">2.1.</span> Upgrading from 5.12 to 5.17</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+I had an issue with upgrading from 5.12 to 5.17, which involved in libc6 becoming the new libc standard and something with libss3-dev. Both packages were not available in &ldquo;Ubuntu Focal&rdquo;. Fixed by adding sources for &ldquo;Jammy&rdquo; (yes very risky&#x2026;), to my &ldquo;/etc/apt/sources.list&rdquo;, which did contain the new packages. Then calling:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt --fix-broken install
+</pre>
+</div>
+<p>
+Your mileage may vary, but in general prevent making such gigantic leaps and be careful with your sources list. This worked in this case, but do not do this on your main machine.
+</p>
+</div>
+</div>
+</div>

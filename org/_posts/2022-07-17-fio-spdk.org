@@ -1,0 +1,52 @@
+#+title: 2022 07 17 Fio Spdk
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: "Notes: Setting up fio for SPDK"
+excerpt: Setting up fio for SPDK
+---
+#+END_EXPORT
+
+* !!!This page requires cleaning!!!
+
+* Setup FIO For SPDK in steps
+Setting up fio for SPDK is at the moment not a fun experience. It involves issues with linking, paths and segfaults.
+The following works (on my machine):
+
+1. Clone SPDK RECURSIVELY (follow https://spdk.io/doc/getting_started.html)
+2. Be sure to setup all pkgdeps in the spdk repo not just a few
+3. Clone fio anywhere (https://github.com/axboe/fio)
+4. move to fio directory
+5. call  `./configure` in the fio directory (not specified but absolutely necessary!)
+6. call `make -j $nprocs` in fio directory
+7. call `sudo make install` IF fio needs to be installed
+8. move to spdk directory again
+9. call `./configure --with-fio=<absolute path to earlier installed fio repo>` inside SPDK dir. Do NOT use a relative path.
+10. call `make -j` in SPDK dir
+11. when running fio with SPDK plugin only this worked for me...:
+    #+BEGIN_SRC bash
+    sudo LD_LIBRARY_PATH=<SPDK_DIR>/build/lib LD_PRELOAD=<SPDK_DIR>/build/fio/spdk_nvme fio
+    #+END_SRC
+
+In order to use ZNS devices for SPDK do:
+
+1. Get NVMe trid:
+   #+BEGIN_SRC bash
+   trid=ls -l /sys/block/$dev/device/device | awk '{split($11,dev,"/"); print dev[4]}'`
+   #+END_SRC
+2. ONLY bind this trid (really why is the default binding to use all devices?):
+   #+BEGIN_SRC bash
+   PCI_ALLOWED=$trid <SPDK_DIR>/scripts/setup.sh
+   #+END_SRC
+3. Move trid to dot separated instead of colon... (required by fio)
+   #+BEGIN_SRC bash
+   triddot=$(echo $trid | sed 's/\:/./g')
+   #+END_SRC
+4. Call the following to run with ZNS:
+   #+BEGIN_SRC bash
+       sudo LD_LIBRARY_PATH=<SPDK_DIR>/build/lib \
+           LD_PRELOAD=<SPDK_DIR>/build/fio/spdk_nvme \
+           fio filename=trtype=PCIe traddr=$triddot ns=1 ioengine=spdk thread=1
+   #+END_SRC
+       ^^ For this remember ns is 1-indexed for unexplained reasons in fio_spdk, not 0-indexed... probably add +1 to your nsid. Also always use thread=1, SPDK does not work with multiple processes, requiring thread parallelism instead.

@@ -1,0 +1,108 @@
+#+TITLE: 2022 07 17 Fio Spdk
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: "Notes: Perf"
+excerpt: "Notes related to perf"
+---
+#+END_EXPORT
+
+This page contains various notes related to perf.
+
+* !!!This page requires cleaning!!!
+
+* Setting up Perf on Ubuntu
+Setting up perf on a stable version of Ubuntu should be easy. Generally it is maintained in the "./tools" part of the Linux kernel. Therefore it is probably available in your package manager. Firs try to install with:
+#+BEGIN_SRC bash
+sudo apt-get update && sudo apt install linux-tools-common
+#+END_SRC
+In case you are running a different Kernel version than the default, perhaps even not a stable version, things are different. This is beneficial when you need the newest of the newest, say some new storage tech :eyes:. To do this, first try to get the current kernel release:
+#+BEGIN_SRC bash
+uname -r
+#+END_SRC
+This might return something like "5.17-generic". We are in this case only interested in the version number itself, so only the "5.17" part. Then try the following installation command:
+#+BEGIN_SRC bash
+sudo apt-get update && sudo apt install linux-tools.<version> # replace <version> with the version retrieved earlier.
+#+END_SRC
+Unfortunately, it might be that there is still is no perf available. This is unfortunate, but nothing we can not solve. At this point we do need to seriously reconsider why we are using Ubuntu in the first place... We are going to build the tools from source. Either clone the entire repository and checkout to your version:
+#+BEGIN_SRC bash
+git clone https://github.com/torvalds/linux.git
+git checkout v<version> # Replace <version> with your uname -r version.
+#+END_SRC
+or download the source code of a release (will use less disk space):
+#+BEGIN_SRC bash
+sudo apt install curl # You can also try wget if you hate curl
+curl -L -o linux-<version>.tar.xz \
+https://www.kernel.org/pub/linux/kernel/v5.x/linux-<version>.tar.xz #Replace BOTH instances of <version> with uname -r version.
+tar xvf linux-<version>.tar.xz
+#+END_SRC
+Then move into the linux directory. Now be VERY careful. Everything you install can brick your system if the versions do not match (and you install the wrong tool). For example, in general do not install a `fsck` tool or something. Now we need to install some dependencies needed for building the tool:
+#+BEGIN_SRC bash
+sudo apt install git fakeroot build-essential xz-utils libssl-dev flex bison
+#+END_SRC
+It might be that more that more libraries are needed dependent on your system in that case, you should see errors during compilation. Just install them when you see the warnings. However, do note that you might not get the full functionality of perf that you might expect. For example you might miss the function: `perf probe` or will be unable to demangle C++ code... This should be visible at the beginning of the installation process, where you will see various checkboxes with supported capabilities. If you see a cross next to a capability, such as at "elf" you will need to first install some extra dependencies if you want to use that capability. Therefore I recommend to also install the following:
+#+BEGIN_SRC bash
+sudo apt install libelf-dev elfutils libiberty-dev binutils-dev
+#+END_SRC
+Now we should be set. Compilation can be done as follows. WARNING, this will overwrite at least your current perf installation:
+#+BEGIN_SRC bash
+sudo make -C tools/ perf_install prefix=/usr/
+#+END_SRC
+To ensure that it works try a simple command, say `perf stat sleep 1`. This should return some statistics. If you also want probe, the command `perf probe`should not say that "probe is not defined", while probe is defined within `man perf`. If probe exists, you are ready to go
+
+
+* Setting up Flamegraph for perf
+FlameGraph is an ideal tool to get insight into what perf is returning. It allows you to get a quick overview of all calls made during the time "perf" was running. Luckily, FlameGraph is very easy to setup. It uses Perl, which should be installed by default on your Ubuntu machine. In this case do the following:
+#+BEGIN_SRC bash
+git clone https://github.com/brendangregg/FlameGraph.git
+#+END_SRC
+and we are done. Just remember where you cloned FlameGraph or make an `alias`. Now we can try to create a simple graph to see that it works. First create a report we can use:
+#+BEGIN_SRC bash
+sudo perf record sleep 10
+#+END_SRC
+Then create a script that can be used by the FlameGraph (in the same directory or point to the ".data" file with the -i arg).
+#+BEGIN_SRC bash
+sudo perf script > flamegraph.script
+#+END_SRC
+Generate the svg:
+#+BEGIN_SRC bash
+./FlameGraph/stackcollapse-perf.pl flamegraph.script | ./FlameGraph/flamegraph.pl > hello_world.svg
+#+END_SRC
+This should spit out a ".svg" file.
+
+But wait, this does not work if you are in a remote, terminal-only environment right. How would you open a svg? Simple, "scp" it out of your VM or scp it out of your remote environment. If this is not allowed for some reason, you can always create a private Github repo or find an UTF-8 renderer or something.
+
+* My first use-case for perf and flamegraph: RocksDB is slowing down after writing 500GB of key-value pairs
+It is always good to have some anecdotal evidence to show how a tool can be used.
+That is the main message I am trying to convey in this section. Please do not dwell too much on the details.
+
+Recently I wanted to test the performance of the filesystem F2FS for key-value stores for large I/O on ZNS SSDs (https://zonedstorage.io/docs/introduction/zns for more on ZNS). In particular I wanted to use Metas key-value store, RocksDB (https://github.com/facebook/rocksdb), with its custom benchmarking tool, "db_bench".
+
+This was a rather complicated setup as the storage stack was non-conventional. A situation I would like to explain shortly. F2FS supports using sequential-only ZNS zones, but it requires randomly writeable zones for metadata. Unfortunately, the device that we wanted to test, was a 7TB SSD with only 4GB of randomly writable zones. 4GB is definitely not enough storage at all for all of the metadata that would be required if we want to use the full device. So an extra device was needed to store the metadata. Further on as we needed cutting edge software and the kernel on the cluster was already going a bit rusty, we needed to run the benchmark in a VM. Lastly, the amount of fast NVMe hardware available was limited. Therefore apart from the ZNS device, all other devices were partitioned.
+
+Our solution was to make use of QEMU passthrough for the 7TB ZNS device and in addition to use paravirtualisation for a partitioned Intel Optane NVMe device. This was good and all as we were able to make and mount a F2FS partition and use it in RocksDB. The specific commands to setup F2FS were:
+#+BEGIN_SRC bash
+sudo mkfs.f2fs -f -m -c /dev/nvme0n2 /dev/vda
+echo mq-deadline | sudo tee /sys/block/nvme0n2/queue/scheduler
+sudo mount -t f2fs /dev/vda /mnt/f2fs
+#+END_SRC
+To benchmark this configuration, We were using db_bench with a custom benchmark config on top, which we will get to in a minute. For now it is enough to know that it was running fast for a while and that were prepared to find out that our hardware solution would give performance problems...
+
+Everything changed after 500GB had been written to the SSD, which we now happened with: `sudo df -h /mnt/f2fs`. The job was hanging for days, with only a few GB written every few hours. We decided that there was only one option, debug whatever what was going wrong, while the benchmark kept running on the background. At first, a good assumption might be that since we are using paravirtualisation the connection between VM and host was becoming the bottleneck. This would require us to rethink our hardware solution. Not something you want to do! We started to run:
+#+BEGIN_SRC bash
+iostat 1 1000
+#+END_SRC
+Something was going on here. There was almost no I/O to speak of, only a few kB here and there. The assumption was immediately that the throughput of F2FS could not the root of our issue and therefore paravirtualisation could not be. The problem, "probably" had to be in db_bench or RocksDB instead. A quick look at htop to get an overview of the system resources revealed that we were only using 10 of the 64GB DRAM available and only 1 core was used at 100%. This all seemed very confusing. Investigating the mounted filesystem, we noticed that the ls command was taking > 2 minutes on the db directory! Something was definitely keeping F2FS very busy. But what? At first a hypothesis was that it was an enumeration problem as there were thousands of files in the db directory. However, as a rule of thumb always benchmark and find out the most expensive calls. As currently the only big process running on the VM was db_bench, it is generally a safe approach to run perf for a while and assume the most expensive calls are for the benchmark. Therefore we ran:
+#+BEGIN_SRC bash
+sudo perf record -a -g -e instructions sleep 60
+#+END_SRC
+The results showed the following top calls:
+ #+BEGIN_SRC plain
+35.11%  rocksdb:low      libc-2.31.so             [.] __memcmp_avx2_movbe
+25.19%  rocksdb:low      librocksdb.so.7.0.0      [.] rocksdb::Compaction::MinInputFileOldestAncesterTime
+13.16%  rocksdb:low      librocksdb.so.7.0.0      [.] rocksdb::(anonymous namespace)::BytewiseComparatorImpl::Compare
+ #+END_SRC
+ Looking at the source code of RocksDB this seemed to be related to the Compaction process and it did seem to iterate over the files. `MinInputFileOldestAncesterTime` calls `Compare` which uses `memcmp` (which internally uses AVX). This seemed to confirm the enumeration problem. However, things turned out to not be so simple. As it was in fact iterating over cached metadata and comparing the strings of that metadata. There is no way that 35% of a complex I/O bound database is used by simple string comparisons in memory. It is more probable that there are an abnormal amount of compactions done instead. In this case, the flamegraph comes in handy. It indeed showed that everything originated (with that I mean > 90%!) in a function known as BGThread, which corresponds to a background operation known as a compaction. This indeed means that there are a lot of compactions happening. Fortunately, RocksDB logs important operations in a separate "LOG" file. Simply catting this file for a few seconds, showed that there were > 3 files created each second. This seriously bottlenecks the database as instead of writing large files, it writes thousands of small files and the IO throughput can not be satisfied. This was in all likelihood the cause. We can not reach GBs per second if we only write small files. The next simple step was to verify why there were so many tiny compactions. Looking at the benchmark configs, it became obvious. The recommended filesize was set to 1kB, which will of course not work properly if we want to write TBs of data :).
+
+This might seem like a cherry-picked example and oddly-specific, but this is an actual example of a real problem that was solved with the help of performance tools. It shows a simple thinking process that can aid in getting to the root of a performance problem. Learning case: performance tools are your friend, use them.

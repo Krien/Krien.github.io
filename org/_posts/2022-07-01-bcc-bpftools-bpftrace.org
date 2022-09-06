@@ -1,0 +1,46 @@
+#+TITLE: 2022 07 01 Bcc Bpftools Bpftrace
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: "Notes: BCC, BPFtools, BPFTrace"
+excerpt: "Notes related to perf"
+---
+#+END_EXPORT
+
+This page contains various notes related to BCC, BPFTools, BPFTrace.
+
+* !!!This page requires cleaning!!!
+* Setting up Bpftrace
+Setting up Bpftrace is a daunting task when working with a custom kernel. Bpftrace has a lot of dependencies on which they seem to have no control (in 2022 at least). If you want all functionalities, you especially have a problem... Since this automatically contains some other tools, we need to install the other tools as well.
+
+First make sure that you have all of your Linux headers installed... On Ubuntu, the headers are generally in `/usr/src/include/linux-<version>/`, but your millage may very. Installing the headers if they miss can be done with:
+#+BEGIN_SRC bash
+sudo apt-get install linux-headers-$(uname -r)
+#+END_SRC
+This might not work or even worse, install older headers!?? Yes the above command can in some cases install headers for older linux versions, which I do not understand. For my custom kernel setup, where I got the kernel from Canonical, I had to install the headers from there and then do (see /2022/06/26/upgrade-kernel-ubuntu.html):
+#+BEGIN_SRC bash
+dpkg -i <headernames>.deb
+dpkg -i <headernames>-generic.deb
+#+END_SRC
+However, if your kernel and your version of Ubuntu do not match, you might miss dependencies. In that case you need to build each of those dependencies or live dangerously and add newer Ubuntu versions to your /etc/apt/sources. For example, on Focal you do not have the most modern `libc6` and you do not have `libssl3`. Adding `Jimmy` or `imp` to your sources in this case can work (dangerous!)...
+
+Then first we want to have access to BPF tools. First check if they are already installed with bpftool --version. If this does not work, it is time to build. This is analogous to how we install perf with the kernel source code. Navigate to the kernel source on your machine, but this time do:
+
+#+BEGIN_SRC bash
+sudo make -C tools/ bpf_install prefix=/usr/
+#+END_SRC
+This worked in my case. Again Linux warns if you miss dependencies. Check if all dependencies are green (libcap, ...) and not red.
+
+Then install libbpf: https://github.com/libbpf/libbpf. The install from this repo is confusing and installs to non-conventional paths. Instead follow part of the installation as done by Docker in bpftrace... (https://github.com/iovisor/bpftrace/blob/master/docker/build.sh) In general this should work:
+#+BEGIN_SRC bash
+git checkout v0.5
+cd src # No build directory?
+CC=gcc make -j
+PREFIX=/usr/local/ LIBDIR=/usr/local/lib make install install_uapi_headers
+#+END_SRC
+Then install bcc, but FIRST install its dependencies. In general follow https://github.com/iovisor/bcc/blob/master/INSTALL.md for Ubuntu. Do not apt install and do not follow installations from other distros. Further on, be sure to checkout to a stable version and not the head. In my case, v0.24.0 worked.
+
+Only then can we start thinking about bpftrace... Try to follow https://github.com/iovisor/bpftrace/blob/master/INSTALL.md. When calling CMake there should only be "yes" and no "no" next to all BPF, BTF and kernel functions. If not, installations are set incorrectly. Install them and do rm CMakeCache.txt before reinstalling. Contrary to what we did for bcc, we now need the head as "stable" bpftrace breaks with "stable" libbpf and bcc. In my case commit: 766787a67f97fb4e9312ab38b9f4dc89001f0c51.
+
+Then we can try bpftrace... Try to run https://github.com/iovisor/bpftrace/issues/1832.

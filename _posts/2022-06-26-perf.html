@@ -1,0 +1,186 @@
+---
+layout: post
+title: "Notes: Perf"
+excerpt: "Notes related to perf"
+---
+
+<p>
+This page contains various notes related to perf.
+</p>
+
+<div id="outline-container-orgb3d50b2" class="outline-2">
+<h2 id="orgb3d50b2"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
+</div>
+
+<div id="outline-container-org803b796" class="outline-2">
+<h2 id="org803b796"><span class="section-number-2">2.</span> Setting up Perf on Ubuntu</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Setting up perf on a stable version of Ubuntu should be easy. Generally it is maintained in the &ldquo;./tools&rdquo; part of the Linux kernel. Therefore it is probably available in your package manager. Firs try to install with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt-get update &amp;&amp; <span style="color: #ECBE7B;">sudo</span> apt install linux-tools-common
+</pre>
+</div>
+<p>
+In case you are running a different Kernel version than the default, perhaps even not a stable version, things are different. This is beneficial when you need the newest of the newest, say some new storage tech :eyes:. To do this, first try to get the current kernel release:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">uname -r
+</pre>
+</div>
+<p>
+This might return something like &ldquo;5.17-generic&rdquo;. We are in this case only interested in the version number itself, so only the &ldquo;5.17&rdquo; part. Then try the following installation command:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt-get update &amp;&amp; <span style="color: #ECBE7B;">sudo</span> apt install linux-tools.&lt;version&gt; <span style="color: #5B6268;"># </span><span style="color: #5B6268;">replace &lt;version&gt; with the version retrieved earlier.</span>
+</pre>
+</div>
+<p>
+Unfortunately, it might be that there is still is no perf available. This is unfortunate, but nothing we can not solve. At this point we do need to seriously reconsider why we are using Ubuntu in the first place&#x2026; We are going to build the tools from source. Either clone the entire repository and checkout to your version:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">git</span> clone https://github.com/torvalds/linux.git
+<span style="color: #ECBE7B;">git</span> checkout v&lt;version&gt; <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Replace &lt;version&gt; with your uname -r version.</span>
+</pre>
+</div>
+<p>
+or download the source code of a release (will use less disk space):
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt install <span style="color: #ECBE7B;">curl</span> <span style="color: #5B6268;"># </span><span style="color: #5B6268;">You can also try wget if you hate </span><span style="color: #5B6268;">curl</span>
+<span style="color: #ECBE7B;">curl</span> -L -o linux-&lt;version&gt;.tar.xz <span style="color: #98be65;">\</span>
+https://www.kernel.org/pub/linux/kernel/v5.x/linux-&lt;version&gt;.tar.xz <span style="color: #5B6268;">#</span><span style="color: #5B6268;">Replace BOTH instances of &lt;version&gt; with uname -r version.</span>
+tar xvf linux-&lt;version&gt;.tar.xz
+</pre>
+</div>
+<p>
+Then move into the linux directory. Now be VERY careful. Everything you install can brick your system if the versions do not match (and you install the wrong tool). For example, in general do not install a `fsck` tool or something. Now we need to install some dependencies needed for building the tool:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt install <span style="color: #ECBE7B;">git</span> fakeroot build-essential xz-utils libssl-dev flex bison
+</pre>
+</div>
+<p>
+It might be that more that more libraries are needed dependent on your system in that case, you should see errors during compilation. Just install them when you see the warnings. However, do note that you might not get the full functionality of perf that you might expect. For example you might miss the function: `perf probe` or will be unable to demangle C++ code&#x2026; This should be visible at the beginning of the installation process, where you will see various checkboxes with supported capabilities. If you see a cross next to a capability, such as at &ldquo;elf&rdquo; you will need to first install some extra dependencies if you want to use that capability. Therefore I recommend to also install the following:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt install libelf-dev elfutils libiberty-dev binutils-dev
+</pre>
+</div>
+<p>
+Now we should be set. Compilation can be done as follows. WARNING, this will overwrite at least your current perf installation:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> <span style="color: #ECBE7B;">make</span> -C tools/ perf_install <span style="color: #dcaeea;">prefix</span>=/usr/
+</pre>
+</div>
+<p>
+To ensure that it works try a simple command, say `perf stat sleep 1`. This should return some statistics. If you also want probe, the command `perf probe`should not say that &ldquo;probe is not defined&rdquo;, while probe is defined within `man perf`. If probe exists, you are ready to go
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgfd87542" class="outline-2">
+<h2 id="orgfd87542"><span class="section-number-2">3.</span> Setting up Flamegraph for perf</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+FlameGraph is an ideal tool to get insight into what perf is returning. It allows you to get a quick overview of all calls made during the time &ldquo;perf&rdquo; was running. Luckily, FlameGraph is very easy to setup. It uses Perl, which should be installed by default on your Ubuntu machine. In this case do the following:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">git</span> clone https://github.com/brendangregg/FlameGraph.git
+</pre>
+</div>
+<p>
+and we are done. Just remember where you cloned FlameGraph or make an `alias`. Now we can try to create a simple graph to see that it works. First create a report we can use:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> perf record <span style="color: #ECBE7B;">sleep</span> <span style="color: #da8548; font-weight: bold;">10</span>
+</pre>
+</div>
+<p>
+Then create a script that can be used by the FlameGraph (in the same directory or point to the &ldquo;.data&rdquo; file with the -i arg).
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> perf script &gt; flamegraph.script
+</pre>
+</div>
+<p>
+Generate the svg:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">./FlameGraph/stackcollapse-perf.pl flamegraph.script | ./FlameGraph/flamegraph.pl &gt; hello_world.svg
+</pre>
+</div>
+<p>
+This should spit out a &ldquo;.svg&rdquo; file.
+</p>
+
+<p>
+But wait, this does not work if you are in a remote, terminal-only environment right. How would you open a svg? Simple, &ldquo;scp&rdquo; it out of your VM or scp it out of your remote environment. If this is not allowed for some reason, you can always create a private Github repo or find an UTF-8 renderer or something.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd230ee7" class="outline-2">
+<h2 id="orgd230ee7"><span class="section-number-2">4.</span> My first use-case for perf and flamegraph: RocksDB is slowing down after writing 500GB of key-value pairs</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+It is always good to have some anecdotal evidence to show how a tool can be used.
+That is the main message I am trying to convey in this section. Please do not dwell too much on the details.
+</p>
+
+<p>
+Recently I wanted to test the performance of the filesystem F2FS for key-value stores for large I/O on ZNS SSDs (<a href="https://zonedstorage.io/docs/introduction/zns">https://zonedstorage.io/docs/introduction/zns</a> for more on ZNS). In particular I wanted to use Metas key-value store, RocksDB (<a href="https://github.com/facebook/rocksdb">https://github.com/facebook/rocksdb</a>), with its custom benchmarking tool, &ldquo;db<sub>bench</sub>&rdquo;.
+</p>
+
+<p>
+This was a rather complicated setup as the storage stack was non-conventional. A situation I would like to explain shortly. F2FS supports using sequential-only ZNS zones, but it requires randomly writeable zones for metadata. Unfortunately, the device that we wanted to test, was a 7TB SSD with only 4GB of randomly writable zones. 4GB is definitely not enough storage at all for all of the metadata that would be required if we want to use the full device. So an extra device was needed to store the metadata. Further on as we needed cutting edge software and the kernel on the cluster was already going a bit rusty, we needed to run the benchmark in a VM. Lastly, the amount of fast NVMe hardware available was limited. Therefore apart from the ZNS device, all other devices were partitioned.
+</p>
+
+<p>
+Our solution was to make use of QEMU passthrough for the 7TB ZNS device and in addition to use paravirtualisation for a partitioned Intel Optane NVMe device. This was good and all as we were able to make and mount a F2FS partition and use it in RocksDB. The specific commands to setup F2FS were:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> mkfs.f2fs -f -m -c /dev/nvme0n2 /dev/vda
+<span style="color: #ECBE7B;">echo</span> mq-deadline | <span style="color: #ECBE7B;">sudo</span> tee /sys/block/nvme0n2/queue/scheduler
+<span style="color: #ECBE7B;">sudo</span> mount -t f2fs /dev/vda /mnt/f2fs
+</pre>
+</div>
+<p>
+To benchmark this configuration, We were using db<sub>bench</sub> with a custom benchmark config on top, which we will get to in a minute. For now it is enough to know that it was running fast for a while and that were prepared to find out that our hardware solution would give performance problems&#x2026;
+</p>
+
+<p>
+Everything changed after 500GB had been written to the SSD, which we now happened with: `sudo df -h /mnt/f2fs`. The job was hanging for days, with only a few GB written every few hours. We decided that there was only one option, debug whatever what was going wrong, while the benchmark kept running on the background. At first, a good assumption might be that since we are using paravirtualisation the connection between VM and host was becoming the bottleneck. This would require us to rethink our hardware solution. Not something you want to do! We started to run:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">iostat <span style="color: #da8548; font-weight: bold;">1</span> <span style="color: #da8548; font-weight: bold;">1000</span>
+</pre>
+</div>
+<p>
+Something was going on here. There was almost no I/O to speak of, only a few kB here and there. The assumption was immediately that the throughput of F2FS could not the root of our issue and therefore paravirtualisation could not be. The problem, &ldquo;probably&rdquo; had to be in db<sub>bench</sub> or RocksDB instead. A quick look at htop to get an overview of the system resources revealed that we were only using 10 of the 64GB DRAM available and only 1 core was used at 100%. This all seemed very confusing. Investigating the mounted filesystem, we noticed that the ls command was taking &gt; 2 minutes on the db directory! Something was definitely keeping F2FS very busy. But what? At first a hypothesis was that it was an enumeration problem as there were thousands of files in the db directory. However, as a rule of thumb always benchmark and find out the most expensive calls. As currently the only big process running on the VM was db<sub>bench</sub>, it is generally a safe approach to run perf for a while and assume the most expensive calls are for the benchmark. Therefore we ran:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> perf record -a -g -e instructions <span style="color: #ECBE7B;">sleep</span> <span style="color: #da8548; font-weight: bold;">60</span>
+</pre>
+</div>
+<p>
+The results showed the following top calls:
+</p>
+<div class="org-src-container">
+<pre class="src src-plain">35.11%  rocksdb:low      libc-2.31.so             [.] __memcmp_avx2_movbe
+25.19%  rocksdb:low      librocksdb.so.7.0.0      [.] rocksdb::Compaction::MinInputFileOldestAncesterTime
+13.16%  rocksdb:low      librocksdb.so.7.0.0      [.] rocksdb::(anonymous namespace)::BytewiseComparatorImpl::Compare
+</pre>
+</div>
+<p>
+Looking at the source code of RocksDB this seemed to be related to the Compaction process and it did seem to iterate over the files. `MinInputFileOldestAncesterTime` calls `Compare` which uses `memcmp` (which internally uses AVX). This seemed to confirm the enumeration problem. However, things turned out to not be so simple. As it was in fact iterating over cached metadata and comparing the strings of that metadata. There is no way that 35% of a complex I/O bound database is used by simple string comparisons in memory. It is more probable that there are an abnormal amount of compactions done instead. In this case, the flamegraph comes in handy. It indeed showed that everything originated (with that I mean &gt; 90%!) in a function known as BGThread, which corresponds to a background operation known as a compaction. This indeed means that there are a lot of compactions happening. Fortunately, RocksDB logs important operations in a separate &ldquo;LOG&rdquo; file. Simply catting this file for a few seconds, showed that there were &gt; 3 files created each second. This seriously bottlenecks the database as instead of writing large files, it writes thousands of small files and the IO throughput can not be satisfied. This was in all likelihood the cause. We can not reach GBs per second if we only write small files. The next simple step was to verify why there were so many tiny compactions. Looking at the benchmark configs, it became obvious. The recommended filesize was set to 1kB, which will of course not work properly if we want to write TBs of data :).
+</p>
+
+<p>
+This might seem like a cherry-picked example and oddly-specific, but this is an actual example of a real problem that was solved with the help of performance tools. It shows a simple thinking process that can aid in getting to the root of a performance problem. Learning case: performance tools are your friend, use them.
+</p>
+</div>
+</div>

@@ -1,0 +1,313 @@
+---
+layout: post
+title: "Notes: Setup QEMU for ZNS experiments"
+excerpt: Notes on setting up QEMU for ZNS experiments
+---
+
+<p>
+I use QEMU for my VMs, on this page I maintain various notes about how I setup QEMU.
+THe configuration is mainly focused on storage aspects, as that is my field of studies.
+</p>
+
+
+<div id="outline-container-org9b81c7e" class="outline-2">
+<h2 id="org9b81c7e"><span class="section-number-2">1.</span> Good QEMU sources</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><a href="https://www.qemu.org/docs/master/about/index.html">https://www.qemu.org/docs/master/about/index.html</a> is the best source on QEMU as far as I am aware.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaf7f494" class="outline-2">
+<h2 id="orgaf7f494"><span class="section-number-2">2.</span> Installing QEMU</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+I do not recommend installing QEMU from your package manager, if you want to research new hardware/software. In that case, please built QEMU yourself. Additionally, QEMU comes with many configuration parameters, that can be enabled/disabled when you built QEMU yourself. Follow <a href="https://www.qemu.org/download/">https://www.qemu.org/download/</a> to get a valid default QEMU installation.
+</p>
+</div>
+
+<div id="outline-container-org439607a" class="outline-3">
+<h3 id="org439607a"><span class="section-number-3">2.1.</span> Using a specific version</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+It is a good idea to pin a version in QEMU if you want your work to be reproducable. Do this by cloning the QEMU repo.
+Then do:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">git</span> checkout $<span style="color: #dcaeea;">version</span> <span style="color: #5B6268;"># </span><span style="color: #5B6268;">with the correct version signature</span>
+</pre>
+</div>
+<p>
+Also beware, `sudo make install` will install QEMU globally! Do not do this, if you want to use multiple versions (or it is not your own machine&#x2026;). Instead use aliases or something.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org31998c4" class="outline-3">
+<h3 id="org31998c4"><span class="section-number-3">2.2.</span> Interesting configuration parameters</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+When you want to use a non-standard installation, you should add some parameters to the ./configure command used in the QEMU guide. Some parameters that are interesting:
+</p>
+<ul class="org-ul">
+<li>&#x2013;help: shows all possible configurationss :).</li>
+<li>&#x2013;enable-kvm: ensures that KVM is used (<a href="https://www.redhat.com/en/topics/virtualization/what-is-KVM">https://www.redhat.com/en/topics/virtualization/what-is-KVM</a>). Might not be necessary, but is generally what you want, especially when benchmarking.</li>
+<li>&#x2013;disable-gtk: disables the GTK GUI. Many VMs will not need a GUI and using this in a remote environment is problematic.</li>
+<li>&#x2013;target-list : explicitly sets the targets to built for. Not setting this argument, will built for ALL your targets, probably not something you want. An example target would be &rsquo;x86<sub>64</sub>-softmmu&rsquo; to only create the x86<sub>64</sub> target.</li>
+<li>&#x2013;enable-linux-aio: enables the Linux AIO functionality (<a href="https://github.com/littledan/linux-aio">https://github.com/littledan/linux-aio</a>). When testing storage tech, please enable.</li>
+<li>&#x2013;enable-trace-backends=sets the backends to use for tracing in QEMU (see <a href="https://qemu.readthedocs.io/en/latest/devel/tracing.html">https://qemu.readthedocs.io/en/latest/devel/tracing.html</a> for what backends you might want to use).</li>
+<li>&#x2013;disable-werror: Disables Werror during compilation. Might be necessary depending on the QEMU version and the compiler/compiler version used.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org624d7a3" class="outline-2">
+<h2 id="org624d7a3"><span class="section-number-2">3.</span> Setting up VMs</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Setting up a VM in QEMU is not hard, but there are a lot of parameters and functionalities to remember! Some guidelines are useful.
+</p>
+</div>
+
+<div id="outline-container-org80ec527" class="outline-3">
+<h3 id="org80ec527"><span class="section-number-3">3.1.</span> Creating images</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Qemu makes it easy to create emulated devices, such as hard disks and SSDs. For this use the command qemu-img with the necessary arguments. A raw disk device of 32 MB can for example be created with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">qemu-img create -f raw NAME.img 32M
+</pre>
+</div>
+<p>
+Then when running the VM, the logic of the image can be defined. In this case NAME.img can for example be used as an NVMe SSD, but also as a NVMe ZNS SSD.
+</p>
+</div>
+</div>
+<div id="outline-container-orge088d33" class="outline-3">
+<h3 id="orge088d33"><span class="section-number-3">3.2.</span> Running the VM</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+When running the VM, you should run `qemu-system-&lt;arch&gt;` with `arch` corresponding with the arch of the device running below QEMU (your physical device!). Depending on the privileges and functionalities used, you might need root privileges&#x2026; For a full example, see for example my personal QEMU config that I used for testing ZNS, <a href="https://github.com/Krien/ZNS_personal_Qemu_config">https://github.com/Krien/ZNS_personal_Qemu_config</a>. The Gentoo wiki also has a nice explanation at <a href="https://wiki.gentoo.org/wiki/QEMU/Options">https://wiki.gentoo.org/wiki/QEMU/Options</a>.
+</p>
+</div>
+<div id="outline-container-orge5ba975" class="outline-4">
+<h4 id="orge5ba975"><span class="section-number-4">3.2.1.</span> Architecture options</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+For info on an arg and its options, set the parameter of the arg to help, such as for the arg `cpu`, `-cpu help`.
+Some interesting architecture parameters (that I use):
+</p>
+<ul class="org-ul">
+<li>-name : sets the name of the VM. When running multiple VMs this is handy. The name will be visible as the `top` process in GNU/Linux. This allows differentiating between the VMs on the host.</li>
+<li>-enable-kvm: gives this VM KVM capabilities. This is necessary to do when you want to use KVM, even when you built QEMU with KVM capabilities! This can also be done with `accel=kvm`, which is apparently more &ldquo;modern&rdquo; and support more options. For example setting the `kvm-irqchip` functionalities or the size of the KVMs per vCPUs dirty page ring with `dirty-ring-size=n`.</li>
+<li>-cpu [CPU,&#x2026;]: allows setting the CPU model (yes really if they are compatible) including CPUID flags. For optimal performance set this to host, which will copy all CPUID flags and CPU configurations from the host. WARNING, if not using host, be sure to use all flags required by the CPU used (such as Meltdown mitigations)! If not done safely, remember what can happen if your VM is compromised and a bug is found leaking out of the VM&#x2026; In this case you for example combine the type with some extra flags such as: `qemu64,+ssse3,-sse4`. `+` adds a flag and `-` removes a flag. To see what flags are available on the host and on the VM do : `cat /proc/cpuinfo | grep flags` on both of them and compare them. This can also be done to debug if host works correctly for your machine. If NOT setting a CPU, default x86 CPU models will be used such as `qemu64`. This might not be safe and is therefore not recommended&#x2026; See <a href="https://qemu.readthedocs.io/en/latest/system/i386/cpu.html">https://qemu.readthedocs.io/en/latest/system/i386/cpu.html</a> for a more comprehensive guide on the cpu parameter.</li>
+<li>-smp : simulates a SMP system. Generally used to set the number of CPU cores that are available to the VM. such as `-smp 4`. When you want to use all cores do `-smp $(nproc)`. It also supports more advanced options such as setting the number of sockets, cores and threads (<a href="https://qemu.readthedocs.io/en/latest/system/invocation.html">https://qemu.readthedocs.io/en/latest/system/invocation.html</a>).</li>
+<li>-m : set to memory that should be available to the VM. Such as `-m 64GB`.</li>
+<li><p>
+-net [options]: used for networking (also between host and VM). This is a parameter you probably want to set when not using the GUI as it allows you to ssh into the VM. Do ensure that the VM exposes a port to use. I often use `-net user,hostfwd=tcp::&lt;hostport&gt;-:&lt;vmport&gt;`, which allows accessing services on the guest from the host. Such as sshing into the VM on the host through the host port with for example with `ssh -X user@localhost -p &lt;hostport&gt; -t`. Another good option to add is `-net nic` allowing the network card to be used within the guest (allowing internet access on the guest as well).
+</p>
+
+<p>
+Something that is easy to overlook with QEMU, is the machine type. When using a tool look `virt-manager` this is apparently visible by default, but it is not explicitly shown when only using the terminal (unless a specific request is made). It is generally advisable to always use a specific machine with `-machine &#x2026;`, if the VM will have a long lifetime and you want to move the VM to a newer QEMU version. That is because QEMU can use multiple types and the default/available types might change depending on the installation process. This in turn is, as described in <a href="https://people.redhat.com/~cohuck/2022/01/05/qemu-machine-types.html">https://people.redhat.com/~cohuck/2022/01/05/qemu-machine-types.html</a>, problematic when the VM needs to be migrated later on. As described there, note down the default machine used. When later migrating, explicitly use `-machine &#x2026;` with the default of the older variant. At the time of writing (June 2022), `q35` is the most novel machine type to use.
+</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7430b6c" class="outline-3">
+<h3 id="org7430b6c"><span class="section-number-3">3.3.</span> Loading images and (emulated) devices</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Typically you want to make use of images when using QEMU. QEMU can uses `qcow` files for its main disk images. Such images can be simply used with the option `-hda &lt;image&gt;.qcow`, such as an Ubuntu image. When you want to use additional devices, there exist a few different approaches.
+</p>
+</div>
+<div id="outline-container-org3d0b9df" class="outline-4">
+<h4 id="org3d0b9df"><span class="section-number-4">3.3.1.</span> Emulated devices</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+To use emulated device (such as created with qemu-img), the commands differ. What the &ldquo;image&rdquo; exactly is, depends on the command used. To use the image as an NVMe device use:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">-drive <span style="color: #dcaeea;">file</span>=<span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">dev</span><span style="color: #98be65;">"</span>,<span style="color: #dcaeea;">id</span>=nvme-device,<span style="color: #dcaeea;">format</span>=raw,<span style="color: #dcaeea;">if</span>=none <span style="color: #5B6268;">#</span><span style="color: #5B6268;">With $dev the name of the .img file</span>
+-device <span style="color: #98be65;">"nvme,drive=nvme-device,serial=nvme-dev"</span> <span style="color: #5B6268;"># </span><span style="color: #5B6268;">The id should match with the drive id</span>
+</pre>
+</div>
+<p>
+Additionally it is possible to set various NVMe specific arguments, separated by &ldquo;,&rdquo;, such as the page sizes:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">-device <span style="color: #98be65;">"nvme,drive=nvme-device,serial=nvme-dev,physical_block_size=4096,logical_block_size=4096"</span>
+</pre>
+</div>
+<p>
+To use a ZNS device use:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">-drive <span style="color: #dcaeea;">file</span>=<span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">dev</span><span style="color: #98be65;">"</span>,<span style="color: #dcaeea;">id</span>=zns-device,<span style="color: #dcaeea;">format</span>=raw,<span style="color: #dcaeea;">if</span>=none <span style="color: #5B6268;">#</span><span style="color: #5B6268;">With $dev the name of the .img file</span>
+-device <span style="color: #98be65;">"nvme,serial=zns-dev,id=nvme1,uuid=5e40ec5f-eeb6-4317-bc5e-c919796a5f79,zoned=true</span>
+<span style="color: #98be65;">-device "</span>nvme-ns,<span style="color: #dcaeea;">drive</span>=zns-device,<span style="color: #dcaeea;">bus</span>=nvme1,<span style="color: #dcaeea;">nsid</span>=<span style="color: #da8548; font-weight: bold;">1</span><span style="color: #98be65;">" # One for each namespace the device should have</span>
+</pre>
+</div>
+<p>
+Both the device and the namespace device have a unique set of options. Some interesting options for the device itself to set are:
+</p>
+<ul class="org-ul">
+<li>-mdts: mdts of the SSD</li>
+<li>-zasl: zasl of the SSD (ZNS option)</li>
+<li>-max<sub>ioqpairs</sub>: maximum amount of IO qpairs that can be active (parallelism)</li>
+</ul>
+<p>
+Some interesting parameters to set for the namespace:
+</p>
+<ul class="org-ul">
+<li>-logical<sub>block</sub><sub>size</sub>: block size as can be used on the device</li>
+<li>-physical<sub>block</sub><sub>size</sub>: the actual block size used in the device</li>
+<li>-zoned.zone<sub>size</sub>: zone size in bytes, such as `4M` (ZNS)</li>
+<li>-zoned.zone<sub>capacity</sub>: zone capacity in bytes, such as `2M`. ALWAYS set less than zone<sub>size</sub> (ZNS)</li>
+<li>-zoned.max<sub>open</sub>: maximum number of zones that can be open (ZNS)</li>
+<li>-zoned.max<sub>active</sub>: maximum number of zones that can be active (ZNS)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3400fa8" class="outline-4">
+<h4 id="org3400fa8"><span class="section-number-4">3.3.2.</span> Paravirtualisation</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+It is possible to use paravirtualisation. This shares the device with the host. This allows you to for example use partitions as they are made on the host (partitions are an OS concept, which would make virtualisation otherwise next to impossible). This CAN give a performance overhead and is therefore not preferred. Paravirtualisation can for example be done with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">-drive <span style="color: #dcaeea;">file</span>=/dev/$<span style="color: #dcaeea;">dev</span>,<span style="color: #dcaeea;">id</span>=para-device,<span style="color: #dcaeea;">if</span>=virtio,<span style="color: #dcaeea;">format</span>=raw <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Replace dev with the device to use, such as a partitition.</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7d3162f" class="outline-4">
+<h4 id="org7d3162f"><span class="section-number-4">3.3.3.</span> Passthrough</h4>
+<div class="outline-text-4" id="text-3-3-3">
+<p>
+It is also possible to use real devices with QEMU passthrough. This gives a real device to the VM to use and makes the device not usable on the host anymore. So be careful! To do this, do in order (on the host):
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #dcaeea;">trid</span>=<span style="color: #51afef; font-weight: bold;">`</span><span style="color: #51afef; font-weight: bold;">ls</span><span style="color: #51afef; font-weight: bold;"> -l /sys/block/$dev/device/device | awk '{split($11,dev,"/"); print dev[4]}'`</span> <span style="color: #5B6268;"># </span><span style="color: #5B6268;">With dev the device to passthrough</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">If the above does not work, which it might, do simply and copy the string at the end, the numeric part that is.</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">and put it in the variable trid. This variable is important to remember.</span>
+<span style="color: #ECBE7B;">ls</span> -l /sys/block/$<span style="color: #dcaeea;">dev</span>/device/device
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Now we will unbind the device</span>
+<span style="color: #ECBE7B;">echo</span> $<span style="color: #dcaeea;">trid</span> &gt; /sys/bus/pci/drivers/nvme/unbind <span style="color: #5B6268;"># </span><span style="color: #5B6268;">might need to use `| </span><span style="color: #5B6268;">sudo</span><span style="color: #5B6268;"> tee` or run as root with `</span><span style="color: #5B6268;">sudo</span><span style="color: #5B6268;"> -i`.</span>
+</pre>
+</div>
+<p>
+The following step depends on the state of the machine. If since the startup, you have already binded this device to vfio-pci you will need a different command. If not, do:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">modprobe vfio-pci
+lspci -n -s $<span style="color: #dcaeea;">trid</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">^ This should return two numbers at the end, separated by a ":" such as xxxx:yyyy. Those are the vendor id and device id</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Rebind to vfio</span>
+<span style="color: #ECBE7B;">echo</span> &lt;xxxx&gt; &lt;yyyy&gt; &gt; /sys/bus/pci/drivers/vfio-pci/new_id <span style="color: #5B6268;"># </span><span style="color: #5B6268;">With xxxx and yyyy the numbers just retrieved</span>
+</pre>
+</div>
+<p>
+However, if you had binded at some point in time. Do (as the device is already known):
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">echo</span> $<span style="color: #dcaeea;">trid</span> &gt; /sys/bus/pci/drivers/vfio-pci/bind
+</pre>
+</div>
+<p>
+Now we can use it in QEMU with the extra parameter:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">-device vfio-pc,<span style="color: #dcaeea;">host</span>=$<span style="color: #dcaeea;">trid</span>
+</pre>
+</div>
+<p>
+When the device needs to be used on the host again, we can do:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">echo</span> $<span style="color: #dcaeea;">trid</span> &gt; /sys/bus/pci/drivers/vfio-pci/unbind <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Unbind from vfio.</span>
+<span style="color: #ECBE7B;">echo</span> $<span style="color: #dcaeea;">trid</span> &gt; /sys/bus/pci/drivers/nvme/bind       <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Rebind</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8ca9065" class="outline-2">
+<h2 id="org8ca9065"><span class="section-number-2">4.</span> Dealing with NUMA</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Some computers come with NUMA, this complicates the setup and is something you need to be aware of when using NUMA. Especially when using benchmarks. You do not want excessive communication between NUMA nodes. Therefore, it is beneficial/advisable to just run your QEMU on just one NUMA node. First check if you even have NUMA:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">lscpu | <span style="color: #ECBE7B;">grep</span> NUMA
+</pre>
+</div>
+<p>
+Then do an investigation of hardware to get the NUMA configuration:
+#+BEGI<sub>SRC</sub> bash
+numactl -H
+#+END<sub>SRC</sub>
+If using passthrough hardware it is important to make sure that the node you use for your VM and the hardware match. For SSDs verify the node with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">cat</span> /sys/class/nvme/$<span style="color: #dcaeea;">dev</span>/numa_node      <span style="color: #5B6268;"># </span><span style="color: #5B6268;">With dev the device you want to use</span>
+<span style="color: #ECBE7B;">cat</span> /sys/bus/pci/devices/$<span style="color: #dcaeea;">id</span>/numa_node  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Should even work when bound to vfio, provided you know the PCI_ID</span>
+</pre>
+</div>
+<p>
+Generally if the device (for NVMe SSDs default) uses MSIX<sub>IRQ</sub> instead of legacy IRQ, this might be done correctly automatically. Else also ensure that the interrupts of the device are on the same NUMA node. Can be tested as follows:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">cat</span> /sys/class/nvme/$<span style="color: #dcaeea;">dev</span>/device/irq         <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Get legacy IRQ associated with device. Might not be useful as it is legacy!</span>
+<span style="color: #ECBE7B;">ls</span> /sys/class/nvme/$<span style="color: #dcaeea;">dev</span>/device/msi_irqs     <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Get msix IRQs. This is probably what you need,</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">since kernel version v4.8 https://github.com/torvalds/linux/commit/90c9712fbb388077b5e53069cae43f1acbb0102a.</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">or</span>
+
+lscpu                  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Note down to what NUMA node a CPU is assigned (this is needed to associate an interrupt to a NUMA node)</span>
+<span style="color: #ECBE7B;">cat</span> /proc/interrupts   <span style="color: #5B6268;"># </span><span style="color: #5B6268;">Since you already know to what NUMA a CPU is assigned, you already know the interrupt mapping.</span>
+</pre>
+</div>
+<p>
+This should show what CPU currently is handling the IRQs (we know what CPU is assigned to what node with numactl -H). Ideally this should be equal to the affinity of CPUs on the node we will use. However, for more information we also want the affinity list of the irq. To get the affinity of the irq, do the following:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">cat</span> /proc/irq/$<span style="color: #dcaeea;">num</span>/smp_affinity_list        <span style="color: #5B6268;"># </span><span style="color: #5B6268;">We want this to be the same as the NUMA nodes we will use on the VM</span>
+</pre>
+</div>
+<p>
+If they are not on the same NUMA node, we might have a problem. Generally, it is the case that the interrupts are assigned to the lower CPUs such as CPU0. If MSI<sub>X</sub> is used (which we want for fast devices), we have a problem if we do need to set the affinity, see <a href="https://serverfault.com/questions/1052448/how-can-i-override-irq-affinity-for-nvme-devices">https://serverfault.com/questions/1052448/how-can-i-override-irq-affinity-for-nvme-devices</a>. In the case that I tested, affinity was properly set, but as MSI<sub>X</sub> was used I could not test the alternative. Technically, MSI<sub>X</sub> can be turned of, but this has signifcant drawbacks&#x2026; It might therefore, not be a fair comparison. This post clarifies (answer by Simon Richter), that it should perform optimal when using passthrough by default.
+</p>
+
+<p>
+Then once we know the NUMA node, we can run:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">numactl -C $<span style="color: #dcaeea;">cpus</span> -N $<span style="color: #dcaeea;">num</span> -m $<span style="color: #dcaeea;">num</span> qemu-system-&lt;arch&gt;... <span style="color: #5B6268;"># </span><span style="color: #5B6268;">cpus, are the cpus we want to use (if we want to use </span><span style="color: #5B6268;">less</span><span style="color: #5B6268;"> than one NUMA node), num is the NUMA node number used for the storage</span>
+</pre>
+</div>
+<p>
+If using less than one NUMA, beware of interrupts still existing on other CPUS with passhtrough, even when setting -C! numactl mainly focuses on the qemu instance, not the device!
+</p>
+
+<p>
+During runtime, we can debug if mainly one node is used with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">numastat -c qemu-system-&lt;arch&gt;
+</pre>
+</div>
+<p>
+We can also test that the device is still assigned to the same NUMA node when the VM uses passthrough with:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #ECBE7B;">cat</span> /proc/interrupts | <span style="color: #ECBE7B;">grep</span> vfio
+</pre>
+</div>
+</div>
+</div>

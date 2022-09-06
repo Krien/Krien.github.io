@@ -1,0 +1,171 @@
+#+TITLE: 2022 06 28 QEMU setup ZNS
+#+OPTIONS: toc:nil
+#+BEGIN_EXPORT html
+---
+layout: post
+title: "Notes: Setup QEMU for ZNS experiments"
+excerpt: Notes on setting up QEMU for ZNS experiments
+---
+#+END_EXPORT
+
+I use QEMU for my VMs, on this page I maintain various notes about how I setup QEMU.
+THe configuration is mainly focused on storage aspects, as that is my field of studies.
+
+
+* Good QEMU sources
+- https://www.qemu.org/docs/master/about/index.html is the best source on QEMU as far as I am aware.
+
+* Installing QEMU
+I do not recommend installing QEMU from your package manager, if you want to research new hardware/software. In that case, please built QEMU yourself. Additionally, QEMU comes with many configuration parameters, that can be enabled/disabled when you built QEMU yourself. Follow https://www.qemu.org/download/ to get a valid default QEMU installation.
+
+** Using a specific version
+It is a good idea to pin a version in QEMU if you want your work to be reproducable. Do this by cloning the QEMU repo.
+Then do:
+#+BEGIN_SRC bash
+git checkout $version # with the correct version signature
+#+END_SRC
+Also beware, `sudo make install` will install QEMU globally! Do not do this, if you want to use multiple versions (or it is not your own machine...). Instead use aliases or something.
+
+** Interesting configuration parameters
+When you want to use a non-standard installation, you should add some parameters to the ./configure command used in the QEMU guide. Some parameters that are interesting:
+- --help: shows all possible configurationss :).
+- --enable-kvm: ensures that KVM is used (https://www.redhat.com/en/topics/virtualization/what-is-KVM). Might not be necessary, but is generally what you want, especially when benchmarking.
+- --disable-gtk: disables the GTK GUI. Many VMs will not need a GUI and using this in a remote environment is problematic.
+- --target-list : explicitly sets the targets to built for. Not setting this argument, will built for ALL your targets, probably not something you want. An example target would be 'x86_64-softmmu' to only create the x86_64 target.
+- --enable-linux-aio: enables the Linux AIO functionality (https://github.com/littledan/linux-aio). When testing storage tech, please enable.
+- --enable-trace-backends=sets the backends to use for tracing in QEMU (see https://qemu.readthedocs.io/en/latest/devel/tracing.html for what backends you might want to use).
+- --disable-werror: Disables Werror during compilation. Might be necessary depending on the QEMU version and the compiler/compiler version used.
+
+* Setting up VMs
+Setting up a VM in QEMU is not hard, but there are a lot of parameters and functionalities to remember! Some guidelines are useful.
+
+** Creating images
+Qemu makes it easy to create emulated devices, such as hard disks and SSDs. For this use the command qemu-img with the necessary arguments. A raw disk device of 32 MB can for example be created with:
+#+BEGIN_SRC bash
+qemu-img create -f raw NAME.img 32M
+#+END_SRC
+Then when running the VM, the logic of the image can be defined. In this case NAME.img can for example be used as an NVMe SSD, but also as a NVMe ZNS SSD.
+** Running the VM
+When running the VM, you should run `qemu-system-<arch>` with `arch` corresponding with the arch of the device running below QEMU (your physical device!). Depending on the privileges and functionalities used, you might need root privileges... For a full example, see for example my personal QEMU config that I used for testing ZNS, https://github.com/Krien/ZNS_personal_Qemu_config. The Gentoo wiki also has a nice explanation at https://wiki.gentoo.org/wiki/QEMU/Options.
+*** Architecture options
+For info on an arg and its options, set the parameter of the arg to help, such as for the arg `cpu`, `-cpu help`.
+Some interesting architecture parameters (that I use):
+- -name : sets the name of the VM. When running multiple VMs this is handy. The name will be visible as the `top` process in GNU/Linux. This allows differentiating between the VMs on the host.
+- -enable-kvm: gives this VM KVM capabilities. This is necessary to do when you want to use KVM, even when you built QEMU with KVM capabilities! This can also be done with `accel=kvm`, which is apparently more "modern" and support more options. For example setting the `kvm-irqchip` functionalities or the size of the KVMs per vCPUs dirty page ring with `dirty-ring-size=n`.
+- -cpu [CPU,...]: allows setting the CPU model (yes really if they are compatible) including CPUID flags. For optimal performance set this to host, which will copy all CPUID flags and CPU configurations from the host. WARNING, if not using host, be sure to use all flags required by the CPU used (such as Meltdown mitigations)! If not done safely, remember what can happen if your VM is compromised and a bug is found leaking out of the VM... In this case you for example combine the type with some extra flags such as: `qemu64,+ssse3,-sse4`. `+` adds a flag and `-` removes a flag. To see what flags are available on the host and on the VM do : `cat /proc/cpuinfo | grep flags` on both of them and compare them. This can also be done to debug if host works correctly for your machine. If NOT setting a CPU, default x86 CPU models will be used such as `qemu64`. This might not be safe and is therefore not recommended... See https://qemu.readthedocs.io/en/latest/system/i386/cpu.html for a more comprehensive guide on the cpu parameter.
+- -smp : simulates a SMP system. Generally used to set the number of CPU cores that are available to the VM. such as `-smp 4`. When you want to use all cores do `-smp $(nproc)`. It also supports more advanced options such as setting the number of sockets, cores and threads (https://qemu.readthedocs.io/en/latest/system/invocation.html).
+- -m : set to memory that should be available to the VM. Such as `-m 64GB`.
+- -net [options]: used for networking (also between host and VM). This is a parameter you probably want to set when not using the GUI as it allows you to ssh into the VM. Do ensure that the VM exposes a port to use. I often use `-net user,hostfwd=tcp::<hostport>-:<vmport>`, which allows accessing services on the guest from the host. Such as sshing into the VM on the host through the host port with for example with `ssh -X user@localhost -p <hostport> -t`. Another good option to add is `-net nic` allowing the network card to be used within the guest (allowing internet access on the guest as well).
+
+  Something that is easy to overlook with QEMU, is the machine type. When using a tool look `virt-manager` this is apparently visible by default, but it is not explicitly shown when only using the terminal (unless a specific request is made). It is generally advisable to always use a specific machine with `-machine ...`, if the VM will have a long lifetime and you want to move the VM to a newer QEMU version. That is because QEMU can use multiple types and the default/available types might change depending on the installation process. This in turn is, as described in https://people.redhat.com/~cohuck/2022/01/05/qemu-machine-types.html, problematic when the VM needs to be migrated later on. As described there, note down the default machine used. When later migrating, explicitly use `-machine ...` with the default of the older variant. At the time of writing (June 2022), `q35` is the most novel machine type to use.
+
+** Loading images and (emulated) devices
+Typically you want to make use of images when using QEMU. QEMU can uses `qcow` files for its main disk images. Such images can be simply used with the option `-hda <image>.qcow`, such as an Ubuntu image. When you want to use additional devices, there exist a few different approaches.
+*** Emulated devices
+To use emulated device (such as created with qemu-img), the commands differ. What the "image" exactly is, depends on the command used. To use the image as an NVMe device use:
+#+BEGIN_SRC bash
+-drive file="$dev",id=nvme-device,format=raw,if=none #With $dev the name of the .img file
+-device "nvme,drive=nvme-device,serial=nvme-dev" # The id should match with the drive id
+#+END_SRC
+Additionally it is possible to set various NVMe specific arguments, separated by ",", such as the page sizes:
+#+BEGIN_SRC bash
+-device "nvme,drive=nvme-device,serial=nvme-dev,physical_block_size=4096,logical_block_size=4096"
+#+END_SRC
+To use a ZNS device use:
+#+BEGIN_SRC bash
+-drive file="$dev",id=zns-device,format=raw,if=none #With $dev the name of the .img file
+-device "nvme,serial=zns-dev,id=nvme1,uuid=5e40ec5f-eeb6-4317-bc5e-c919796a5f79,zoned=true
+-device "nvme-ns,drive=zns-device,bus=nvme1,nsid=1" # One for each namespace the device should have
+#+END_SRC
+Both the device and the namespace device have a unique set of options. Some interesting options for the device itself to set are:
+- -mdts: mdts of the SSD
+- -zasl: zasl of the SSD (ZNS option)
+- -max_ioqpairs: maximum amount of IO qpairs that can be active (parallelism)
+Some interesting parameters to set for the namespace:
+- -logical_block_size: block size as can be used on the device
+- -physical_block_size: the actual block size used in the device
+- -zoned.zone_size: zone size in bytes, such as `4M` (ZNS)
+- -zoned.zone_capacity: zone capacity in bytes, such as `2M`. ALWAYS set less than zone_size (ZNS)
+- -zoned.max_open: maximum number of zones that can be open (ZNS)
+- -zoned.max_active: maximum number of zones that can be active (ZNS)
+*** Paravirtualisation
+It is possible to use paravirtualisation. This shares the device with the host. This allows you to for example use partitions as they are made on the host (partitions are an OS concept, which would make virtualisation otherwise next to impossible). This CAN give a performance overhead and is therefore not preferred. Paravirtualisation can for example be done with:
+#+BEGIN_SRC bash
+-drive file=/dev/$dev,id=para-device,if=virtio,format=raw # Replace dev with the device to use, such as a partitition.
+#+END_SRC
+*** Passthrough
+It is also possible to use real devices with QEMU passthrough. This gives a real device to the VM to use and makes the device not usable on the host anymore. So be careful! To do this, do in order (on the host):
+#+BEGIN_SRC bash
+trid=`ls -l /sys/block/$dev/device/device | awk '{split($11,dev,"/"); print dev[4]}'` # With dev the device to passthrough
+# If the above does not work, which it might, do simply and copy the string at the end, the numeric part that is.
+# and put it in the variable trid. This variable is important to remember.
+ls -l /sys/block/$dev/device/device
+# Now we will unbind the device
+echo $trid > /sys/bus/pci/drivers/nvme/unbind # might need to use `| sudo tee` or run as root with `sudo -i`.
+#+END_SRC
+The following step depends on the state of the machine. If since the startup, you have already binded this device to vfio-pci you will need a different command. If not, do:
+#+BEGIN_SRC bash
+modprobe vfio-pci
+lspci -n -s $trid
+# ^ This should return two numbers at the end, separated by a ":" such as xxxx:yyyy. Those are the vendor id and device id
+# Rebind to vfio
+echo <xxxx> <yyyy> > /sys/bus/pci/drivers/vfio-pci/new_id # With xxxx and yyyy the numbers just retrieved
+#+END_SRC
+However, if you had binded at some point in time. Do (as the device is already known):
+#+BEGIN_SRC bash
+echo $trid > /sys/bus/pci/drivers/vfio-pci/bind
+#+END_SRC
+Now we can use it in QEMU with the extra parameter:
+#+BEGIN_SRC bash
+-device vfio-pc,host=$trid
+#+END_SRC
+When the device needs to be used on the host again, we can do:
+#+BEGIN_SRC bash
+echo $trid > /sys/bus/pci/drivers/vfio-pci/unbind # Unbind from vfio.
+echo $trid > /sys/bus/pci/drivers/nvme/bind       # Rebind
+#+END_SRC
+* Dealing with NUMA
+Some computers come with NUMA, this complicates the setup and is something you need to be aware of when using NUMA. Especially when using benchmarks. You do not want excessive communication between NUMA nodes. Therefore, it is beneficial/advisable to just run your QEMU on just one NUMA node. First check if you even have NUMA:
+#+BEGIN_SRC bash
+lscpu | grep NUMA
+#+END_SRC
+Then do an investigation of hardware to get the NUMA configuration:
+#+BEGI_SRC bash
+numactl -H
+#+END_SRC
+If using passthrough hardware it is important to make sure that the node you use for your VM and the hardware match. For SSDs verify the node with:
+#+BEGIN_SRC bash
+cat /sys/class/nvme/$dev/numa_node      # With dev the device you want to use
+cat /sys/bus/pci/devices/$id/numa_node  # Should even work when bound to vfio, provided you know the PCI_ID
+#+END_SRC
+Generally if the device (for NVMe SSDs default) uses MSIX_IRQ instead of legacy IRQ, this might be done correctly automatically. Else also ensure that the interrupts of the device are on the same NUMA node. Can be tested as follows:
+#+BEGIN_SRC bash
+cat /sys/class/nvme/$dev/device/irq 		# Get legacy IRQ associated with device. Might not be useful as it is legacy!
+ls /sys/class/nvme/$dev/device/msi_irqs 	# Get msix IRQs. This is probably what you need,
+# since kernel version v4.8 https://github.com/torvalds/linux/commit/90c9712fbb388077b5e53069cae43f1acbb0102a.
+
+# or
+
+lscpu                  # Note down to what NUMA node a CPU is assigned (this is needed to associate an interrupt to a NUMA node)
+cat /proc/interrupts   # Since you already know to what NUMA a CPU is assigned, you already know the interrupt mapping.
+#+END_SRC
+This should show what CPU currently is handling the IRQs (we know what CPU is assigned to what node with numactl -H). Ideally this should be equal to the affinity of CPUs on the node we will use. However, for more information we also want the affinity list of the irq. To get the affinity of the irq, do the following:
+#+BEGIN_SRC bash
+cat /proc/irq/$num/smp_affinity_list		# We want this to be the same as the NUMA nodes we will use on the VM
+#+END_SRC
+If they are not on the same NUMA node, we might have a problem. Generally, it is the case that the interrupts are assigned to the lower CPUs such as CPU0. If MSI_X is used (which we want for fast devices), we have a problem if we do need to set the affinity, see https://serverfault.com/questions/1052448/how-can-i-override-irq-affinity-for-nvme-devices. In the case that I tested, affinity was properly set, but as MSI_X was used I could not test the alternative. Technically, MSI_X can be turned of, but this has signifcant drawbacks... It might therefore, not be a fair comparison. This post clarifies (answer by Simon Richter), that it should perform optimal when using passthrough by default.
+
+Then once we know the NUMA node, we can run:
+#+BEGIN_SRC bash
+numactl -C $cpus -N $num -m $num qemu-system-<arch>... # cpus, are the cpus we want to use (if we want to use less than one NUMA node), num is the NUMA node number used for the storage
+#+END_SRC
+If using less than one NUMA, beware of interrupts still existing on other CPUS with passhtrough, even when setting -C! numactl mainly focuses on the qemu instance, not the device!
+
+During runtime, we can debug if mainly one node is used with:
+#+BEGIN_SRC bash
+numastat -c qemu-system-<arch>
+#+END_SRC
+We can also test that the device is still assigned to the same NUMA node when the VM uses passthrough with:
+#+BEGIN_SRC bash
+cat /proc/interrupts | grep vfio
+#+END_SRC
