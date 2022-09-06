@@ -5,6 +5,7 @@
 layout: post
 title: "NVMe-CLI"
 short: "Setting up NVMe-CLi and retrieving NVMe SSD info"
+category: benchmarking
 status: WIP
 ---
 #+END_EXPORT

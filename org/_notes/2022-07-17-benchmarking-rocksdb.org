@@ -3,8 +3,9 @@
 #+BEGIN_EXPORT html
 ---
 layout: post
-title: "Notes: benchmarking RocksDB"
+title: "Benchmarking RocksDB"
 short: "Notes related to Benchmarking RocksDB"
+category: benchmarking
 status: Stale
 ---
 #+END_EXPORT

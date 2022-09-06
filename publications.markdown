@@ -4,7 +4,6 @@ title: Publications
 permalink: /publications/
 ---
 
-
 <ul>
   {% assign sortedpublications = site.publications | sort: 'date' | reverse %}
   {% for publication in sortedpublications %}

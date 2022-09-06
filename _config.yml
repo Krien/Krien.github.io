@@ -43,6 +43,10 @@ collections:
     status: true
     authors: true
     short: true
+    output: true
+  categories:
+    status: true
+    output: true
 
 # Build settings
 theme: minima

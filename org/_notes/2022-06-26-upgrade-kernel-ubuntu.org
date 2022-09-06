@@ -5,6 +5,7 @@
 layout: post
 title: "Upgrade Linux kernel"
 short: "Notes on upgrading Linux kernel in Ubuntu"
+category: GNU/Linux
 status: WIP
 ---
 #+END_EXPORT

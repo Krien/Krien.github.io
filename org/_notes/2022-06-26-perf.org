@@ -5,6 +5,7 @@
 layout: post
 title: "Perf"
 short: "Setting up Perf and using Perf"
+category: benchmarking
 status: Stale
 ---
 #+END_EXPORT
