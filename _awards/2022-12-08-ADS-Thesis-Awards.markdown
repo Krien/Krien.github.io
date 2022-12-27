@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Amsterdam Data Science Thesis Award
-date:  2022-12-08
+title: "Amsterdam Data Science Thesis Award"
+date: 2022-12-08
 short: "Won the ADS Thesis Award for my master thesis on "TropoDB: Design, Implementation and Evaluation of an Optimised KV-Store for NVMe Zoned Namespace Devices""
 status: Done
 ---
