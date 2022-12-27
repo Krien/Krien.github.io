@@ -30,6 +30,7 @@ semanticscholar_username: https://www.semanticscholar.org/author/Krijn-Doekemeij
 
 header_pages:
   - publications.markdown
+  - awards.markdown
   - notes.markdown
   - cv.markdown
   - about.markdown
@@ -38,6 +39,9 @@ collections:
   publications:
     excerpt: true
     authors: true
+    output: true
+  awards:
+    excerpt: true
     output: true
   notes:
     status: true
