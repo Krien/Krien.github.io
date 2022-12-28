@@ -6,30 +6,30 @@ category: benchmarking
 status: WIP
 ---
 
-<div id="outline-container-org6f0b8dd" class="outline-2">
-<h2 id="org6f0b8dd"><span class="section-number-2">1.</span> Setting up NVMe-CLI</h2>
+<div id="outline-container-org1c65e9c" class="outline-2">
+<h2 id="org1c65e9c"><span class="section-number-2">1.</span> Setting up NVMe-CLI</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A good approach to get the most modern features is to build nvme-cli yourself. For this, you can do:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ECBE7B;">git</span> clone https://github.com/linux-nvme/nvme-cli.git
-<span style="color: #ECBE7B;">cd</span> nvme-cli
-<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Follow instructions at https://github.com/linux-nvme/nvme-cli</span>
+<pre class="src src-bash"><span style="color: #fabd2f;">git</span> clone https://github.com/linux-nvme/nvme-cli.git
+<span style="color: #fabd2f;">cd</span> nvme-cli
+<span style="color: #928374;"># </span><span style="color: #928374;">Follow instructions at https://github.com/linux-nvme/nvme-cli</span>
 </pre>
 </div>
 <p>
 Then simply check if it works by listing all NVMe capable devices and see if they are all there:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> nvme list
+<pre class="src src-bash"><span style="color: #fabd2f;">sudo</span> nvme list
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org599d268" class="outline-2">
-<h2 id="org599d268"><span class="section-number-2">2.</span> Using nvme-cli to get NVMe stats</h2>
+<div id="outline-container-orge3ed190" class="outline-2">
+<h2 id="orge3ed190"><span class="section-number-2">2.</span> Using nvme-cli to get NVMe stats</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 The NVMe standard specifies that NVMe SSDs should support a functionality known as smart-log. This contains some basic metrics that can be used to get information from the SSD. A few of those metrics are predefined and are therefore available on most NVMe SSDs, provided they are made in a reliable in trustworthy manner. This can be beneficial for benchmarking, a few helpful ones include:
@@ -49,7 +49,7 @@ The unit &ldquo;data units&rdquo; is slightly confusing, as it is a non-conventi
 An easy way to get the actions issued between an I/O heavy application is to log before the I/O heavy application starts and to measure afterwards. Do ensure that nothing else writes to the device in the meantime as smart-log does not differentiate between the applications, that is an OS thing. Information can be retrieved with for example:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> nvme smart-log -o json <span style="color: #98be65;">"/dev/&lt;nvmedev&gt;"</span> <span style="color: #5B6268;"># </span><span style="color: #5B6268;">with &lt;nvmedev&gt; the device name</span>
+<pre class="src src-bash"><span style="color: #fabd2f;">sudo</span> nvme smart-log -o json <span style="color: #b8bb26;">"/dev/&lt;nvmedev&gt;"</span> <span style="color: #928374;"># </span><span style="color: #928374;">with &lt;nvmedev&gt; the device name</span>
 </pre>
 </div>
 <p>

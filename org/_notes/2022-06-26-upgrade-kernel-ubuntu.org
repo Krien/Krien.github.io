@@ -10,15 +10,14 @@ status: WIP
 ---
 #+END_EXPORT
 
-* Why update?
-There exist multiple ways to upgrade the kernel within Ubuntu. First, why would you want to upgrade your kernel? Say you want to have access to some new Storage API, but that Storage API is only available in a more modern kernel. Or there are no proper device drivers in the kernel version of Ubuntu LTS. That might require waiting for Canocical to update kernel to said kernel version, which can take months. In such case, it might be beneficial to upgrade your kernel. Beware! They are not supported yet on Ubuntu for a reason!
+There exist multiple ways to upgrade the kernel within Ubuntu. I will report the ones I have tried and how to fix some common issues.
 
 * Updating from Ubuntu kernel PPA directly
-The method I show here is not necessarily the best, I just report so that I have a reproducible method :).
-I take no responsibility if you mess up your system. The ubuntu Kernel team supply various ready to use kernel versions at https://kernel.ubuntu.com/~kernel-ppa/mainline. Those versions come with a few ".deb" files, checksums and metadata. These ".deb" files contain everything you need to add a new kernel version. You can then get the ".deb" files either through a `browser` or `wget`. These can then be installed with dpkg (yes no apt, remember we have the files locally). Be sure to read up on the version you intend to install and what files you need. In general you need the headers, modules and image deb files. For example, I wanted to install 5.17.1 for amd64. To do this, I called:
+The method I show here is not necessarily the best. I take no responsibility if you mess up your system. The Ubuntu Kernel team supply various ready to use kernel versions at https://kernel.ubuntu.com/~kernel-ppa/mainline. Those versions come with a few ".deb" files, checksums and metadata. These ".deb" files contain everything you need to add a new kernel version. You can then get the ".deb" files either through a `browser` or `wget`. These can then be installed with dpkg (yes no apt, remember we have the files locally). Be sure to read up on the version you intend to install and what files you need. In general you need the headers, modules and image deb files. For example, I wanted to install 5.17.1 for amd64. To do this, I called:
 #+BEGIN_SRC bash
 mkdir l517 && cd l517 # Does not really matter what it is called, just remember WHERE you will install the deb files!
-wget \ https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-headers-5.17.1-051701-generic_5.17.1-051701.202203280950_amd64.deb
+wget \
+https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-headers-5.17.1-051701-generic_5.17.1-051701.202203280950_amd64.deb
 wget \
 https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-headers-5.17.1-051701_5.17.1-051701.202203280950_all.deb
 wget \
@@ -26,17 +25,43 @@ https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-image-unsigne
 wget \
 https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.17.1/amd64/linux-modules-5.17.1-051701-generic_5.17.1-051701.202203280950_amd64.deb
 #+END_SRC
+
+#+RESULTS:
+
 Then we need to install all of these ".deb" files. But beware! Sometimes there are breaking changes that can mess up halfway through.
-For example when Libc updates, but the new libs is not yet in your ".sources" file in Ubuntu. Keep this in mind and make sure that you do not throw all your eggs in one basket, make backups now!
+For example when Libc updates, but the new Libc is not yet in your ".sources" file in Ubuntu. Keep this in mind and make sure that you do not throw all your eggs in one basket, make backups now!
 #+BEGIN_SRC bash
 # Make sure you did not throw other random files in the earlier created directory!
 sudo dpkg -i *.deb
 #+END_SRC
-Now if everything went alright, new entries are added to your grub menu. Verify if there are any errors and if not reboot.
+Now if everything went alright, new entries are added to your grub config. Verify if there are any errors and if not reboot.
 
 ** Upgrading from 5.12 to 5.17
-I had an issue with upgrading from 5.12 to 5.17, which involved in libc6 becoming the new libc standard and something with libss3-dev. Both packages were not available in "Ubuntu Focal". Fixed by adding sources for "Jammy" (yes very risky...), to my "/etc/apt/sources.list", which did contain the new packages. Then calling:
+I had an issue with upgrading from 5.12 to 5.17, which involved in libc6 becoming the new libc standard and something with libssl3-dev. Both packages were not available in "Ubuntu Focal". I know of two ways to resolve the issue.
+*** The hacky way
+Fixed by adding sources for a newer Ubuntu such as "Jammy" (risky...), to my "/etc/apt/sources.list", which did contain the new packages. Then call:
 #+BEGIN_SRC bash
 sudo apt --fix-broken install
 #+END_SRC
-Your mileage may vary, but in general prevent making such gigantic leaps and be careful with your sources list. This worked in this case, but do not do this on your main machine.
+*** Update Ubuntu...
+Just update Ubuntu itself if you can and then upgrade the kernel.
+#+BEGIN_SRC bash
+sudo apt update
+sudo apt upgrade
+sudo do-release-upgrade -p
+#+END_SRC
+
+* Built a custom kernel
+More customisation possible and possibilities to add more functionality, the PPA builds might miss stuff. For example, =perf= is not always included.
+
+First get the source by either cloning the Linux repo and checking out to the needed version (e.g. =git checkout v5.17=) or by using wget and getting one version like =wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.tar.gz=. The wget version uses less disk space.
+
+Then get all needed deps. Currently those are: =git bison flex fakeroot build-essential libelf-dev bc xz-utils ncurses-dev libssl-dev=.
+
+Tnen copy your current config to the Linux dir. We do not want to mess up our old config, just upgrade it. Do this with =cp  /boot/config-$(uname -r) .config=. Then "make" the config as needed for the new kernel: =make menuconfig=. Finally make the files with: =make deb-pkg=. The resulting deb files can be installed and added to your grub with: =sudo dpkg -i *.deb=.
+
+** How to solve canonical-certs.pem
+We are not canonical, therefore we can not sign it with Canonicals pem file. Therefore, disable the signature with =./scripts/config --disable SYSTEM_TRUSTED_KEYS && ./scripts/config --disable SYSTEM_REVOCATION_KEYS= and built the kernel again.
+
+** How to solve issue with weird symlink in Linux source
+There is an incorrect symlink somewhere in the repo. Clean does not solve it. What does work is removing the link in question.

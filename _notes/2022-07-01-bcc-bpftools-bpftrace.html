@@ -10,11 +10,11 @@ status: Stale
 This page contains various notes related to BCC, BPFTools, BPFTrace.
 </p>
 
-<div id="outline-container-orgcdeee48" class="outline-2">
-<h2 id="orgcdeee48"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
+<div id="outline-container-org1c47ad3" class="outline-2">
+<h2 id="org1c47ad3"><span class="section-number-2">1.</span> !!!This page requires cleaning!!!</h2>
 </div>
-<div id="outline-container-orga81e84e" class="outline-2">
-<h2 id="orga81e84e"><span class="section-number-2">2.</span> Setting up Bpftrace</h2>
+<div id="outline-container-org0c163e0" class="outline-2">
+<h2 id="org0c163e0"><span class="section-number-2">2.</span> Setting up Bpftrace</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Setting up Bpftrace is a daunting task when working with a custom kernel. Bpftrace has a lot of dependencies on which they seem to have no control (in 2022 at least). If you want all functionalities, you especially have a problem&#x2026; Since this automatically contains some other tools, we need to install the other tools as well.
@@ -24,7 +24,7 @@ Setting up Bpftrace is a daunting task when working with a custom kernel. Bpftra
 First make sure that you have all of your Linux headers installed&#x2026; On Ubuntu, the headers are generally in `/usr/src/include/linux-&lt;version&gt;/`, but your millage may very. Installing the headers if they miss can be done with:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> apt-get install linux-headers-$<span style="color: #51afef;">(</span>uname -r<span style="color: #51afef;">)</span>
+<pre class="src src-bash"><span style="color: #fabd2f;">sudo</span> apt-get install linux-headers-$<span style="color: #fe8019;">(</span>uname -r<span style="color: #fe8019;">)</span>
 </pre>
 </div>
 <p>
@@ -44,7 +44,7 @@ Then first we want to have access to BPF tools. First check if they are already 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ECBE7B;">sudo</span> <span style="color: #ECBE7B;">make</span> -C tools/ bpf_install <span style="color: #dcaeea;">prefix</span>=/usr/
+<pre class="src src-bash"><span style="color: #fabd2f;">sudo</span> <span style="color: #fabd2f;">make</span> -C tools/ bpf_install <span style="color: #83a598;">prefix</span>=/usr/
 </pre>
 </div>
 <p>
@@ -55,10 +55,10 @@ This worked in my case. Again Linux warns if you miss dependencies. Check if all
 Then install libbpf: <a href="https://github.com/libbpf/libbpf">https://github.com/libbpf/libbpf</a>. The install from this repo is confusing and installs to non-conventional paths. Instead follow part of the installation as done by Docker in bpftrace&#x2026; (<a href="https://github.com/iovisor/bpftrace/blob/master/docker/build.sh">https://github.com/iovisor/bpftrace/blob/master/docker/build.sh</a>) In general this should work:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #ECBE7B;">git</span> checkout v0.5
-<span style="color: #ECBE7B;">cd</span> src <span style="color: #5B6268;"># </span><span style="color: #5B6268;">No build directory?</span>
-<span style="color: #dcaeea;">CC</span>=gcc <span style="color: #ECBE7B;">make</span> -j
-<span style="color: #dcaeea;">PREFIX</span>=/usr/local/ <span style="color: #dcaeea;">LIBDIR</span>=/usr/local/lib <span style="color: #ECBE7B;">make</span> install install_uapi_headers
+<pre class="src src-bash"><span style="color: #fabd2f;">git</span> checkout v0.5
+<span style="color: #fabd2f;">cd</span> src <span style="color: #928374;"># </span><span style="color: #928374;">No build directory?</span>
+<span style="color: #83a598;">CC</span>=gcc <span style="color: #fabd2f;">make</span> -j
+<span style="color: #83a598;">PREFIX</span>=/usr/local/ <span style="color: #83a598;">LIBDIR</span>=/usr/local/lib <span style="color: #fabd2f;">make</span> install install_uapi_headers
 </pre>
 </div>
 <p>

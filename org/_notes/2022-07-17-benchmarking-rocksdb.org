@@ -22,8 +22,34 @@ db_bench should come along with the rest of the RocksDB repository. By using CMa
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j db_bench
+make -j $nprocs db_bench
 #+END_SRC
+
+If you prefer UNIX Makefiles, do:
+#+BEGIN_SRC bash
+DEBUG_LEVEL=0 make -j $nprocs db_bench
+#+END_SRC
+
+** Gflags
+RocksDB tools such as db_bench depend on Gflags to be installed. This is leads to problems when you do not want to globally install Gflags (why would you?).
+To solve this, you need to clone Gflags, install it to a custom directory, and change some variables in the build variables used for RocksDB.
+#+BEGIN_SRC bash
+git clone https://github.com/gflags/gflags.git
+git checkout v2.0
+./configure --prefix=<prefix_dir>
+make
+make install
+#+END_SRC
+If for any chance you installed the wrong version, you might need to cleanup manually.
+Remove the directory `prefix_dir/include/gflags` and all `gflags` .a and .so files in `prefix_dir/lib/`.
+
+Then built db_bench. For CMake set (e.g. ccmake) `GFLAGS_INCLUDE_DIR` to `prefix_dir/include/gflags` and `GFLAGS_LIBRARIES` to `prefix_dir/lib/libgflags.a` (so use the static one).
+For the Unix Makefile, the following seems to work:
+#+BEGIN_SRC bash
+make clean # Always clean before rebuilding!
+PKG_CONFIG_PATH="$PKG_CONFIG_PATH:<prefix_dir>/lib/pkgconfig" CFLAGS="-I <prefix_dir>/include/gflags/ -DGFLAGS=google" LDFLAGS="<prefix_dir>/lib/libgflags.a" <OTHER_VARS> make db_bench
+#+END_SRC
+
 
 ** Improve histogram to show more information
 
@@ -63,6 +89,8 @@ db_bench allows testing various configurations. A few that I use:
 - max_bytes_for_level_multiplier: The difference in max bytes for each level. Can be used to tweak the step between levels.
 - threads: dependent on the benchmark. Generally means the client threads. For example for write benchmarks, it refers to concurrent client writes.
 - use_existing_db: if set will use an already existing db. Some benchmarks require an existing db, others requires a new db. This parameter is good to set if multiple benchmarks will be run in series and they should continue on a dirty state.
+- enable_pipelined_write: allows writing to memtable and WAL concurrently (like a pipeline).
+- unordered_write + two_write_queues: relaxed consistency constraints for more performance. Is mutually exclusive with enable_pipelined_write. It is possible for concurrent reads to read different things and snapshots are not consistent (MVCC), but you will always read what you have just written.
 
 * Benchmark RocksDB with ZenFS
 ZenFS is an alternative file system that can only be used within RocksDB. It is essentially a domain-specific filesystem. Further on, it only works with ZNS SSDs. However, as of July 2022 this is the state of the art for RocksDB on such devices. It is therefore tempting to compare against ZenFS when benchmarking on ZNS SSDs.
