@@ -10,7 +10,7 @@ status: WIP
 ---
 #+END_EXPORT
 
-This page contains a list of benchmarking tools on GNU/Linux that I at least know of and that are known to work pretty well. I am sure that I am missing a few, but please bear with me. I come back to this page to see what tools to use.
+This page contains a list of benchmarking tools on GNU/Linux that I use. I am sure that I am missing a few, but please bear with me. I come back to this page to see what tools to use.
 
 - perf (https://perf.wiki.kernel.org/index.php/Main_Page)
 - FlameGraph (https://github.com/brendangregg/FlameGraph)
