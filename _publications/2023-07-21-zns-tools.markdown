@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Understanding (Un)Written Contracts of NVMe ZNS Devices with zns-tools"
+date:  2023-07-21
+authors: "Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi"
+categories: flash zns
+status: Done
+conference: "arXiv:2307.11860"
+---
+
+<h2>Abstract</h2>
+Operational and performance characteristics of flash SSDs have long been associated with a set of Unwritten Contracts due to their hidden, complex internals and lack of control from the host software stack. These unwritten contracts govern how data should be stored, accessed, and garbage collected. The emergence of Zoned Namespace (ZNS) flash devices with their open and standardized interface allows us to write these unwritten contracts for the storage stack. However, even with a standardized storage-host interface, due to the lack of appropriate end-to-end operational data collection tools, the quantification and reasoning of such contracts remain a challenge. In this paper, we propose zns.tools, an open-source framework for end-to-end event and metadata collection, analysis, and visualization for the ZNS SSDs contract analysis. We showcase how zns.tools can be used to understand how the combination of RocksDB with the F2FS file system interacts with the underlying storage. Our tools are available openly at https://github.com/stonet-research/zns-tools.
+
+<h2>Metadata</h2>
+- <b>Authors:</b> Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi
+- <b>Type:</b> Preprint
+- <b>Keywords:</b> ZNS, analysis tools, vizualization
+- <b>Publish date:</b> 2023-07-21
+
+<h2>Availability</h2>
+- arXiv: [arXiv:2307.11860](https://arxiv.org/abs/arXiv:2307.11860).
+- Code: [https://github.com/stonet-research/zns-tools](https://github.com/stonet-research/zns-tools)

@@ -5,7 +5,8 @@ date:  2022-08-26 14:00:00
 authors: "Krijn Doekemeijer"
 categories: flash "key-value store"
 short: "The design, implementation and evaluation of an LSM-tree-based key-value store for NVMe Zoned Namespace Devices."
-status: WIP
+status: Done
+conference: MSc thesis
 ---
 
 <h2>Abstract</h2>
@@ -38,12 +39,13 @@ for TropoDB is available at [https://github.com/Krien/TropoDB](
 https://github.com/Krien/TropoDB).
 
 <h2>Metadata</h2>
-- <b>Authors:</b> Krijn Doekemeijer 
+- <b>Authors:</b> Krijn Doekemeijer
+- <b>Type:</b> Master thesis
 - <b>Keywords:</b> Flash storage, SSD, NVMe, ZNS, Key-value stores, LSM-tree, RocksDB, LevelDB, user-space, file systems
-- <b>Publish date:</b> Not published yet!!!
+- <b>Publish date:</b> 2022-09-01
 
-<h2>Availability (for now)</h2>
-- Draft paper: [github.com/Krien/TropoDB/blob/master/paper/out/TropoDB.pdf](https://github.com/Krien/TropoDB/blob/master/paper/out/TropoDB:_Design_and_Implementation_of_a_NVMe_Zoned_Namespace_Optimised_LSM_KV_Store_2022.pdf).
+<h2>Availability</h2>
+- Thesis paper: [github.com/Krien/TropoDB/blob/master/paper/out/TropoDB.pdf](https://github.com/Krien/TropoDB/blob/master/paper/out/TropoDB:_Design_and_Implementation_of_a_NVMe_Zoned_Namespace_Optimised_LSM_KV_Store_2022.pdf).
 - TropoDB code: [github.com/Krien/TropoDB](https://github.com/Krien/TropoDB)
 - TropoDB code (mirror):
 [github.com/atlarge-research/TropoDB](https://github.com/atlarge-research/TropoDB)
