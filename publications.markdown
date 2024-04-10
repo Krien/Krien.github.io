@@ -7,11 +7,13 @@ years:
   - 2023
   - 2022
 ---
+<link rel="icon" href="{{ "./favicon-32x32.png" | relative_url }}" type="image/x-icon">
 
-<ul style="list-style-type: none;">
+<ul style="list-style: none; padding-left: 0;display:table-row;">
   {% assign sortedpublications = site.publications | sort: 'date' | reverse %}
   {% for year in page.years %}
     <h3> {{ year }} </h3>
+    <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
         {% if publication.status == "Done" and  pubyear contains year %}
@@ -23,5 +25,6 @@ years:
         {% else %}
         {% endif %}
     {% endfor %}
+    </ul>
   {% endfor %}
 </ul>

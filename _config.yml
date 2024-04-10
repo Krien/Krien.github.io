@@ -58,6 +58,7 @@ theme: minima
 # remote_theme: jekyll/minima@v2.5.0
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
   # - jekyll-remote-theme
 
 # skins are not released yet
