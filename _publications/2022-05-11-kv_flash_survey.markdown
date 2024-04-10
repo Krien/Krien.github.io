@@ -7,6 +7,7 @@ categories: flash "key-value store"
 short: "A survey into how key-value stores have been optimised for flash storage in the past decade (~2010 to ~2022)"
 status: Done
 conference: "arXiv:2205.07975"
+type: preprint
 ---
 
 <h2>Abstract</h2>

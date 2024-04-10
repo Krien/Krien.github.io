@@ -7,6 +7,8 @@ categories: flash "performance characterization" ZNS
 short: "A performance characterization of the ZNS interface)"
 status: Done
 conference: "2023 IEEE International Conference on Cluster Computing (CLUSTER)"
+type: conference
+selected: "yes"
 ---
 
 <h2>Abstract</h2>

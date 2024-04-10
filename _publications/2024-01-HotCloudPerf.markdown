@@ -6,6 +6,7 @@ authors: "Zebin Ren, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
 conference: "Workshop on Hot Topics in Cloud Computing Performance (HotCloudPerf'24)"
+type: workshop
 ---
 
 <h2>Metadata</h2>

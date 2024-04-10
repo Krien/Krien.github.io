@@ -7,6 +7,7 @@ categories: flash "key-value store"
 short: "The design, implementation and evaluation of an LSM-tree-based key-value store for NVMe Zoned Namespace Devices."
 status: Done
 conference: MSc thesis
+type: thesis
 ---
 
 <h2>Abstract</h2>

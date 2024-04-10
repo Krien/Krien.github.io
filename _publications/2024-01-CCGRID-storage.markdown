@@ -6,6 +6,7 @@ authors: "Animesh Trivedi, Matthijs Jansen, Krijn Doekemeijer, Sacheendra Tallur
 categories: education storage
 status: Done
 conference: "IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing 2024"
+type: "co-authored conference"
 ---
 
 <h2>Metadata</h2>

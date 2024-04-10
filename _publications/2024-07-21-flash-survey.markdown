@@ -6,6 +6,7 @@ authors: "Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash zns
 status: Done
 conference: "arXiv:2307.11860"
+type: preprint
 ---
 
 <h2>Metadata</h2>
