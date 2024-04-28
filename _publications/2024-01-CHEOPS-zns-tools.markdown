@@ -5,7 +5,7 @@ date:  2024-04-21
 authors: "Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
-conference: "4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) @ EuroSys 2024"
+conference: "4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) at EuroSys 2024"
 type: workshop
 selected: yes
 ---
