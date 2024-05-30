@@ -55,6 +55,12 @@ years:
 <ul style="list-style-type: none;">
 
   <li style="margin-top: 0px; margin-bottom: 20px;">
+    Krijn Doekemeijer, Zebin Ren, Nick Tehrany, Animesh Trivedi (2024 May)<br>
+    <a href="{{ site.url }}/downloads/talk_compsys_2024.pdf" style="color:#0089cf">Talk - ZWAL: Rethinking Write-ahead Logs for ZNS SSDs with Zone Appends</a><br>
+    <i style="color:#868e96">CompSys'24, Sint michielsgestel, The Netherlands</i> <br>
+  </li>
+
+  <li style="margin-top: 20px; margin-bottom: 20px;">
     Krijn Doekemeijer, Nick Tehrany, Balakrishnan Chandrasekaran, Animesh Trivedi (2024 April)<br>
     <a href="{{ site.url }}/downloads/poster_ictopen_2024.pdf" style="color:#0089cf">Poster - Performance Characterization of NVMe Devices with Zoned Namespaces (ZNS)</a><br>
     <i style="color:#868e96">ICT.OPEN'24, Utrecht, The Netherlands</i> <br>
