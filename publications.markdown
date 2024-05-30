@@ -20,10 +20,7 @@ years:
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
         {% if publication.status == "Done" and  pubyear contains year %}
         <li style="margin-top: 20px; margin-bottom: 20px;">
-          {{ publication.authors }} ({{ publication.date | date: "%Y %B" }})
-          {%if publication.other != ""}
-            {{publication.other}}
-          {% endif %}
+          {{ publication.authors }} ({{ publication.date | date: "%Y %B" }}) {{ publication.other }}
           <br>
           <a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a> 
           <br>
