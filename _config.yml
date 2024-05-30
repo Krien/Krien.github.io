@@ -42,6 +42,7 @@ collections:
     excerpt: true
     authors: true
     output: true
+    other: ""
   awards:
     excerpt: true
     output: true

@@ -7,6 +7,7 @@ categories: education storage
 status: Done
 conference: "IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing 2024"
 type: "co-authored conference"
+other: ""
 ---
 
 <h2>Metadata</h2>
@@ -17,4 +18,4 @@ type: "co-authored conference"
 
 <h2>Availability</h2>
 - Paper at AtLarge: [2024-stosys-education.pdf](https://atlarge-research.com/pdfs/2024-stosys-education.pdf).
-- Course content: [ https://atlarge-research.com/courses/storage-systems-vu.4]( https://atlarge-research.com/courses/storage-systems-vu.).
+- Course content: [https://atlarge-research.com/courses/storage-systems-vu/](https://atlarge-research.com/courses/storage-systems-vu/).

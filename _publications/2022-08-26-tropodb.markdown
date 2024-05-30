@@ -8,6 +8,7 @@ short: "The design, implementation and evaluation of an LSM-tree-based key-value
 status: Done
 conference: MSc thesis
 type: thesis
+other: ""
 ---
 
 <h2>Abstract</h2>

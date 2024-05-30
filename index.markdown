@@ -27,7 +27,7 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
                 {{ publication.authors }} ({{ publication.date | date: "%Y %B" }}) <br>
                 <a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a> <br>
                 <i style="color:#868e96">{{ publication.conference }}</i> <br>
-                {% if publication.other != ""%}
+                {% if publication.other != "" %}
                   <b> {{ publication.other }} </b><br>
                 {% endif %}
             </li>

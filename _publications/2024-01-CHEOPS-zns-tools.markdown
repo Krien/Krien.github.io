@@ -8,6 +8,7 @@ status: Done
 conference: "4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) at EuroSys 2024"
 type: workshop
 selected: yes
+other: ""
 ---
 
 <h2>Metadata</h2>
@@ -18,4 +19,5 @@ selected: yes
 
 <h2>Availability</h2>
 - Paper at AtLarge: [2024-zns-tools.pdf](https://atlarge-research.com/pdfs/2024-zns-tools.pdf).
+- Paper at ACM: [https://dl.acm.org/doi/10.1145/3642963.3652205](https://dl.acm.org/doi/10.1145/3642963.3652205)
 - Code: [https://github.com/stonet-research/zns-tools](https://github.com/stonet-research/zns-tools).
