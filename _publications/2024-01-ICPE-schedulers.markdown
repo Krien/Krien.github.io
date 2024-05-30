@@ -8,6 +8,7 @@ status: Done
 conference: "ACM/SPEC International Conference on Performance Engineering (ICPE 24)"
 type: conference
 selected: yes
+other: best research paper 🏆
 ---
 
 <h2>Metadata</h2>
