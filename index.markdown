@@ -24,7 +24,7 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
         {% if publication.status == "Done" and pubyear contains year and publication.selected %}
             <li style="margin-top: 10px; margin-bottom: 10px;">
-                <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
+                <b><a href="{{ publication.pdf }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
                 {% for author in publication.authors %}
                   {% if author == "Krijn Doekemeijer" %}
                     <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
@@ -37,6 +37,15 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
                 {% if publication.other != "" %}
                   <b> {{ publication.other }} </b><br>
                 {% endif %}
+                <div style="word-space: 10px;">
+                  {% if publication.pdf %}
+                    <a href="{{ publication.pdf }}" style="color:#ff00ff">PDF</a>
+                  {% endif %}
+                  {% if publication.code %}
+                    <a href="{{ publication.code }}" style="color:#ff00ff">Code</a>
+                  {% endif %}
+                  <a href="{{ publication.url }}" style="color:#ff00ff">More</a>
+                </div>
             </li>
         {% endif %}
     {% endfor %}
