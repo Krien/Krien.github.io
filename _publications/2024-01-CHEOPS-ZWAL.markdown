@@ -13,6 +13,8 @@ conference: "In Proceedings of the 4th Workshop on Challenges and Opportunities 
 type: workshop
 other: ""
 selected: no
+pdf: https://atlarge-research.com/pdfs/2024-zns-wal.pdf
+code: https://github.com/stonet-research/zwal
 ---
 
 <h2>Metadata</h2>

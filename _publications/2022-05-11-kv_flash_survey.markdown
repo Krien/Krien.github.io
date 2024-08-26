@@ -12,8 +12,7 @@ conference: "arXiv preprint arXiv:2205.07975"
 type: preprint
 other: ""
 selected: no
-pdf: "https://arxiv.org/abs/2205.07975"
-code "none"
+pdf: https://arxiv.org/abs/2205.07975
 ---
 
 <h2>Abstract</h2>

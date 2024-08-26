@@ -12,6 +12,8 @@ conference: "In Proceedings of the 4th Workshop on Challenges and Opportunities 
 type: workshop
 selected: yes
 other: ""
+pdf: https://atlarge-research.com/pdfs/2024-zns-tools.pdf
+code: https://github.com/stonet-research/zns-tools
 ---
 
 <h2>Metadata</h2>

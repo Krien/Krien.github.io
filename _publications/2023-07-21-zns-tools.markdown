@@ -12,6 +12,8 @@ conference: "arXiv preprint arXiv:2307.11860"
 type: preprint
 other: ""
 selected: no
+pdf: https://arxiv.org/abs/arXiv:2307.11860
+code: https://github.com/stonet-research/zns-tools
 ---
 
 <h2>Abstract</h2>

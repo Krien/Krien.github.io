@@ -11,6 +11,8 @@ conference: MSc thesis
 type: thesis
 other: ""
 selected: no
+pdf: https://github.com/Krien/TropoDB/blob/master/paper/out/TropoDB:_Design_and_Implementation_of_a_NVMe_Zoned_Namespace_Optimised_LSM_KV_Store_2022.pdf
+code: https://github.com/Krien/TropoDB
 ---
 
 <h2>Abstract</h2>

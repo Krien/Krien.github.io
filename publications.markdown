@@ -33,14 +33,18 @@ years:
           {% if publication.other != ""%}
             <b> {{ publication.other }} </b><br>
           {% endif %}
+          <div style="word-space: 10px;">
+            {% if publication.pdf %}
+              <a href="{{ publication.pdf }}" style="color:#ff00ff">PDF</a>
+            {% endif %}
+            {% if publication.code %}
+              <a href="{{ publication.code }}" style="color:#ff00ff">Code</a>
+            {% endif %}
+            <a href="{{ publication.url }}" style="color:#ff00ff">More</a>
+          </div>
         </li>
         {% else %}
         {% endif %}
-        <div style="word-space: 10px;">
-          <a href="{{ publication.pdf }}" style="color:#ff00ff">PDF</a>
-          <a href="{{ publication.code }}" style="color:#ff00ff">Code</a>
-          <a href="{{ publication.url }}" style="color:#ff00ff">More</a>
-        </div>
     {% endfor %}
     </ul>
   {% endfor %}

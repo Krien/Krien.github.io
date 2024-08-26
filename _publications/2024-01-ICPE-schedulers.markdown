@@ -13,6 +13,8 @@ conference: "In Proceedings of 15th ACM/SPEC International Conference on Perform
 type: conference
 selected: yes
 other: 🏆 "Best research paper award" 
+pdf: https://atlarge-research.com/pdfs/2024-io-schedulers.pdf
+code: https://zenodo.org/records/10599514
 ---
 
 <h2>Metadata</h2>

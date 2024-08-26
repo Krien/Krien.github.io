@@ -14,6 +14,7 @@ conference: "In 2024 IEEE/ACM 24rd International Symposium on Cluster, Cloud and
 type: "co-authored conference"
 other: ""
 selected: no
+pdf: https://atlarge-research.com/pdfs/2024-stosys-education.pdf
 ---
 
 <h2>Metadata</h2>

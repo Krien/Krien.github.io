@@ -13,6 +13,7 @@ conference: "ACM SIGOPS Operating Systems Review, Volume 58, Issue 1 (SIGOPS OSR
 type: "Journal article"
 selected: "yes"
 other: ""
+pdf: https://atlarge-research.com/pdfs/2024-zns-wal.pdf
 ---
 
 <h2>Metadata</h2>

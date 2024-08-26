@@ -12,6 +12,7 @@ conference: "Companion of the 15th ACM/SPEC International Conference on Performa
 type: workshop
 other: ""
 selected: no
+pdf: https://atlarge-research.com/pdfs/hotcloudperf24-kyber.pdf
 ---
 
 <h2>Metadata</h2>
