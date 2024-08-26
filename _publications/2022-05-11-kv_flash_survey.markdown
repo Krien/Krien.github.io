@@ -2,7 +2,9 @@
 layout: post
 title: "Key-Value Stores on Flash Storage Devices: A Survey"
 date:  2022-05-11 08:21:34
-authors: "Krijn Doekemeijer, Animesh Trivedi"
+authors: 
+    - "Krijn Doekemeijer"
+    - "Animesh Trivedi"
 categories: flash "key-value store"
 short: "A survey into how key-value stores have been optimised for flash storage in the past decade (~2010 to ~2022)"
 status: Done

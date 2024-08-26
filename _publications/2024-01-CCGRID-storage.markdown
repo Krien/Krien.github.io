@@ -2,7 +2,12 @@
 layout: post
 title: "Reviving Storage Systems Education in the 21st Century — An experience report"
 date:  2024-05-01
-authors: "Animesh Trivedi, Matthijs Jansen, Krijn Doekemeijer, Sacheendra Talluri, Nick Tehrany "
+authors: 
+    - "Animesh Trivedi"
+    - "Matthijs Jansen" 
+    - "Krijn Doekemeijer" 
+    - "Sacheendra Talluri"
+    - "Nick Tehrany"
 categories: education storage
 status: Done
 conference: "In 2024 IEEE/ACM 24rd International Symposium on Cluster, Cloud and Internet Computing (CCGrid'24)"

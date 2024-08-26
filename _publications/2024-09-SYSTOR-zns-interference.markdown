@@ -2,7 +2,13 @@
 layout: post
 title: "Exploring I/O Management Performance in ZNS with ConfZNS++"
 date:  2024-09-22
-authors: "Krijn Doekemeijer, Dennis Maisenbacher, Zebin Ren, Nick Tehrany, Matias Bjørling, Animesh Trivedi"
+authors: 
+    - "Krijn Doekemeijer"
+    - "Dennis Maisenbacher"
+    - "Zebin Ren" 
+    - "Nick Tehrany"
+    - "Matias Bjørling" 
+    - "Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
 conference: "In Proceedings of the 17th ACM International Conference on Systems and Storage (SYSTOR'24)"

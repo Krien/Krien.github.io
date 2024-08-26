@@ -2,7 +2,11 @@
 layout: post
 title: "ZWAL: Rethinking Write-ahead Logs for ZNS SSDs with Zone Appends "
 date:  2024-05-14
-authors: "Krijn Doekemeijer, Zebin Ren, Nick Tehrany, Animesh Trivedi"
+authors: 
+    - "Krijn Doekemeijer"
+    - "Zebin Ren" 
+    - "Nick Tehrany" 
+    - "Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
 conference: "In Proceedings of the 4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24)"

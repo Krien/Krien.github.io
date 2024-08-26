@@ -2,7 +2,10 @@
 layout: post
 title: "A Survey on the Integration of NAND Flash Storage in the Design of File Systems and the Host Storage Software Stack"
 date:  2023-07-21
-authors: "Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi"
+authors: 
+    - "Nick Tehrany"
+    - "Krijn Doekemeijer"
+    - "Animesh Trivedi"
 categories: flash zns
 status: Done
 conference: "arXiv preprint arXiv:2307.11860"

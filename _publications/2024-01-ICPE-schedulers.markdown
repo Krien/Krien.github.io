@@ -2,7 +2,11 @@
 layout: post
 title: "BFQ, Multiqueue-Deadline, or Kyber? Performance Characterization of Linux Storage Schedulers in the NVMe Era"
 date:  2024-05-07
-authors: "Zebin Ren, Krijn Doekemeijer, Nick Tehrany, Animesh Trivedi"
+authors: 
+    - "Zebin Ren"
+    - "Krijn Doekemeijer" 
+    - "Nick Tehrany"
+    - "Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
 conference: "In Proceedings of 15th ACM/SPEC International Conference on Performance Engineering (ICPE'24)"

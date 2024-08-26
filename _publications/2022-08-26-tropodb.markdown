@@ -2,7 +2,8 @@
 layout: post
 title: "TropoDB: Design, Implementation and Evaluation of an Optimised KV-Store for NVMe Zoned Namespace Devices"
 date:  2022-08-26 14:00:00
-authors: "Krijn Doekemeijer"
+authors: 
+    - "Krijn Doekemeijer"
 categories: flash "key-value store"
 short: "The design, implementation and evaluation of an LSM-tree-based key-value store for NVMe Zoned Namespace Devices."
 status: Done

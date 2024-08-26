@@ -25,7 +25,14 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
         {% if publication.status == "Done" and pubyear contains year and publication.selected %}
             <li style="margin-top: 10px; margin-bottom: 10px;">
                 <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
-                {{ publication.authors }} ({{ publication.date | date: "%Y %B" }}) <br>
+                {% for author in publication.authors %}
+                  {% if author == "Krijn Doekemeijer" %}
+                    <u>{{ author }}</u>
+                  {% else %}
+                    {{ author }}
+                  {% endif %}
+                {% endfor %}
+                ({{ publication.date | date: "%Y %B" }}) <br>
                 <i style="color:#868e96">{{ publication.conference }}</i> <br>
                 {% if publication.other != "" %}
                   <b> {{ publication.other }} </b><br>
