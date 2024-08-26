@@ -20,7 +20,7 @@ years:
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
         {% if publication.status == "Done" and  pubyear contains year %}
         <li style="margin-top: 20px; margin-bottom: 20px;">
-          <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
+          <b><a href="{{ publication.pdf }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
           {% for author in publication.authors %}
             {% if author == "Krijn Doekemeijer" %}
               <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
@@ -36,6 +36,11 @@ years:
         </li>
         {% else %}
         {% endif %}
+        <div style="word-space: 10px;">
+          <a href="{{ publication.pdf }}" style="color:#ff00ff">PDF</a>
+          <a href="{{ publication.code }}" style="color:#ff00ff">Code</a>
+          <a href="{{ publication.url }}" style="color:#ff00ff">More</a>
+        </div>
     {% endfor %}
     </ul>
   {% endfor %}
