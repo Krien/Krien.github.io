@@ -2,7 +2,12 @@
 layout: post
 title: "Performance Characterization of NVMe Flash Devices with Zoned Namespaces (ZNS)"
 date:  2023-10-31
-authors: "Krijn Doekemeijer, Nick Tehrany, Balakrishnan Chandrasekaran, Matias  Bjørling, Animesh Trivedi"
+authors: 
+    - "Krijn Doekemeijer"
+    - "Nick Tehrany"
+    - "Balakrishnan Chandrasekaran"
+    - "Matias  Bjørling"
+    - "Animesh Trivedi"
 categories: flash "performance characterization" ZNS
 short: "A performance characterization of the ZNS interface)"
 status: Done
