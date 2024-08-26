@@ -26,6 +26,9 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
             <li style="margin-top: 10px; margin-bottom: 10px;">
                 <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
                 {% for author in publication.authors %}
+                  {% unless forloop.first %}
+                    ,
+                  {% endunless %}
                   {% if author == "Krijn Doekemeijer" %}
                     <u>{{ author }}</u>
                   {% else %}
