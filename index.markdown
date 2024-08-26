@@ -25,7 +25,6 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
         {% if publication.status == "Done" and pubyear contains year and publication.selected %}
             <li style="margin-top: 10px; margin-bottom: 10px;">
                 <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
-                <!-- create a comma-separated list of authors with me underlined-->
                 {% for author in publication.authors %}
                   {% if author == "Krijn Doekemeijer" %}
                     <u>{{ author }}</u>
