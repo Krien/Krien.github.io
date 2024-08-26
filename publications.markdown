@@ -51,7 +51,7 @@ years:
   <li style="margin-top: 0px; margin-bottom: 20px;">
     <b><a href="{{ site.url }}/downloads/talk_zwal_2024.pdf" style="color:#0089cf">Talk - ZWAL: Rethinking Write-ahead Logs for ZNS SSDs with Zone Appends</a></b><br>
     <u>Krijn Doekemeijer</u>, Zebin Ren, Nick Tehrany, Animesh Trivedi (2024 April)<br>
-    <i style="color:#868e96">4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) at EuroSys 2024, Athens, Greece</i></b><br>
+    <i style="color:#868e96">4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) at EuroSys 2024, Athens, Greece</i><br>
   </li>
 
   <li style="margin-top: 0px; margin-bottom: 20px;">
