@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "zns-tools: An eBPF-powered, Cross-Layer Storage Profiling Tool for NVMe ZNS SSDs"
-date:  2024-04-21
+date:  2024-05-15
 authors: "Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
@@ -15,7 +15,7 @@ other: ""
 - <b>Authors:</b> Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi
 - <b>Type:</b> Workshop paper
 - <b>Keywords:</b> ZNS SSDs, eBPF, Visualization, Tracing, Profiling
-- <b>Publish date:</b> 2023-05-?
+- <b>Publish date:</b> 2023-05-14
 
 <h2>Availability</h2>
 - Paper at AtLarge: [2024-zns-tools.pdf](https://atlarge-research.com/pdfs/2024-zns-tools.pdf).

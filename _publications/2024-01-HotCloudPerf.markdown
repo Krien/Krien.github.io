@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Systematic Configuration Space Exploration of the Linux Kyber I/O Scheduler"
-date:  2024-05-01
+date:  2024-05-07
 authors: "Zebin Ren, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
@@ -14,7 +14,7 @@ other: ""
 - <b>Authors:</b> Zebin Ren, Krijn Doekemeijer, Animesh Trivedi
 - <b>Type:</b> Workshop paper
 - <b>Keywords:</b> Linux storage schedulers, Kyber, Measurements
-- <b>Publish date:</b> 2023-05-?
+- <b>Publish date:</b> 2023-05-07
 
 <h2>Availability</h2>
 - Paper at AtLarge: [hotcloudperf24-kyber.pdf](https://atlarge-research.com/pdfs/hotcloudperf24-kyber.pdf).
