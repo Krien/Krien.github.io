@@ -27,9 +27,6 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
                 <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
                 <!-- create a comma-separated list of authors with me underlined-->
                 {% for author in publication.authors %}
-                  {% unless forloop.first %}
-                    ,
-                  {% endif %}
                   {% if author == "Krijn Doekemeijer" %}
                     <u>{{ author }}</u>
                   {% else %}
