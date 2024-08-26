@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ZWAL: Rethinking Write-ahead Logs for ZNS SSDs with Zone Appends "
-date:  2024-04-21
+date:  2024-08-14
 authors: "Krijn Doekemeijer, Zebin Ren, Nick Tehrany, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
@@ -13,7 +13,7 @@ other: ""
 
 <h2>Metadata</h2>
 - <b>Authors:</b>  Krijn Doekemeijer, Zebin Ren, Nick Tehrany, Animesh Trivedi
-- <b>Type:</b> Article, previously published as a workshop paper at CHEOPS'24
+- <b>Type:</b> Article (previously published at CHEOPS'24)
 - <b>Keywords:</b> Write-ahead log, Key-Value store, ZNS SSDs
 - <b>Publish date:</b> 2024-08-14
 
