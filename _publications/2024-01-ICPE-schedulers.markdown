@@ -5,7 +5,7 @@ date:  2024-05-07
 authors: "Zebin Ren, Krijn Doekemeijer, Nick Tehrany, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
-conference: "ACM/SPEC International Conference on Performance Engineering (ICPE 24)"
+conference: "In Proceedings of 15th ACM/SPEC International Conference on Performance Engineering (ICPE'24)"
 type: conference
 selected: yes
 other: 🏆 "Best research paper award" 

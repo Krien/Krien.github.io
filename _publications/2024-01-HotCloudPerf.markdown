@@ -5,7 +5,7 @@ date:  2024-05-07
 authors: "Zebin Ren, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
-conference: "Workshop on Hot Topics in Cloud Computing Performance (HotCloudPerf'24)"
+conference: "Companion of the 15th ACM/SPEC International Conference on Performance Engineering (ICPE ’24 Companion)"
 type: workshop
 other: ""
 selected: no

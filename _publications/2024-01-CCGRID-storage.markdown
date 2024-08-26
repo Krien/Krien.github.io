@@ -5,7 +5,7 @@ date:  2024-05-01
 authors: "Animesh Trivedi, Matthijs Jansen, Krijn Doekemeijer, Sacheendra Talluri, Nick Tehrany "
 categories: education storage
 status: Done
-conference: "IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing 2024"
+conference: "In 2024 IEEE/ACM 24rd International Symposium on Cluster, Cloud and Internet Computing (CCGrid'24)"
 type: "co-authored conference"
 other: ""
 selected: no

@@ -5,7 +5,7 @@ date:  2024-09-22
 authors: "Krijn Doekemeijer, Dennis Maisenbacher, Zebin Ren, Nick Tehrany, Matias Bjørling, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
-conference: "ACM International Systems and Storage Conference 2024 (SYSTOR'24)"
+conference: "In Proceedings of the 17th ACM International Conference on Systems and Storage (SYSTOR'24)"
 type: conference
 selected: yes
 other: ""

@@ -38,7 +38,7 @@ years:
 
 <ul style="list-style: none; padding-left: 0;display:table-row;">
 
-<h4> Conference </h4>
+<h4> International </h4>
 <ul style="list-style-type: none;">
 
   <li style="margin-top: 0px; margin-bottom: 20px;">
@@ -50,7 +50,7 @@ years:
   <li style="margin-top: 0px; margin-bottom: 20px;">
     Krijn Doekemeijer, Nick Tehrany, Balakrishnan Chandrasekaran, Matias Bjørling, Animesh Trivedi (2023 November)<br>
     <a href="{{ site.url }}/downloads/talk_cluster_2023.pdf" style="color:#0089cf">Talk - Performance Characterization of NVMe Flash Devices with Zoned Namespaces (ZNS)</a><br>
-    <i style="color:#868e96">IEEE CLUSTER'23, Santa Fe, NM, USA</i> <br>
+    <i style="color:#868e96">2023 IEEE International Conference on Cluster Computing (CLUSTER), Santa Fe, NM, USA</i> <br>
   </li>
 </ul>
 
