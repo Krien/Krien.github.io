@@ -24,7 +24,7 @@ years:
           {% for author in publication.authors %}
             {% unless author == "Krijn" %}
               ,
-            {% endif %}
+            {% endunless %}
             {% if author == "Krijn Doekemeijer" %}
               <u>{{ author }}</u>
             {% else %}
