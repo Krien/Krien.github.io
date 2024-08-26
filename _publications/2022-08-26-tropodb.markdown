@@ -9,6 +9,7 @@ status: Done
 conference: MSc thesis
 type: thesis
 other: ""
+selected: no
 ---
 
 <h2>Abstract</h2>

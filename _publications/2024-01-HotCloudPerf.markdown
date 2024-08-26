@@ -8,6 +8,7 @@ status: Done
 conference: "Workshop on Hot Topics in Cloud Computing Performance (HotCloudPerf'24)"
 type: workshop
 other: ""
+selected: no
 ---
 
 <h2>Metadata</h2>

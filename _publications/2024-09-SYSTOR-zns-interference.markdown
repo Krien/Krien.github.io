@@ -7,7 +7,7 @@ categories: flash "performance characterization" NVMe
 status: Done
 conference: "ACM International Systems and Storage Conference 2024 (SYSTOR'24)"
 type: conference
-selected: "yes"
+selected: yes
 other: ""
 ---
 

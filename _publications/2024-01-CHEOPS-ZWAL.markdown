@@ -8,6 +8,7 @@ status: Done
 conference: "4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) at EuroSys 2024"
 type: workshop
 other: ""
+selected: no
 ---
 
 <h2>Metadata</h2>
