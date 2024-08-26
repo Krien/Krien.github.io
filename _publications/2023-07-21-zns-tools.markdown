@@ -5,7 +5,7 @@ date:  2023-07-21
 authors: "Nick Tehrany, Krijn Doekemeijer, Animesh Trivedi"
 categories: flash zns
 status: Done
-conference: "arXiv:2307.11860"
+conference: "arXiv preprint arXiv:2307.11860"
 type: preprint
 other: ""
 selected: no
