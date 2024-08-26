@@ -39,12 +39,12 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
                 {% endif %}
                 <div style="word-space: 10px;">
                   {% if publication.pdf %}
-                    <a href="{{ publication.pdf }}" style="color:#ff00ff">PDF</a>
+                    <a href="{{ publication.pdf }}" style="color:#009988">PDF</a>
                   {% endif %}
                   {% if publication.code %}
-                    <a href="{{ publication.code }}" style="color:#ff00ff">Code</a>
+                    <a href="{{ publication.code }}" style="color:#009988">Code</a>
                   {% endif %}
-                  <a href="{{ publication.url }}" style="color:#ff00ff">More</a>
+                  <a href="{{ publication.url }}" style="color:#009988">More</a>
                 </div>
             </li>
         {% endif %}
