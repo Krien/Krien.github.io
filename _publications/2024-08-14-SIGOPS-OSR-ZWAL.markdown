@@ -6,14 +6,14 @@ authors: "Krijn Doekemeijer, Zebin Ren, Nick Tehrany, Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
 conference: "ACM SIGOPS Operating Systems Review, Volume 58, Issue 1"
-type: article
+type: journal
 selected: "yes"
 other: ""
 ---
 
 <h2>Metadata</h2>
 - <b>Authors:</b>  Krijn Doekemeijer, Zebin Ren, Nick Tehrany, Animesh Trivedi
-- <b>Type:</b> Article (previously published at CHEOPS'24)
+- <b>Type:</b> Journal article (previously published at CHEOPS'24)
 - <b>Keywords:</b> Write-ahead log, Key-Value store, ZNS SSDs
 - <b>Publish date:</b> 2024-08-14
 
