@@ -22,7 +22,7 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
-        {% if publication.status == "Done" and pubyear contains year and publication.selected == yes  %}
+        {% if publication.status == "Done" and pubyear contains year and publication.selected %}
             <li style="margin-top: 10px; margin-bottom: 10px;">
                 {{ publication.authors }} ({{ publication.date | date: "%Y %B" }}) <br>
                 <a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a> <br>
