@@ -23,7 +23,7 @@ years:
           <b><a href="{{ publication.url }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
           {% for author in publication.authors %}
             {% if author == "Krijn Doekemeijer" %}
-              <u>{{ author -}}{% unless forloop.last -%}</u>,{% endunless %}
+              <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
             {% else %}
               {{ author -}}{% unless forloop.last -%},{% endunless %}
             {% endif %}
