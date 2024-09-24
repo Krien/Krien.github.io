@@ -58,6 +58,12 @@ years:
 <ul style="list-style-type: none;">
 
   <li style="margin-top: 0px; margin-bottom: 20px;">
+    <b><a href="{{ site.url }}/downloads/talk_systor_2024.pdf" style="color:#0089cf">Talk - Exploring I/O Management Performance in ZNS with ConfZNS++</a></b> <b><a href="https://drive.google.com/file/d/1uJ_fTApyBCzGz26bsxnK4cJV63liuq9y/view?usp=drive_link" style="color:#0089cf">(video)</a></b> <br>
+    <u>Krijn Doekemeijer</u>, Dennis Maisenbacher, Zebin Ren, Nick Tehrany, Matias Bjørling, Animesh Trivedi (2024 September)<br>
+    <i style="color:#868e96">In Proceedings of the 17th ACM International Conference on Systems and Storage (SYSTOR'24), Virtual, Israel</i><br>
+  </li>
+
+  <li style="margin-top: 0px; margin-bottom: 20px;">
     <b><a href="{{ site.url }}/downloads/talk_zwal_2024.pdf" style="color:#0089cf">Talk - ZWAL: Rethinking Write-ahead Logs for ZNS SSDs with Zone Appends</a></b><br>
     <u>Krijn Doekemeijer</u>, Zebin Ren, Nick Tehrany, Animesh Trivedi (2024 April)<br>
     <i style="color:#868e96">4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24) at EuroSys 2024, Athens, Greece</i><br>
