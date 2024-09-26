@@ -12,7 +12,7 @@ categories: education storage
 status: Done
 conference: "In 2024 IEEE/ACM 24rd International Symposium on Cluster, Cloud and Internet Computing (CCGrid'24)"
 type: "co-authored conference"
-other: ""
+other: 🥉 "Nominated for best paper award" 
 selected: no
 pdf: https://atlarge-research.com/pdfs/2024-stosys-education.pdf
 ---
