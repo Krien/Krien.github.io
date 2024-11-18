@@ -21,8 +21,9 @@ pdf: https://atlarge-research.com/pdfs/2024-stosys-education.pdf
 - <b>Authors:</b> Animesh Trivedi, Matthijs Jansen, Krijn Doekemeijer, Sacheendra Talluri, Nick Tehrany
 - <b>Type:</b> Conference paper
 - <b>Keywords:</b> Storage systems, Education, Experience report
-- <b>Publish date:</b> 2023-05-?
+- <b>Publish date:</b> 2023-05-06
 
 <h2>Availability</h2>
 - Paper at AtLarge: [2024-stosys-education.pdf](https://atlarge-research.com/pdfs/2024-stosys-education.pdf).
+- Paper at IEEE: [https://ieeexplore.ieee.org/abstract/document/10701387](https://ieeexplore.ieee.org/abstract/document/10701387)
 - Course content: [https://atlarge-research.com/courses/storage-systems-vu/](https://atlarge-research.com/courses/storage-systems-vu/).
