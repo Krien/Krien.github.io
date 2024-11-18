@@ -10,9 +10,9 @@ list_title: ' '
 
 <h2> Thesis Supervision </h2>
 I am looking for students to supervise (MSc) that are interested in storage systems. I have topics regarding NVMe, performance analysis, QoS tracing, LSM-trees, and storage/network schedulers.
-If you are interested please contact me on my mail or join one of our weekly StoNet-research meetings on <a href="https://stonet-research.github.io/index.html">Tuesday 16:00</a>. I am also available on the weekly AtLarge training sessions, or the weekly BSc thesis meetings (I am part of their organization).
+If you are interested please contact me on my mail or join one of our weekly StoNet-research meetings on <a href="https://stonet-research.github.io/index.html">Tuesday 16:00</a>. I am also available in a number of our training sessions. For example, I am present at the weekly AtLarge training sessions, and the weekly BSc thesis meetings (I am part of their organization).
 
-I have co-supervised the following succesful projects:
+I have co-supervised the following projects:
 <ul>
     <li> [BSc HP project] Gleb Mischenko — TBD — WIP </li>
     <li> [MSc thesis] Sudarsan Sivakumar — <i>Performance Characterization Study of NVMe Storage Over TCP</i> — <a href="{{ site.url }}/downloads/supervised_thesis_sudarsan_sivakumar_NVMeoFTCP.pdf" style="color:#009988">PDF</a> <a href="https://github.com/stonet-research/NVMeoFTCP-Characterization" style="color:#009988">Code</a> — 2024 </li>
@@ -30,5 +30,5 @@ For my PhD, I have been involved as a teaching assistant (along with coordinatin
     <li> [2023–2025] — <a href="https://research.vu.nl/en/courses/systems-seminar-2"> System Seminar (MSc)</a>: Teaching students how to read <i>and</i> review systems papers. Topics change yearly and we have covered topics ranging from storage, networks, accelerators, programming languages to data center carbon footprint. Additionally, students are given the opportunity to reproduce systems artifacts and write a system artifact review. I have responsibilities regarding the lab practicals, the system artifacts, and grading the reviews.</li>
 </ul>
 
-<h2> Service </h2>
+<h2> Academic service </h2>
 I have reviewed conference papers from CCGRID, USENIX, and ICPE. I have also reviewed system artifacts from SOSP.
