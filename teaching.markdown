@@ -10,7 +10,7 @@ list_title: ' '
 
 <h2> Thesis Supervision </h2>
 I am looking for students to supervise (MSc) that are interested in storage systems. I have topics regarding NVMe, performance analysis, QoS tracing, LSM-trees, and storage/network schedulers.
-If you are interested please contact me on my mail or join one of our weekly StoNet-research meetings on <a href="https://stonet-research.github.io/index.html">Tuesday 16:00</a>. I am also available in a number of our training sessions. For example, I am present at the weekly AtLarge training sessions, and the weekly BSc thesis meetings (I am part of their organization).
+If you are interested please contact me on my mail or join one of our weekly StoNet-research meetings on <a href="https://stonet-research.github.io/index.html">Tuesday 16:00</a>. I am also available in a number of our AtLarge training sessions. For example, I am part of the weekly AtLarge groupmeetings (open to everyone at the VU), and the weekly AtLarge BSc thesis meetings (I am part of their organization, they start around yearly at March/April).
 
 I have co-supervised the following projects:
 <ul>
