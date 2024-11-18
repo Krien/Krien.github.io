@@ -18,7 +18,7 @@ I have co-supervised the following succesful projects:
     <li> [MSc thesis] Sudarsan Sivakumar — <i>Performance Characterization Study of NVMe Storage Over TCP</i> — <a href="{{ site.url }}/downloads/supervised_thesis_sudarsan_sivakumar_NVMeoFTCP.pdf" style="color:#009988">PDF</a> <a href="https://github.com/stonet-research/NVMeoFTCP-Characterization" style="color:#009988">Code</a> — 2024 </li>
     <li> [BSc thesis] Darko Vujica — <i>Exploring Redis Persistence Modes: Introducing AOFURing, an io_uring AOF Extension</i> —  <a href="{{ site.url }}/downloads/supervised_thesis_darko_vujica_aofuring.pdf" style="color:#009988">PDF</a> <a href="https://github.com/daraccrafter/Thesis-Redis-IO_Uring" style="color:#009988">Code</a> — 2024 </li>
     <li> [BSc thesis] Vincent Kohm — <i>Optimizing Metadata Handling with vkFS: A Hybrid Key-Value Store File System leveraging RocksDB</i> — <a href="{{ site.url }}/downloads/supervised_thesis_vincent_kohm_vkfs.pdf" style="color:#009988">PDF</a> <a href="https://github.com/Vincent881909/vkfs" style="color:#009988">Code</a> — 2024 </li>
-    <li> [MSc survey] Sudarsan Sivakumar — <i>A survey on flash storage disaggregation: performance and quality of service considerations</i> — 2024 </li>
+    <li> [MSc survey] Sudarsan Sivakumar — <i>A survey on flash storage disaggregation: performance and quality of service considerations</i> — <a href="{{ site.url }}/downloads/supervised_survey_sudarsan_sivakumar_flash_storage_disaggregation_qos.pdf" style="color:#009988">PDF</a> —  2024 </li>
 </ul>
 
 <h2> Courses </h2>
