@@ -31,4 +31,4 @@ For my PhD, I have been involved as a teaching assistant (along with coordinatin
 </ul>
 
 <h2> Academic service </h2>
-I have reviewed conference papers from CCGRID, USENIX, and ICPE. I have also reviewed system artifacts from SOSP.
+I have reviewed conference papers from CCGRID, and ICPE, and system artifacts from SOSP.

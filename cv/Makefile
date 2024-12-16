@@ -1,7 +1,7 @@
 LATEX= pdflatex --shell-escape
 
 MAINDOC= main
-OUTPDF=../downloads/CV_KrijnDoekemeijer_2022.pdf
+OUTPDF=../downloads/CV_KrijnDoekemeijer_2024.pdf
 
 all: clean
 	${LATEX} ${MAINDOC}.tex
