@@ -18,7 +18,6 @@ I am also a part of [StoNet-research](https://stonet-research.github.io/). My re
 <ul style="list-style: none; padding-left: 0;display:table-row;">
   {% assign sortedpublications = site.publications | sort: 'date' | reverse %}
   {% for year in page.years %}
-    <h3> {{ year }} </h3>
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}

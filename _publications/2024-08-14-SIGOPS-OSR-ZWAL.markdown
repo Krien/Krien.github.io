@@ -10,7 +10,7 @@ authors:
 categories: flash "performance characterization" NVMe
 status: Done
 conference: "ACM SIGOPS Operating Systems Review, Volume 58, Issue 1 (SIGOPS OSR'24)"
-type: "Journal article"
+type: "journal"
 selected: "yes"
 other: ""
 pdf: https://atlarge-research.com/pdfs/2024-zns-wal.pdf

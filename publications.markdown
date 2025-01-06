@@ -13,41 +13,124 @@ years:
 
 <ul style="list-style: none; padding-left: 0;display:table-row;">
   {% assign sortedpublications = site.publications | sort: 'date' | reverse %}
+
+  <h3> Refereed publications </h3>
   {% for year in page.years %}
-    <h3> {{ year }} </h3>
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
         {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
-        {% if publication.status == "Done" and  pubyear contains year %}
-        <li style="margin-top: 20px; margin-bottom: 20px;">
-          <b><a href="{{ publication.pdf }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
-          {% for author in publication.authors %}
-            {% if author == "Krijn Doekemeijer" %}
-              <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
-            {% else %}
-              {{ author -}}{% unless forloop.last -%},{% endunless %}
-            {% endif %}
-          {% endfor %}
-          ({{ publication.date | date: "%Y %B" }}) <br>
-          <i style="color:#868e96">{{ publication.conference }}</i> <br>
-          {% if publication.other != ""%}
-            <b> {{ publication.other }} </b><br>
+        {% if publication.type == "conference" or publication.type == "workshop" or publication.type == "journal" %}
+          {% if publication.status == "Done" and  pubyear contains year %}
+            <li style="margin-top: 20px; margin-bottom: 20px;">
+              <b><a href="{{ publication.pdf }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
+              {% for author in publication.authors %}
+                {% if author == "Krijn Doekemeijer" %}
+                  <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
+                {% else %}
+                  {{ author -}}{% unless forloop.last -%},{% endunless %}
+                {% endif %}
+              {% endfor %}
+              ({{ publication.date | date: "%Y %B" }}) <br>
+              <i style="color:#868e96">{{ publication.conference }}</i> <br>
+              {% if publication.other != ""%}
+                <b> {{ publication.other }} </b><br>
+              {% endif %}
+              <div style="word-space: 10px;">
+                {% if publication.pdf %}
+                  <a href="{{ publication.pdf }}" style="color:#009988">PDF</a>
+                {% endif %}
+                {% if publication.code %}
+                  <a href="{{ publication.code }}" style="color:#009988">Code</a>
+                {% endif %}
+                <a href="{{ publication.url }}" style="color:#009988">More</a>
+              </div>
+            </li>
+          {% else %}
           {% endif %}
-          <div style="word-space: 10px;">
-            {% if publication.pdf %}
-              <a href="{{ publication.pdf }}" style="color:#009988">PDF</a>
-            {% endif %}
-            {% if publication.code %}
-              <a href="{{ publication.code }}" style="color:#009988">Code</a>
-            {% endif %}
-            <a href="{{ publication.url }}" style="color:#009988">More</a>
-          </div>
-        </li>
         {% else %}
         {% endif %}
     {% endfor %}
     </ul>
   {% endfor %}
+
+  <h3> Preprints </h3>
+  {% for year in page.years %}
+    <ul style="list-style-type: none;">
+    {% for publication in sortedpublications %}
+        {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
+        {% if publication.type == "preprint" %}
+          {% if publication.status == "Done" and  pubyear contains year %}
+            <li style="margin-top: 20px; margin-bottom: 20px;">
+              <b><a href="{{ publication.pdf }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
+              {% for author in publication.authors %}
+                {% if author == "Krijn Doekemeijer" %}
+                  <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
+                {% else %}
+                  {{ author -}}{% unless forloop.last -%},{% endunless %}
+                {% endif %}
+              {% endfor %}
+              ({{ publication.date | date: "%Y %B" }}) <br>
+              <i style="color:#868e96">{{ publication.conference }}</i> <br>
+              {% if publication.other != ""%}
+                <b> {{ publication.other }} </b><br>
+              {% endif %}
+              <div style="word-space: 10px;">
+                {% if publication.pdf %}
+                  <a href="{{ publication.pdf }}" style="color:#009988">PDF</a>
+                {% endif %}
+                {% if publication.code %}
+                  <a href="{{ publication.code }}" style="color:#009988">Code</a>
+                {% endif %}
+                <a href="{{ publication.url }}" style="color:#009988">More</a>
+              </div>
+            </li>
+          {% else %}
+          {% endif %}
+        {% else %}
+        {% endif %}
+    {% endfor %}
+    </ul>
+  {% endfor %}
+
+  <h3> Other </h3>
+  {% for year in page.years %}
+    <ul style="list-style-type: none;">
+    {% for publication in sortedpublications %}
+        {% capture pubyear %}{{ publication.date | date: "%Y" }}{% endcapture %}
+        {% if publication.type == "thesis" %}
+          {% if publication.status == "Done" and  pubyear contains year %}
+            <li style="margin-top: 20px; margin-bottom: 20px;">
+              <b><a href="{{ publication.pdf }}" style="color:#0089cf">{{ publication.title }}</a></b> <br>
+              {% for author in publication.authors %}
+                {% if author == "Krijn Doekemeijer" %}
+                  <u>{{ author -}}</u>{% unless forloop.last -%},{% endunless %}
+                {% else %}
+                  {{ author -}}{% unless forloop.last -%},{% endunless %}
+                {% endif %}
+              {% endfor %}
+              ({{ publication.date | date: "%Y %B" }}) <br>
+              <i style="color:#868e96">{{ publication.conference }}</i> <br>
+              {% if publication.other != ""%}
+                <b> {{ publication.other }} </b><br>
+              {% endif %}
+              <div style="word-space: 10px;">
+                {% if publication.pdf %}
+                  <a href="{{ publication.pdf }}" style="color:#009988">PDF</a>
+                {% endif %}
+                {% if publication.code %}
+                  <a href="{{ publication.code }}" style="color:#009988">Code</a>
+                {% endif %}
+                <a href="{{ publication.url }}" style="color:#009988">More</a>
+              </div>
+            </li>
+          {% else %}
+          {% endif %}
+        {% else %}
+        {% endif %}
+    {% endfor %}
+    </ul>
+  {% endfor %}
+
 </ul>
 
 <h2> Talks </h2>
