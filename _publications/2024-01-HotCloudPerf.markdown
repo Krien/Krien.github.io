@@ -8,7 +8,7 @@ authors:
     - "Animesh Trivedi"
 categories: flash "performance characterization" NVMe
 status: Done
-conference: "Companion of the 15th ACM/SPEC International Conference on Performance Engineering (ICPE ’24 Companion)"
+conference: "Companion of the 15th ACM/SPEC International Conference on Performance Engineering (ICPE’24 Companion)"
 type: workshop
 other: ""
 selected: no
