@@ -14,7 +14,7 @@ years:
 <ul style="list-style: none; padding-left: 0;display:table-row;">
   {% assign sortedpublications = site.publications | sort: 'date' | reverse %}
 
-  <h3> Refereed publications </h3>
+  <h4> Refereed publications </h4>
   {% for year in page.years %}
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
@@ -53,7 +53,7 @@ years:
     </ul>
   {% endfor %}
 
-  <h3> Preprints </h3>
+  <h4> Preprints </h4>
   {% for year in page.years %}
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
@@ -92,7 +92,7 @@ years:
     </ul>
   {% endfor %}
 
-  <h3> Other </h3>
+  <h4> Other </h4>
   {% for year in page.years %}
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
