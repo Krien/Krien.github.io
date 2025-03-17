@@ -26,5 +26,5 @@ code: https://zenodo.org/records/10599514
 <h2>Availability</h2>
 - Paper at AtLarge: [2024-io-schedulers.pdf](https://atlarge-research.com/pdfs/2024-io-schedulers.pdf).
 - Paper at ACM: [https://dl.acm.org/doi/pdf/10.1145/3629526.3645053](https://dl.acm.org/doi/pdf/10.1145/3629526.3645053)
-- Code at Zenode: [https://zenodo.org/records/10599514](https://zenodo.org/records/10599514).
+- Code at Zenodo: [https://zenodo.org/records/10599514](https://zenodo.org/records/10599514).
 - Code at GitHub: [https://github.com/stonet-research/icpe24_io_scheduler_study_artifact](https://github.com/stonet-research/icpe24_io_scheduler_study_artifact)
