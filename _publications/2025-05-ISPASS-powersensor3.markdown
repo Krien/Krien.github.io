@@ -12,7 +12,7 @@ authors:
     - "John Romein"
 categories: Kubernetes
 status: Done
-conference: "In Proceedings of 16th ACM/SPEC International Conference on Performance Engineering (ICPE'25)"
+conference: "2025 IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS)"
 type: "conference"
 selected: no
 other: ""
