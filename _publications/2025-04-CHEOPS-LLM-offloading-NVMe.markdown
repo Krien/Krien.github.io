@@ -14,6 +14,7 @@ status: Done
 conference: "In Proceedings of the 5th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'25)"
 type: "workshop"
 selected: no
+other: ""
 pdf: https://krien.github.io
 ---
 
