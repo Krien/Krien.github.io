@@ -15,7 +15,8 @@ conference: "In Proceedings of the 5th Workshop on Challenges and Opportunities 
 type: "workshop"
 selected: no
 other: ""
-pdf: https://krien.github.io
+pdf: https://atlarge-research.com/pdfs/2025-cheops-llm.pdf
+code: https://github.com/stonet-research/cheops25-IO-characterization-of-LLM-model-kv-cache-offloading-nvme
 ---
 
 <h2>Metadata</h2>
@@ -24,4 +25,6 @@ pdf: https://krien.github.io
 - <b>Publish date:</b> 2025-05-?
 
 <h2>Availability</h2>
-TBD
+- Paper at Atlarge:  https://atlarge-research.com/pdfs/2025-cheops-llm.pdf
+- Paper at ACM: TBD
+- Code: https://github.com/stonet-research/cheops25-IO-characterization-of-LLM-model-kv-cache-offloading-nvme
