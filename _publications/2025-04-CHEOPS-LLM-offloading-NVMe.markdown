@@ -16,7 +16,7 @@ type: "workshop"
 selected: no
 other: ""
 pdf: https://atlarge-research.com/pdfs/2025-cheops-llm.pdf
-code: https://github.com/ZebinRen/cheops25-IO-characterization-of-LLM-model-kv-cache-offloading-nvme
+code: https://github.com/stonet-research/cheops25-IO-characterization-of-LLM-model-kv-cache-offloading-nvme
 ---
 
 <h2>Metadata</h2>
@@ -27,3 +27,4 @@ code: https://github.com/ZebinRen/cheops25-IO-characterization-of-LLM-model-kv-c
 <h2>Availability</h2>
 - Paper at AtLarge: [2025-cheops-llm.pdf](https://atlarge-research.com/pdfs/2025-cheops-llm.pdf)
 - ACM: https://dl.acm.org/doi/pdf/10.1145/3719330.3721230
+- Code: https://github.com/stonet-research/cheops25-IO-characterization-of-LLM-model-kv-cache-offloading-nvme
