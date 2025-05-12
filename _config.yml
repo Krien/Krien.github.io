@@ -45,6 +45,11 @@ collections:
   awards:
     excerpt: true
     output: true
+  notes:
+    status: true
+    authors: true
+    short: true
+    output: true
   categories:
     status: true
     output: true
