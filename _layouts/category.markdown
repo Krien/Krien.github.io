@@ -3,7 +3,7 @@ layout: page
 type: archive
 ---
 
-<ul>
+<!-- <ul>
   {% assign sortednotes = site.notes | sort: 'date' | reverse %}
   {% for note in sortednotes %}
    {% if note.category == page.category %} 
@@ -23,4 +23,4 @@ type: archive
     {% endfor %}
     {% endfor %}
 </ul>
-
+ -->
