@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "PowerSensor3: A fast and accurate open source power measurement tool"
-date:  2025-05-01
+date:  2025-05-20
 authors: 
     - "Steven van der Vlugt" 
     - "Leon Oostrum"
@@ -16,7 +16,8 @@ conference: "2025 IEEE International Symposium on Performance Analysis of System
 type: "conference"
 selected: no
 other: ""
-pdf: https://krien.github.io
+pdf: https://arxiv.org/pdf/2504.17883
+code: https://zenodo.org/records/15037451
 ---
 
 <h2>Metadata</h2>
@@ -25,4 +26,4 @@ pdf: https://krien.github.io
 - <b>Publish date:</b> 2025-05-?
 
 <h2>Availability</h2>
-TBD
+- ArXiv: https://arxiv.org/pdf/2504.17883

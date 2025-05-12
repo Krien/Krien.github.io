@@ -9,11 +9,13 @@ list_title: ' '
 <link rel="icon" href="{{ "./favicon-32x32.png" | relative_url }}" type="image/x-icon">
 
 <h2> Thesis Supervision </h2>
-I am looking for students to supervise (MSc) that are interested in storage systems. I have topics regarding NVMe, performance analysis, QoS tracing, LSM-trees, and storage/network schedulers.
-If you are interested please contact me on my mail or join one of our weekly StoNet-research meetings on <a href="https://stonet-research.github.io/index.html">Tuesday 16:00</a>. I am also available in a number of our AtLarge training sessions. For example, I am part of the weekly AtLarge groupmeetings (open to everyone at the VU), and the weekly AtLarge BSc thesis meetings (I am part of their organization, they start around yearly at March/April).
+I am looking for students to supervise (MSc) that are interested in storage systems. I have topics regarding NVMe, performance analysis, QoS tracing, and storage/network schedulers.
+If you are interested please contact me on my mail or join one of our weekly StoNet-research meetings on <a href="https://stonet-research.github.io/index.html">Tuesday 11:00</a>. I am also available in a number of our AtLarge training sessions. For example, I am part of the weekly AtLarge groupmeetings (open to everyone at the VU).
 
 I have co-supervised the following projects:
 <ul>
+    <li> [MSc thesis] Joseph Kanichai — TBD — WIP </li>
+    <li> [BSc thesis] Yigit Abaci — TBD — WIP </li>
     <li> [BSc HP project] Gleb Mischenko — TBD — WIP </li>
     <li> [MSc thesis] <a href="https://medium.com/@appsby12">Sudarsan Sivakumar</a> — <i>Performance Characterization Study of NVMe Storage Over TCP</i> — <a href="{{ site.url }}/downloads/supervised_thesis_sudarsan_sivakumar_NVMeoFTCP.pdf" style="color:#009988">PDF</a> <a href="https://github.com/stonet-research/NVMeoFTCP-Characterization" style="color:#009988">Code</a> — 2024 </li>
     <li> [BSc thesis] Darko Vujica — <i>Exploring Redis Persistence Modes: Introducing AOFURing, an io_uring AOF Extension</i> —  <a href="{{ site.url }}/downloads/supervised_thesis_darko_vujica_aofuring.pdf" style="color:#009988">PDF</a> <a href="https://github.com/daraccrafter/Thesis-Redis-IO_Uring" style="color:#009988">Code</a> — 2024 </li>
@@ -24,10 +26,13 @@ I have co-supervised the following projects:
 <h2> Courses </h2>
 For my PhD, I have been involved as a teaching assistant (along with coordinating roles) for the following courses:
 <ul>
-    <li> [2023] — <a href="https://atlarge-research.com/courses/storage-systems-vu/"> Storage Systems (MSc)</a>: StoNet's flagship course. Here we teach students how to design, implement and evaluate storage systems. Students implement an FTL, a GC algorithm and an FS for the NVMe ZNS interface. I was a lead TA and I had roles related to coordination, grading, interviewing students, maintaining the grading/competition framework, server provisioning, lab practicals, student contact person, and I provided educational material for KV-stores.</li>
+    <li> [2023] — <a href="https://atlarge-research.com/courses/storage-systems-vu/"> Storage Systems (MSc)</a>: StoNet's flagship course. Here we taught students how to design, implement and evaluate storage systems. Students had to implement an FTL, a GC algorithm and an FS for the NVMe ZNS interface. I was a lead TA and I had roles related to coordination, grading, interviewing students, maintaining the grading/competition framework, server provisioning, lab practicals, student contact person, and I provided educational material for KV-stores.</li>
     <li> [2024] — <a href="https://atlarge-research.com/courses/distr-sys-vu/"> Distributed Systems (MSc)</a>: Teaching students how to design, implement, and evaluate distributed systems. Students can pick a project that aligns with their interest, I gave storage systems related projects to several groups.</li>
-    <li> [2023–2024] — <a href="https://atlarge-research.com/courses/advanced-net-prog-vu/2"> Advanced Network Programming (BSc)</a>: Teaching students how to design, implement and evaluate network stacks. Among others they implement ICMP and TCP in user-space for Linux. I was the lead TA for this course, leading the other TAs. I had coordination, grading, interviewer, lab practical, and contact person roles.</li>
-    <li> [2023–2025] — <a href="https://research.vu.nl/en/courses/systems-seminar-2"> System Seminar (MSc)</a>: Teaching students how to read <i>and</i> review systems papers. Topics change yearly and we have covered topics ranging from storage, networks, accelerators, programming languages to data center carbon footprint. Additionally, students are given the opportunity to reproduce systems artifacts and write a system artifact review. I have responsibilities regarding the lab practicals, the system artifacts, and grading the reviews.</li>
+        <ul>
+            <li> Dissagregated RocksDB (2024): Modify RocksDB to allow swapping the I/O engine with a file system plugin and evaluate the impact of I/O engines and dissagregated storage on RocksDB performance.</li>
+        </ul>
+    <li> [2023–2024] — <a href="https://atlarge-research.com/courses/advanced-net-prog-vu/2"> Advanced Network Programming (BSc)</a>: Teaching students how to design, implement and evaluate network stacks. Among others students had to implement ICMP and TCP in user-space for Linux. I was lead TA for this course, leading the other TAs. I had coordination, grading, interviewer, lab practical, and contact person roles.</li>
+    <li> [2023–2025] — <a href="https://research.vu.nl/en/courses/systems-seminar-2"> System Seminar (MSc)</a>: Teaching students how to read <i>and</i> review systems papers. Topics changed yearly and we have covered topics ranging from storage, networks, accelerators, programming languages to data center carbon footprint. Additionally in 2023-2024, students were given the opportunity to reproduce systems artifacts and write a system artifact review. I had responsibilities regarding the lab practicals, managing the system artifacts, and grading the reviews.</li>
 </ul>
 
 <h2> Academic service </h2>
