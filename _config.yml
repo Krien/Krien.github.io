@@ -20,7 +20,7 @@
 
 title:  "Krijn Doekemeijer"
 description: >-
-  PhD CS student at the VU Amsterdam, researching how to schedule storage- and networked systems efficiently.
+  Ph.D. candidate in CS at the VU Amsterdam, researching performance QoS for networked storage systems.
 baseurl: ""
 url: ""
 
@@ -33,7 +33,6 @@ header_pages:
   - publications.markdown
   - teaching.markdown
   - awards.markdown
-  - notes.markdown
   - cv.markdown
   - about.markdown
 
@@ -45,11 +44,6 @@ collections:
     other: ""
   awards:
     excerpt: true
-    output: true
-  notes:
-    status: true
-    authors: true
-    short: true
     output: true
   categories:
     status: true
