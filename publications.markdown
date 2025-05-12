@@ -163,6 +163,11 @@ years:
 <h4> Dutch Venues </h4>
 <ul style="list-style-type: none;">
 
+  <li style="margin-top: 20px; margin-bottom: 20px;">
+    <b><a href="{{ site.url }}/downloads/poster_ictopen_2025.pdf" style="color:#0089cf">Poster — Exploring I/O Management Performance in ZNS with ConfZNS++)</a></b><br>
+    <i style="color:#868e96">ICT.OPEN'25, Utrecht, The Netherlands</i> <br>
+  </li>
+
   <li style="margin-top: 0px; margin-bottom: 20px;">
     <b><a href="{{ site.url }}/downloads/talk_compsys_2024.pdf" style="color:#0089cf">Talk — ZWAL: Rethinking Write-ahead Logs for ZNS SSDs with Zone Appends</a></b><br>
     <u>Krijn Doekemeijer</u>, Zebin Ren, Nick Tehrany, Animesh Trivedi (2024 May)<br>
