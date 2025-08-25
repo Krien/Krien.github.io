@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Storage-Based Approximate Nearest Neighbor Search: What are the Performance Cost and I/O Characteristics?"
+title: "Does Linux Provide Performance Isolation for NVMe SSDs? Configuring cgroups for I/O Control in the NVMe Era"
 date:  2025-10-14
 authors: 
     - "Krijn Doekemeijer"
@@ -12,7 +12,7 @@ categories: flash "performance characterization" NVMe
 status: Done
 conference: "In 2025 IEEE International Symposium on Workload Characterization (IISWC)"
 type: "conference"
-selected: no
+selected: yes
 other: ""
 pdf: ""
 code: ""
