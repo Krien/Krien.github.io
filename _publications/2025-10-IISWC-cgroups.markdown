@@ -7,7 +7,7 @@ authors:
     - "Zebin Ren" 
     - "Tiziano de Matteis"
     - "Balakrishnan Chandrasekaran"
-    - 'Animesh Trivedi" 
+    - "Animesh Trivedi" 
 categories: flash "performance characterization" NVMe 
 status: Done
 conference: "In 2025 IEEE International Symposium on Workload Characterization (IISWC)"
