@@ -10,7 +10,7 @@ categories: flash "performance characterization" NVMe
 status: Done
 conference: "In Proceedings of the 4th Workshop on Challenges and Opportunities of Efficient and Performant Storage Systems (CHEOPS'24)"
 type: workshop
-selected: yes
+selected: no
 other: ""
 pdf: https://atlarge-research.com/pdfs/2024-zns-tools.pdf
 code: https://github.com/stonet-research/zns-tools
