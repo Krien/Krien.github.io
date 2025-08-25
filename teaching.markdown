@@ -14,9 +14,9 @@ If you are interested please contact me on my mail or join one of our weekly Sto
 
 I have co-supervised the following projects:
 <ul>
-    <li> [MSc thesis] Joseph Kanichai — Characterizing The Energy Contribution and Energy-Performance Trade-offs of NVMe SSDs in the Linux Storage Stack — TBD — 2025 </li>
-    <li> [BSc thesis] Yigit Abaci — A performance analysis of TC for high speed, scalable data center networks — TBD — 2025 </li>
-    <li> [BSc HP project] Gleb Mischenko — <i> PokeSto: A Storage Benchmark for Modifiable Virtual Environments </i> — <a href="{{ site.url }}/downloads/supervised_hp_gleb_mischenko_mve.pdf" style="color:#009988">PDF</a> <a href="https://github.com/atlarge-research/yardstick" style="color:#009988">Code</a> - 2025 </li>
+    <li> [MSc thesis] Joseph Kanichai — <i>Characterizing The Energy Contribution and Energy-Performance Trade-offs of NVMe SSDs in the Linux Storage Stack</i> — TBD — 2025 </li>
+    <li> [BSc thesis] Yigit Abaci — <i>A Performance Analysis of TC for High Speed, Scalable Data Center Networks </i> — TBD — 2025 </li>
+    <li> [BSc HP project] Gleb Mischenko — <i>PokeSto: A Storage Benchmark for Modifiable Virtual Environments</i> — <a href="{{ site.url }}/downloads/supervised_hp_gleb_mischenko_mve.pdf" style="color:#009988">PDF</a> <a href="https://github.com/atlarge-research/yardstick" style="color:#009988">Code</a> - 2025 </li>
     <li> [MSc thesis] <a href="https://medium.com/@appsby12">Sudarsan Sivakumar</a> — <i>Performance Characterization Study of NVMe Storage Over TCP</i> — <a href="{{ site.url }}/downloads/supervised_thesis_sudarsan_sivakumar_NVMeoFTCP.pdf" style="color:#009988">PDF</a> <a href="https://github.com/stonet-research/NVMeoFTCP-Characterization" style="color:#009988">Code</a> — 2024 </li>
     <li> [BSc thesis] Darko Vujica — <i>Exploring Redis Persistence Modes: Introducing AOFURing, an io_uring AOF Extension</i> —  <a href="{{ site.url }}/downloads/supervised_thesis_darko_vujica_aofuring.pdf" style="color:#009988">PDF</a> <a href="https://github.com/daraccrafter/Thesis-Redis-IO_Uring" style="color:#009988">Code</a> — 2024 </li>
     <li> [BSc thesis] Vincent Kohm — <i>Optimizing Metadata Handling with vkFS: A Hybrid Key-Value Store File System leveraging RocksDB</i> — <a href="{{ site.url }}/downloads/supervised_thesis_vincent_kohm_vkfs.pdf" style="color:#009988">PDF</a> <a href="https://github.com/Vincent881909/vkfs" style="color:#009988">Code</a> — 2024 </li>

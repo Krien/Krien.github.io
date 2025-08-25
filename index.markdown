@@ -11,7 +11,7 @@ years:
 
 <h2> Bio </h2>
 Krijn Doekemeijer is a Ph.D. candidate in Computer Systems (CS) at the VU Amsterdam ([AtLarge](https://atlarge-research.com/kdoekemeijer/)). He is also part of [StoNet-research](https://stonet-research.github.io/).
-Currently, he is researching how to improve the performance quality of service (QoS) of storage and networked systems in data centers (e.g., SSDs, I/O schedulers, file systems, databases, and performance modeling, to name a few). To see what he has been up to, look at his [/cv](https://krien.github.io/cv) or [/publications](https://krien.github.io/publications).
+Currently, he is researching how to improve the performance quality of service (QoS) of storage systems in data centers (e.g., SSDs, I/O schedulers, file systems, databases, and performance modeling, to name a few). To see what he has been up to, look at his [/cv](https://krien.github.io/cv) or [/publications](https://krien.github.io/publications).
 
 <h2> Selected Publications </h2>
 <h3>Click <a href="./publications" style="color:#0089cf"> here </a> to see all publications</h3>

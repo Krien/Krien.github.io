@@ -10,7 +10,7 @@ authors:
     - "Bram Veenboer"
     - "Krijn Doekemeijer" 
     - "John Romein"
-categories: Kubernetes
+categories: "Power Measurements"
 status: Done
 conference: "2025 IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS)"
 type: "conference"
