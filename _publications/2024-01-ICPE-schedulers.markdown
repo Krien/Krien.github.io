@@ -7,7 +7,7 @@ authors:
     - "Krijn Doekemeijer" 
     - "Nick Tehrany"
     - "Animesh Trivedi"
-categories: flash "performance characterization" NVMe
+categories: flash 
 status: Done
 conference: "In Proceedings of 15th ACM/SPEC International Conference on Performance Engineering (ICPE'24)"
 type: conference
