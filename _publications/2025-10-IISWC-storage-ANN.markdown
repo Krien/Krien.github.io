@@ -13,8 +13,8 @@ conference: "In 2025 IEEE International Symposium on Workload Characterization (
 type: "conference"
 selected: no
 other: ""
-pdf: ""
-code: ""
+pdf: "https://atlarge-research.com/pdfs/2025-iiswc-vectordb.pdf"
+code: "https://zenodo.org/records/16916496"
 ---
 
 <h2>Metadata</h2>
@@ -23,3 +23,5 @@ code: ""
 - <b>Publish date:</b> 2025-05-?
 
 <h2>Availability</h2>
+- AtLarge website: https://atlarge-research.com/pdfs/2025-iiswc-vectordb.pdf
+- Code: [https://zenodo.org/records/16916496](https://zenodo.org/records/16916496)

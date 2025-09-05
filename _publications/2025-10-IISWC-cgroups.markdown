@@ -14,8 +14,8 @@ conference: "In 2025 IEEE International Symposium on Workload Characterization (
 type: "conference"
 selected: "yes"
 other: ""
-pdf: ""
-code: ""
+pdf: "https://atlarge-research.com/pdfs/2025-iiswc-cgroups.pdf"
+code: "https://github.com/atlarge-research/isol-bench"
 ---
 
 <h2>Metadata</h2>
@@ -24,3 +24,5 @@ code: ""
 - <b>Publish date:</b> 2025-05-?
 
 <h2>Availability</h2>
+- AtLarge website: https://atlarge-research.com/pdfs/2025-iiswc-cgroups.pdf
+- Code: [https://github.com/atlarge-research/isol-bench](https://github.com/atlarge-research/isol-bench)

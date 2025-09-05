@@ -26,4 +26,6 @@ code: https://zenodo.org/records/15037451
 - <b>Publish date:</b> 2025-05-?
 
 <h2>Availability</h2>
+- IEEE; https://ieeexplore.ieee.org/document/11096398
 - ArXiv: https://arxiv.org/pdf/2504.17883
+- AtLarge website: https://atlarge-research.com/pdfs/2025-ispass-powersensor3.pdf
