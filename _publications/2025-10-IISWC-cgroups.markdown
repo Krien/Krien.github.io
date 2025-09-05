@@ -11,8 +11,8 @@ authors:
 categories: flash "performance characterization" NVMe 
 status: Done
 conference: "In 2025 IEEE International Symposium on Workload Characterization (IISWC)"
-type: "conference"
-selected: "yes"
+type: conference
+selected: yes
 other: ""
 pdf: "https://atlarge-research.com/pdfs/2025-iiswc-cgroups.pdf"
 code: "https://github.com/atlarge-research/isol-bench"
