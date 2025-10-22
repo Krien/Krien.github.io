@@ -9,7 +9,7 @@ authors:
     - "Animesh Trivedi" 
 categories: flash 
 status: Done
-conference: "In 2025 IEEE International Symposium on Workload Characterization (IISWC)"
+conference: "2025 IEEE International Symposium on Workload Characterization (IISWC)"
 type: "conference"
 selected: no
 other: ""

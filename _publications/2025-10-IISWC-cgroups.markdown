@@ -10,7 +10,7 @@ authors:
     - "Animesh Trivedi" 
 categories: flash "performance characterization" NVMe 
 status: Done
-conference: "In 2025 IEEE International Symposium on Workload Characterization (IISWC)"
+conference: "2025 IEEE International Symposium on Workload Characterization (IISWC)"
 type: conference
 selected: yes
 other: 🥉 "Nominated for best paper award" 
