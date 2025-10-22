@@ -54,7 +54,7 @@ years:
     </ul>
   {% endfor %}
 
-  <h4> Preprints </h4>
+  <h4> Preprints (not peer-reviewed) </h4>
   {% for year in page.years %}
     <ul style="list-style-type: none;">
     {% for publication in sortedpublications %}
@@ -140,6 +140,12 @@ years:
 
 <h4> International Venues </h4>
 <ul style="list-style-type: none;">
+
+  <li style="margin-top: 0px; margin-bottom: 20px;">
+    <b><a href="{{ site.url }}/downloads/talk_iiswc_2025.pdf" style="color:#0089cf">Talk — Does Linux Provide Performanc Isolation for NVMe SSDs? Configuring cgroups for I/O Control in the NVMe Era </a></b> <br>
+    <u>Krijn Doekemeijer</u>, Zebin Ren, Tiziano De Matteis, Balakrishnan Chandrasekaran, Animesh Trivedi (2025 October)<br>
+    <i style="color:#868e96">In 2025 IEEE International Symposium on Workload Characterization (IISWC), Irvine, CA, USA</i><br>
+  </li>
 
   <li style="margin-top: 0px; margin-bottom: 20px;">
     <b><a href="{{ site.url }}/downloads/talk_systor_2024.pdf" style="color:#0089cf">Talk — Exploring I/O Management Performance in ZNS with ConfZNS++</a></b> <b><a href="https://drive.google.com/file/d/1uJ_fTApyBCzGz26bsxnK4cJV63liuq9y/view?usp=drive_link" style="color:#0089cf">(video)</a></b> <br>
