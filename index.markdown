@@ -4,6 +4,7 @@
 layout: home
 list_title: ' '
 years:
+  - 2025
   - 2024
   - 2023
 ---
