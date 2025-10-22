@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "IISWC 2025 Nominated for Best Paper Award"
-date: 2024-10-05
+date: 2025-10-05
 short: "Krijn, Zebin, Tiziano, Bala, and Animesh were nominated for the best paper award at IISWC'25"
 status: Done
 ---
