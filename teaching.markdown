@@ -35,7 +35,7 @@ For my PhD at Vrije Universiteit Amsterdam, I was involved as a teaching assista
         <ul>
             <li> Dissagregated RocksDB (2024): Teach students about dissagregated storage, I/O interfaces, RocksDB, and performance. In this project, students modify RocksDB to allow swapping the I/O interface through a file system plugin, and evaluate the performance impact of I/O engines on local and dissagregated storage. See
             <a href="{{ site.url }}/downloads/bose-et-al-2024.pdf" style="color:#009988">bose-et-al.pdf</a> and
-            <a href="{{ site.url }}/downloads/ahn-et-al-2024.pdf" style="color:#009988">anh-et-al.pdf</a>.
+            <a href="{{ site.url }}/downloads/anh-et-al-2024.pdf" style="color:#009988">anh-et-al.pdf</a>.
             </li>
         </ul>
      <li> [2023] — <a href="https://atlarge-research.com/courses/storage-systems-vu/"> Storage Systems (MSc, discontinued)</a>: StoNet's flagship course. Here we taught students how to design, implement and evaluate storage systems. Students had to implement an FTL, a GC algorithm, and an FS for the NVMe ZNS interface. I was a lead TA (along with Matthijs Jansen) and I had roles related to coordination, grading, interviewing students, maintaining the grading/competition framework, server provisioning, lab practicals, and student contact person. I also provided educational material for KV-stores. We published our efforts in <a href=https://ieeexplore.ieee.org/abstract/document/10701387>CCGRID'24</a></li>
