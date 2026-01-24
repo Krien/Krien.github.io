@@ -14,7 +14,7 @@ If you are interested please contact me on my mail or join one of our weekly Sto
 
 If you are a student, I am unfortunately not looking for students to supervise at the moment. However, feel free to reach out to me for questions or the. I have supervised projects (BSc and MSc level) on storage system performance characterizations and optimizations.  Students have completed the following projects succesfully with me as a daily supervisor at Vrije Universiteit Amsterdam:
 <ul>
-    <li> [MSc research project] Duc Anh Phan — <i> I/O Characterization Study of Prefix caching in vLLM </i> — WIP — WIP - 2025 </li>
+    <li> [MSc research project] Duc Anh Phan — <i> LLM KV Cache Performance Characterization When Using Disk Offloading for Prefix Caching </i> — WIP — WIP - 2025 </li>
     <li> [MSc thesis] Joseph Kanichai — <i>Characterizing The Energy Contribution and Energy-Performance Trade-offs of NVMe SSDs in the Linux Storage Stack</i> — <a href="{{ site.url }}/downloads/supervised_thesis_joseph_kanichai_ssd_energy.pdf" style="color:#009988">PDF</a> <a href="https://github.com/t348575/energy-benchmark" style="color:#009988">Code</a> — 2025 </li>
     <li> [BSc thesis] Yigit Abaci — <i>A Performance Analysis of TC for High Speed, Scalable Data Center Networks </i> — <a href="{{ site.url }}/downloads/supervised_thesis_yigit_abaci_tc.pdf" style="color:#009988">PDF</a> — 2025 </li>
     <li> [BSc HP project] Gleb Mischenko — <i>PokeSto: A Storage Benchmark for Modifiable Virtual Environments</i> — <a href="{{ site.url }}/downloads/supervised_hp_gleb_mischenko_mve.pdf" style="color:#009988">PDF</a> <a href="https://github.com/atlarge-research/yardstick" style="color:#009988">Code</a> - 2025 </li>
@@ -35,7 +35,7 @@ For my PhD at Vrije Universiteit Amsterdam, I was involved as a teaching assista
         <ul>
             <li> Dissagregated RocksDB (2024): Teach students about dissagregated storage, I/O interfaces, RocksDB, and performance. In this project, students modify RocksDB to allow swapping the I/O interface through a file system plugin, and evaluate the performance impact of I/O engines on local and dissagregated storage. See
             <a href="{{ site.url }}/downloads/bose-et-al-2024.pdf" style="color:#009988">bose-et-al.pdf</a> and
-            <a href="{{ site.url }}/downloads/ahn-et-al-2024.pdf" style="color:#009988">ahn-et-al.pdf</a>.
+            <a href="{{ site.url }}/downloads/ahn-et-al-2024.pdf" style="color:#009988">anh-et-al.pdf</a>.
             </li>
         </ul>
      <li> [2023] — <a href="https://atlarge-research.com/courses/storage-systems-vu/"> Storage Systems (MSc, discontinued)</a>: StoNet's flagship course. Here we taught students how to design, implement and evaluate storage systems. Students had to implement an FTL, a GC algorithm, and an FS for the NVMe ZNS interface. I was a lead TA (along with Matthijs Jansen) and I had roles related to coordination, grading, interviewing students, maintaining the grading/competition framework, server provisioning, lab practicals, and student contact person. I also provided educational material for KV-stores. We published our efforts in <a href=https://ieeexplore.ieee.org/abstract/document/10701387>CCGRID'24</a></li>
