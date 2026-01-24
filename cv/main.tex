@@ -98,7 +98,7 @@
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[label={}]}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
 \definecolor{darkgreen}{HTML}{228833}
@@ -116,14 +116,14 @@
     \href{https://krien.github.io/}{\underline{krien.github.io}} $|$
     \href{https://linkedin.com/in/krijn-doekemeijer-9692801aa}{\underline{linkedin.com/in/krijn-doekemeijer}} $|$
     \href{https://github.com/Krien}{\underline{github.com/Krien}} \\
-    \textit{ Computer Science PhD student, characterizing and improving QoS of storage systems. } 
+    \textit{ Computer Science PhD candidate, characterizing and improving performance QoS of NVMe storage. } 
 \end{center}
 
 %-----------EXPERIENCE-----------
 \section{Employment}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {Doctor of Philosophy in Computer Science}{Dec. 2022 --}
+      {Doctor of Philosophy in Computer Science}{Dec. 2022 -- Jan. 2026}
       {Vrije Universiteit Amsterdam (VU)}{Amsterdam, The Netherlands}
       \resumeItemListStart
       \resumeItem{ 
@@ -133,7 +133,7 @@
         Research team: Massivizing Computer Systems Group (AtLarge)
       }
       \resumeItem{
-        Research focus: Computer systems, specializing in characterizing and improving QoS for storage systems
+        Research focus: Computer systems, specializing in characterizing and optimizing performance QoS of NVMe storage (Linux, C, C++, Python, NVMe, NVMe ZNS)
       }
       \resumeItemListEnd
     \resumeSubheading
@@ -141,10 +141,10 @@
       {Kaartje2Go, Working Talent}{Zwolle, The Netherlands}
       \resumeItemListStart
         \resumeItem{ 
-          Focus: Setting up the Analytics pipeline, telemetry tooling and A/B test tooling
+          Focus: Setting up the analytics pipeline, telemetry tooling and A/B test tooling
         }
         \resumeItem{
-          Technologies: Full-stack web development, analytics (GA, GTM...), genetic algorithms, DevOPs (AWS, CI/CD)
+          Technologies: Full-stack web development, analytics (GA, GTM), genetic algorithms, DevOps (AWS, CI/CD)
         }
       \resumeItemListEnd
 
@@ -171,13 +171,14 @@
   ``Does Linux Provide Performance Isolation for NVMe SSDs? Configuring cgroups for I/O Control in the NVMe Era'', 
   \underline{K. Doekemeijer}, Z. Ren, T. De Matteis, B. Chandrasekaran, A.Trivedi, 
   \textit{In 2025 IEEE International Symposium on Workload Characterization (IISWC)}, 
-  TBD, 2025.
+  October, 2025.
+  \textbf{Nominated for ``Best paper award''}.
 
 \item
-  ``Storage-Based Approximate Nearest Neighbor Search: What are the Performance Cost and I/O Characteristics?''', 
+  ``Storage-Based Approximate Nearest Neighbor Search: What are the Performance Cost and I/O Characteristics?'', 
   Z. Ren, \underline{K. Doekemeijer},  P. Apparao, A.Trivedi, 
   \textit{In 2025 IEEE International Symposium on Workload Characterization (IISWC)}, 
-  TBD, 2025.
+  October, 2025.
 
 \item
   ``PowerSensor3: A fast and accurate open source power measurement tool'', 
@@ -275,13 +276,6 @@
 \begin{itemize}[label={}]
 \item
   \textbf{Poster}: 
-  ``Performance Characterization of NVMe Devices with Zoned Namespaces (ZNS)'',
-  \underline{K. Doekemeijer}, N. Tehrany, B. Chandrasekaran, A. Trivedi,
-  \textit{ICT.OPEN} (National Dutch ICT conference),
-  April, 2024, Utrecht, The Netherlands.
-
-\item
-  \textbf{Poster}: 
   ``TropoDB: Design, Implementation and Evaluation of a KV-Store for Zoned Namespace Devices'',
   \underline{K. Doekemeijer}, A. Trivedi,
   \textit{ICT.OPEN} (National Dutch ICT conference),
@@ -297,41 +291,46 @@
 %-----------PROJECTS-----------
 \section{Research Projects}
     \resumeSubHeadingListStart
-
     \resumeProjectHeading
-      {\textbf{ConfZNS++} $|$ \emph{ZNS SSDs, emulator}} {April 2024 -- }
+      {\textbf{isol-bench} $|$ \emph{NVMe SSDs, benchmark}} {January 2025 -- December 2025}
+      \resumeItemListStart
+        \resumeItem{isol-bench is a benchmark to evaluate performance isolation of NVMe storage.
+        See: \href{https://github.com/stonet-research/isol-bench}{\underline{https://github.com/stonet-research/isol-bench}}.   }
+      \resumeItemListEnd
+    \resumeProjectHeading
+      {\textbf{ConfZNS++} $|$ \emph{ZNS SSDs, emulator}} {April 2024 -- December 2025}
       \resumeItemListStart
         \resumeItem{ConfZNS++ is the first function-accurate emulator for ZNS that incorporates realistic I/O management operations.
         See: \href{https://github.com/stonet-research/confznsplusplus}{\underline{https://github.com/stonet-research/confznsplusplus}}.   }
       \resumeItemListEnd
     \resumeProjectHeading
-      {\textbf{ZINC} $|$ \emph{ZNS SSDs, I/O scheduler}} {Oktober 2023 -- }
+      {\textbf{ZINC} $|$ \emph{ZNS SSDs, I/O scheduler, kernel modules}} {Oktober 2023 -- December 2025}
       \resumeItemListStart
         \resumeItem{ZINC is an I/O scheduler for ZNS with I/O management operations (i.e., reset and finish) as first-class citizens.
         See: \href{https://github.com/stonet-research/zinc-schedulers}{\underline{https://github.com/stonet-research/zinc-scheduler}}.   }
       \resumeItemListEnd
     \resumeProjectHeading
-      {\textbf{ZWAL} $|$ \emph{ZNS SSDs, KV-store, WAL}} {July 2023 -- }
+      {\textbf{ZWAL} $|$ \emph{ZNS SSDs, KV-store, WAL}} {July 2023 -- December 2025}
       \resumeItemListStart
         \resumeItem{ZWAL is a write-ahead log (WAL) redesigned to make use of the ZNS SSD append operation. It intents to leverage 
         the performance stability of ZNS, but keep throughput at high levels with the append operation. It is build on top of SZD.
         See \href{https://github.com/stonet-research/zwal}{\underline{https://github.com/stonet-research/zwal}}. }
       \resumeItemListEnd
     \resumeProjectHeading
-      {\textbf{zns-tools} $|$ \emph{ZNS SSDs, tracing, profiling, end-to-end}} {March 2023 -- }
+      {\textbf{zns-tools} $|$ \emph{ZNS SSDs, tracing, profiling, end-to-end, BPF}} {March 2023 -- December 2025}
       \resumeItemListStart
         \resumeItem{zns-tools is the first step to make an end-to-end tool to trace storage requests from application to storage. For now it traces
         F2FS and Btrfs activity on ZNS, but we plan to extend it. See \href{https://github.com/stonet-research/zns-tools}{\underline{https://github.com/stonet-research/zns-tools}}. }
       \resumeItemListEnd
     \resumeProjectHeading
-      {\textbf{TropoDB} $|$ \emph{ZNS SSDs, Key-value store, SPDK, raw storage}} {February 2022 --}
+      {\textbf{TropoDB} $|$ \emph{ZNS SSDs, Key-value store, SPDK, raw storage}} {February 2022 -- August 2024}
       \resumeItemListStart
         \resumeItem{ TropoDB is an ongoing reseach project of redesigning LSM-tree KV-stores for flash SSDs. It is an implementation in user-space (using SPDK) 
         that is originally build around ZNS SSDs. The intent is to provide a research project for each component of the LSM-tree.
         See: \href{https://github.com/Krien/TropoDB}{\underline{github.com/Krien/TropoDB}}. }
       \resumeItemListEnd
     \resumeProjectHeading
-      {\textbf{Simple ZNS Device (SZD)} $|$ \emph{ZNS SSDs, SPDK, io\_uring, API}} {February 2022 -- }
+      {\textbf{Simple ZNS Device (SZD)} $|$ \emph{ZNS SSDs, SPDK, io\_uring, API}} {February 2022 -- December 2025}
       \resumeItemListStart
         \resumeItem{SZD is a storage engine for NVMe (ZNS) SSDs. It uses an opinionated subset of SPDK
         and io\_uring. See \href{https://github.com/Krien/SimpleZNSDevice}{\underline{github.com/Krien/SimpleZNSDevice}}.  }
@@ -388,6 +387,9 @@
     \textbf{Conference}
     \begin{itemize}[label={}]
     \item
+        ``Does Linux Provide Performance Isolation for NVMe SSDs? Configuring cgroups for I/O Control in the NVMe Era'',
+        \textit{IISWC'25}, October, 2025, Irvine, CA, USA.
+    \item
         ``Exploring I/O Management Performance in ZNS with ConfZNS++'',
         \textit{SYSTOR'24}, September, 2024, Virtual, Israel.
     \item
@@ -411,11 +413,19 @@
 
 \section{Community Service}
 \textbf{Reviewer}:
-\begin{itemize}
+\begin{itemize}[label={}]
 \itemsep0em
-\item Paper: ACM/SPEC International Conference on Performance Engineering (ICPE) -- 2024
-\item Paper: IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing (CCGrid) -- 2023--2024
-\item Artifact: Symposium on Operating Systems Principles (SOSP) -- 2023
+  \item Paper: \textit{ACM Transactions on Storage (TOS)}, 2025
+  
+  \item Paper: \textit{ACM/IFIP International Middleware Conference (Middleware)}, 2025
+  
+  \item Paper: \textit{ACM/SPEC International Conference on Performance Engineering (ICPE)}, 2024
+  
+  \item Paper: \textit{IEEE/ACM International Symposium on Cluster, Cloud and Internet Computing (CCGrid)}, 2024
+   
+  \item Paper: \textit{ACM International Symposium on High-Performance Parallel and Distributed Computing (HPDC)}, 2023
+
+  \item Artifact: \textit{Symposium on Operating Systems Principles (SOSP)}, 2023
 \end{itemize}
 
 \section{Teaching, Supervision}
@@ -439,25 +449,31 @@
 \end{itemize}
 
 \textbf{Supervision}:
-\begin{itemize}
+\begin{itemize}[label={}]
 \itemsep0em
-  \item Joseph Kanichai  (MSc. thesis):  \textit{Characterizing The Energy Contribution and Energy-Performance Trade-offs of NVMe SSDs in the Linux Storage Stack} (2025).
+  \item Duc Anh Phan (MSc. research project, 2025) -- Daily supervisor\\  
+  \textit{LLM KV Cache Performance Characterization When Using Disk Offloading for Prefix Caching}.
 
-  \item Yigit Abaci  (BSc. thesis):  \textit{A Performance Analysis of TC for High Speed, Scalable Data Center Networks} (2025).
+  \item Joseph Kanichai  (MSc. thesis, 2025) -- Daily supervisor\\  
+  \textit{Characterizing The Energy Contribution and Energy-Performance Trade-offs of NVMe SSDs in the Linux Storage Stack}.
 
-  \item Gleb Mishchenko  (BSc. honours program):  \textit{You do not need fast NVMes for MVEs. PokeSto: A Storage Benchmark for Modifiable Virtual Environments} (2025).
+  \item Yigit Abaci  (BSc. thesis, 2025) -- Daily supervisor\\  
+  \textit{A Performance Analysis of TC for High Speed, Scalable Data Center Networks}.
+
+  \item Gleb Mishchenko  (BSc. honours program, 2025) -- Daily supervisor\\
+  \textit{You do not need fast NVMes for MVEs. PokeSto: A Storage Benchmark for Modifiable Virtual Environments}.
   
-  \item Sudarsan Sivakumar (MSc. thesis): 
-  \textit{Performance Characterization Study of NVMe Storage Over TCP} (2024).
+  \item Sudarsan Sivakumar (MSc. thesis, 2024) -- Daily supervisor\\ 
+  \textit{Performance Characterization Study of NVMe Storage Over TCP}.
   
-  \item Darko Vujica (BSc. thesis): 
-  \textit{Exploring Redis Persistence Modes: Introducing AOFURing, an io\_uring AOF Extension} (2024).
+  \item Darko Vujica (BSc. thesis, 2024) -- Daily supervisor\\ 
+  \textit{Exploring Redis Persistence Modes: Introducing AOFURing, an io\_uring AOF Extension}.
   
-  \item Vincent Kohm (BSc. thesis): 
-  \textit{Optimizing Metadata Handling with vkFS: A Hybrid Key-Value Store File System leveraging RocksDB} (2024).
+  \item Vincent Kohm (BSc. thesis, 2024) -- Daily supervisor\\ 
+  \textit{Optimizing Metadata Handling with vkFS: A Hybrid Key-Value Store File System leveraging RocksDB}.
   
-  \item Sudarsan Sivakumar (MSc. survey): 
-  \textit{A survey on flash storage disaggregation: performance and quality of service considerations} (2024).
+  \item Sudarsan Sivakumar (MSc. survey, 2024) -- Daily supervisor\\ 
+  \textit{A survey on flash storage disaggregation: performance and quality of service considerations}.
 \end{itemize}
 
 %
