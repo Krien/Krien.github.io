@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Characterizing Energy Efficiency Trade-offs in the Linux Storage Stack for Flash-based NVMe SSDs"
-date:  2025-10-14
+date:  2026-10-14
 authors: 
     - "Joseph Kanichai" 
     - "Krijn Doekemeijer"
